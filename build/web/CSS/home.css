@@ -1,0 +1,41 @@
+h3 {
+	background-color: #03224C;
+	color: white;
+	box-shadow: 0px 0px 9px #1c1a19;
+	margin-bottom: 30px;
+	opacity: 0.85;
+	padding: 10px 10px 10px 10px;
+}
+
+section {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-family: Verdana, Arial, Trebuchet MS;
+}
+
+#poll_list {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin-top: 50px;
+	margin-right: 50px;
+	margin-left: 50px;
+	font-size: 1.5em;
+}
+
+#poll_list a {
+	color: white;
+	padding: 50px 10px 0px 10px;
+	margin : 30px 30px 30px 30px;
+	background-color: #03224C;
+	opacity: 0.75;
+	border-radius: 10px;
+	text-align: center;
+	width: 220px;
+	height: 90px;
+}
+
+section a {
+    text-decoration: none;
+}
