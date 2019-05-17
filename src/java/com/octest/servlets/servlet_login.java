@@ -33,7 +33,15 @@ public class servlet_login extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
-	}
+		
+            String userName = request.getParameter("email");
+            String password = request.getParameter("password");
+            
+            
+            
+            //this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+	
+        
+        }
 
 }

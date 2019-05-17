@@ -38,3 +38,6 @@
 
     </body>
 </html>
+
+
+<%--TODO: make a regex to email--%>
