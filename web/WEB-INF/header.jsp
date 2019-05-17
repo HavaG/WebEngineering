@@ -4,7 +4,7 @@
     <img src="CSS/pictures/logo_form.png" alt="Form logo" />
     <div>
         <h1><a href="Home"><em>Poll</em>Web</a></h1>
-        <h2>That part in our surveys ...</h2>
+        <h2>Take part in our surveys ...</h2>
     </div>
 </div>
 

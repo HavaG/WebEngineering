@@ -6,6 +6,7 @@ body {
 	position: relative;
 	margin: 0px 0px 0px 0px;
 	background-image: url("pictures/background.png");
+        background-size: cover;
 }
 
 header {

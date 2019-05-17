@@ -33,6 +33,6 @@ public interface User {
     
     //User getType();
     
-    //void setType(User type);
+    //void setType(User newType);
     
 }

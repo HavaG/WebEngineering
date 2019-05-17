@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import pollweb.data.impl.UserImpl;
 
 /**
  * Servlet implementation class servlet_home
@@ -34,8 +35,13 @@ public class servlet_login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-            String userName = request.getParameter("email");
+            String email = request.getParameter("email");
             String password = request.getParameter("password");
+            
+            UserImpl user = new UserImpl();
+            
+            user.setEmail(email);
+            user.setPassword(password);
             
             
             
