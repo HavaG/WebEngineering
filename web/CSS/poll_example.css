@@ -2,9 +2,18 @@ h3 {
 	background-color: #03224C;
 	color: white;
 	box-shadow: 0px 0px 9px #1c1a19;
-	margin-bottom: 30px;
-	opacity: 0.9;
+	margin-bottom: 20px;
+	opacity: 0.8;
 	padding: 10px 10px 10px 10px;
+}
+
+.text {
+	background-color: #03224C;
+	opacity: 0.9;
+	color: white;
+	padding: 10px 10px 10px 10px;
+	width: 500px;
+	text-align: center;
 }
 
 section {
@@ -20,12 +29,17 @@ form {
 	align-items: center;
 }
 
+input {
+	text-align: center;
+}
+
 .fond_question {
 	background-color: #03224C; 
 	width: 100%;
-	height: 50px;
 	color: white;
 	margin-bottom: 20px;
+	padding-top: 15px;
+	padding-bottom: 15px;
 	text-align: center;
 	opacity: 0.9;
 }
@@ -38,4 +52,11 @@ form {
 	box-shadow: 0px 0px 9px #1c1a19;
 	width: 500px;
 	opacity: 0.9;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#poll_send {
+	font-size: 1.2em;
 }
