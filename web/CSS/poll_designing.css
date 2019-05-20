@@ -1,4 +1,4 @@
-button, input, select, textarea {
+input, select, textarea {
   font-family : inherit;
   font-size   : 100%;
 }
@@ -8,7 +8,6 @@ button, input, select, textarea {
 	font-weight: bold;
 	font-size: 1.5em;
 	text-align: center;
-
 	background-color: #03224C;
 	opacity: 0.8;
 	color: white;
@@ -81,13 +80,14 @@ textarea {
 	margin-bottom: 30px;
 }
 
-input {
+input[type="text"], input[type="button"]{
 	border: none;
 	text-align: center;
 }
 
-#envoi_infos_poll{
-	margin-top: 30px;
+#poll_send {
+        margin-top: 30px;
+        font-size: 1.2em;
 }
 
 #buttons {
