@@ -5,6 +5,8 @@
  */
 package pollweb.data.model;
 
+import java.util.List;
+
 /**
  *
  * @author venecia2
@@ -31,8 +33,13 @@ public interface User {
     
     void setValid(boolean newValid);
     
-    //User getType();
+    User getType();
     
-    //void setType(User newType);
+    void setType(User newType);
+    
+    List<Poll> getAvailablePolls();
+    
+    void setAvailablePolls(List<Poll> polls);
+    
     
 }

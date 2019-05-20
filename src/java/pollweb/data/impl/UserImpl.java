@@ -5,6 +5,8 @@
  */
 package pollweb.data.impl;
 
+import java.util.List;
+import pollweb.data.model.Poll;
 import pollweb.data.model.User;
 
 /**
@@ -17,7 +19,8 @@ public class UserImpl implements User{
       private String name;
       private String email;
       public boolean valid;
-      //public User type;	
+      public User type;	
+      List<Poll> polls;
 
     public UserImpl() {
         this.key = 0;
@@ -76,6 +79,26 @@ public class UserImpl implements User{
      @Override
     public void setValid(boolean valid) {
         this.valid = valid;
+    }
+
+    @Override
+    public User getType() {
+        return type;
+    }
+
+    @Override
+    public void setType(User newType) {
+        this.type = newType;
+    }
+
+    @Override
+    public List<Poll> getAvailablePolls() {
+        return polls;
+    }
+
+    @Override
+    public void setAvailablePolls(List<Poll> polls) {
+        this.polls = polls;
     }
       
     
