@@ -15,7 +15,7 @@
         
         <section>
             <div class="add_manager">
-                <form method="post" action="traitement">
+                <form method="post" action="Administrator">
                     <div class="top_add_manager"><p>Add a manager :</p></div>
                     <div><div id="email">
                         <label for="email">Mail Adress :</label>
@@ -25,11 +25,10 @@
                         <label for="password">Password :</label>
                         <input type="password" name="password" placeholder="Ex : C~&;3H:t5*dD" size="20" maxlength="12"/>
                     </div></div>
-                    <div id="button"><input type="submit" value="Login"/></div>
+                    <div id="button"><input type="submit" value="Add"/></div>
                 </form>
             </div>
 
-            <h3>List of Managers :</h3>
             <div id="manager_list">
                 <div class="manager">
                     <p>Manager 1 :</p>

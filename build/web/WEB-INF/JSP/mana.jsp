@@ -14,25 +14,17 @@
         </header>
         
         <section>
-            <a id="addapoll" href="Designing">Add a poll</a>
-            <h3>Your Polls :</h3>
+            <a id="add_poll" href="Designing">Add a poll</a>
             <div id="poll_list">
                 <a href="Example">Poll 1</a>
                 <a href="Example">Poll 2</a>
                 <a href="Example">Poll 3</a>
                 <a href="Example">Poll 4</a>
-                <a href="Example">Poll 5</a>
-                <a href="Example">Poll 6</a>
-                <a href="Example">Poll 7</a>
-                <a href="Example">Poll 8</a>
-                <a href="Example">Poll 9</a>
-                <a href="Example">Poll 10</a>
             </div>
         </section>
             
         <footer>
             <%@ include file="footer.jsp"%>
         </footer>
-
     </body>
 </html>
