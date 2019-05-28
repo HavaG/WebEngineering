@@ -14,7 +14,7 @@
         </header>
         
         <section>
-            <form method="post" action="traitement.php">
+            <form method="post" action="poll_designing">
                 <input type="text" name="poll_title" id="poll_title" class="champ" size="25" placeholder="Name of the Poll" maxlength="40" required/>
                 
                 <textarea name="opening_text" id="opening_text" class="text" placeholder="Opening text" maxlength="200" rows="3" cols="56" required></textarea>
@@ -44,7 +44,7 @@
                 </div>
 
                 <div class="question" id="question_2">
-                    <input type="text" name="question_name_2" id="question_name_2" class="question_top" size="45" placeholder="Question" maxlength="40" required />
+                    <input type="text" name="question_name_2" id="question_name_2" class="question_top" size="45" placeholder="Question" maxlength="40" />
                     <div class="question_body" id="question_body_2">
                         <input type="text" size="53" placeholder="Answer" maxlength="50">
                     </div>
@@ -64,7 +64,7 @@
                 </div>
 
                 <div class="question" id="question_3">
-                    <input type="text" name="question_name_3" id="question_name_3" class="question_top" size="45" placeholder="Question" maxlength="40" required />
+                    <input type="text" name="question_name_3" id="question_name_3" class="question_top" size="45" placeholder="Question" maxlength="40" />
                     <div class="question_body" id="question_body_3">
                         <input type="text" size="53" placeholder="Answer" maxlength="50">
                     </div>
@@ -84,7 +84,7 @@
                 </div>
 
                 <div class="question" id="question_4">
-                    <input type="text" name="question_name_4" id="question_name_4" class="question_top" size="45" placeholder="Question" maxlength="40" required />
+                    <input type="text" name="question_name_4" id="question_name_4" class="question_top" size="45" placeholder="Question" maxlength="40" />
                     <div class="question_body" id="question_body_4">
                         <input type="text" size="53" placeholder="Answer" maxlength="50">
                     </div>
@@ -104,7 +104,7 @@
                 </div>
 
                 <div class="question" id="question_5">
-                    <input type="text" name="question_name_5" id="question_name_5" class="question_top" size="45" placeholder="Question" maxlength="40" required />
+                    <input type="text" name="question_name_5" id="question_name_5" class="question_top" size="45" placeholder="Question" maxlength="40" />
                     <div class="question_body" id="question_body_5">
                         <input type="text" size="53" placeholder="Answer" maxlength="50">
                     </div>
@@ -124,7 +124,7 @@
                 </div>
 
                 <div class="question" id="question_6">
-                    <input type="text" name="question_name_6" id="question_name_6" class="question_top" size="45" placeholder="Question" maxlength="40" required />
+                    <input type="text" name="question_name_6" id="question_name_6" class="question_top" size="45" placeholder="Question" maxlength="40" />
                     <div class="question_body" id="question_body_6">
                         <input type="text" size="53" placeholder="Answer" maxlength="50">
                     </div>
@@ -144,7 +144,7 @@
                 </div>
 
                 <div class="question" id="question_7">
-                    <input type="text" name="question_name_7" id="question_name_7" class="question_top" size="45" placeholder="Question" maxlength="40" required />
+                    <input type="text" name="question_name_7" id="question_name_7" class="question_top" size="45" placeholder="Question" maxlength="40" />
                     <div class="question_body" id="question_body_7">
                         <input type="text" size="53" placeholder="Answer" maxlength="50">
                     </div>
@@ -164,7 +164,7 @@
                 </div>
 
                 <div class="question" id="question_8">
-                    <input type="text" name="question_name_8" id="question_name_8" class="question_top" size="45" placeholder="Question" maxlength="40" required />
+                    <input type="text" name="question_name_8" id="question_name_8" class="question_top" size="45" placeholder="Question" maxlength="40" />
                     <div class="question_body" id="question_body_8">
                         <input type="text" size="53" placeholder="Answer" maxlength="50">
                     </div>
@@ -184,7 +184,7 @@
                 </div>
 
                 <div class="question" id="question_9">
-                    <input type="text" name="question_name_9" id="question_name_9" class="question_top" size="45" placeholder="Question" maxlength="40" required />
+                    <input type="text" name="question_name_9" id="question_name_9" class="question_top" size="45" placeholder="Question" maxlength="40" />
                     <div class="question_body" id="question_body_9">
                         <input type="text" size="53" placeholder="Answer" maxlength="50">
                     </div>
@@ -204,7 +204,7 @@
                 </div>
 
                 <div class="question" id="question_10">
-                    <input type="text" name="question_name_10" id="question_name_10" class="question_top" size="45" placeholder="Question" maxlength="40" required />
+                    <input type="text" name="question_name_10" id="question_name_10" class="question_top" size="45" placeholder="Question" maxlength="40" />
                     <div class="question_body" id="question_body_10">
                         <input type="text" size="53" placeholder="Answer" maxlength="50">
                     </div>
@@ -231,7 +231,7 @@
                 <div><label for="reserved_yes">Poll reserved : Yes</label><input type="radio" name="reserved" value="yes" id="reserved_yes" />
                      <label for="reserved_no">No</label><input type="radio" name="reserved" value="no" id="reserved_no" checked/></div>
 
-                <input type="submit" id="envoi_infos_poll" value="Send" />
+                <input type="submit" id="poll_send" value="Ok" />
             </form>
         </section>
             

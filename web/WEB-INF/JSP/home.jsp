@@ -14,7 +14,6 @@
         </header>
         
         <section>
-            <h3>Participate in one of the polls :</h3>
             <div id="poll_list">
                 <a href="Example">Poll 1</a>
                 <a href="Example">Poll 2</a>
@@ -32,6 +31,5 @@
         <footer>
             <%@ include file="footer.jsp"%>
         </footer>
-
     </body>
 </html>

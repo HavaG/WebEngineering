@@ -15,7 +15,7 @@
         
         <section>
             <div class="login">
-                <form method="post" action="traitement">
+                <form method="post" action="Login">
                     <div class="top_login"><p>Login :</p></div>
                     <div><div id="email">
                         <label for="email">Mail Adress :</label>
@@ -35,9 +35,5 @@
         <footer>
             <%@ include file="footer.jsp"%>
         </footer>
-
     </body>
 </html>
-
-
-<%--TODO: make a regex to email--%>
