@@ -19,14 +19,14 @@ public class PollImpl implements Poll{
     
     int key;
     String title;
-    Manager manager;
+    Integer managerID;
     String openText;
     String closeText;
     List<Question> questions;
     boolean isReserved;
     List<User> participants;
     
-    PollImpl(){}
+    public PollImpl(){}
 
     @Override
     public int getKey() {
@@ -49,13 +49,13 @@ public class PollImpl implements Poll{
     }
 
     @Override
-    public Manager getManager() {
-        return manager;
+    public Integer getManagerID() {
+        return managerID;
     }
 
     @Override
-    public void setManager(Manager manager) {
-        this.manager = manager;
+    public void setManagerID(Integer managerID) {
+        this.managerID = managerID;
     }
 
     @Override

@@ -13,7 +13,7 @@ import pollweb.data.model.Manager;
  *
  * @author venecia2
  */
-public class AdministratorImpl extends UserImpl implements Administrator{
+public class AdministratorImpl extends ManagerImpl implements Administrator{
     
     List<Manager> managers;
 

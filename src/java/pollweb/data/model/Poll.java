@@ -21,9 +21,9 @@ public interface Poll {
 
     void setTitle(String title);
     
-    Manager getManager();
+    Integer getManagerID();
     
-    void setManager(Manager manager);
+    void setManagerID(Integer managerID);
     
     String getOpenText();
     

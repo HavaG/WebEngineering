@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author venecia2
  */
-public interface Administrator extends User{
+public interface Administrator extends Manager{
     
     List<Manager> getManagers();
     
