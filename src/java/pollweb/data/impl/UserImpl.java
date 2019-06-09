@@ -20,7 +20,7 @@ public class UserImpl implements User{
       private String email;
       public boolean valid;
       public User type;	
-      List<Poll> polls;
+      List<Poll> polls;//TODO: delete
 
     public UserImpl() {
         this.key = 0;
