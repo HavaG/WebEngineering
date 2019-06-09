@@ -9,6 +9,8 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import pollweb.data.dao.PollWebDataLayer;
+import pollweb.data.util.DataException;
 
 /**
  *
@@ -24,7 +26,14 @@ public class ShowPolls extends PollWebBaseController{
     }
 
     @Override
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException {    
+        try{
+            request.setAttribute("poll_title", "Polls");
+            request.setAttribute("polls", ((PollWebDataLayer)request.getAttribute("datalayer")).getPollDAO().getUnsignedPolls());
+
+        } catch (DataException ex) {
+                request.setAttribute("message", "Data access exception: " + ex.getMessage());
+                action_error(request, response);
+        }
     }
 }
