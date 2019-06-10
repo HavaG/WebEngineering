@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ include file="taglibs.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -26,7 +26,6 @@
                     </div>
                     <div class="button_question">
                             <input type="button" class="add_answer" id="add_answer_1" value="+" />
-                            <input type="button" class="res_answer" id="res_answer_1" value="-" />
                     </div>
                 </div>
                 <div class="question_choices" id="question_choices_1">
@@ -48,6 +47,9 @@
                     <div class="question_body" id="question_body_2">
                         <input type="text" size="53" placeholder="Answer" maxlength="50">
                     </div>
+                    <div class="button_question">
+                            <input type="button" class="add_answer" id="add_answer_2" value="+" />
+                    </div>
                 </div>
                 <div class="question_choices" id="question_choices_2">
                     <label for="mandatory_yes_2">Mandatory : Yes</label><input type="radio" name="mandatory_2" value="yes" id="mandatory_yes_2"/>
@@ -67,6 +69,9 @@
                     <input type="text" name="question_name_3" id="question_name_3" class="question_top" size="45" placeholder="Question" maxlength="40" />
                     <div class="question_body" id="question_body_3">
                         <input type="text" size="53" placeholder="Answer" maxlength="50">
+                    </div>
+                    <div class="button_question">
+                            <input type="button" class="add_answer" id="add_answer_3" value="+" />
                     </div>
                 </div>
                 <div class="question_choices" id="question_choices_3">
@@ -88,6 +93,9 @@
                     <div class="question_body" id="question_body_4">
                         <input type="text" size="53" placeholder="Answer" maxlength="50">
                     </div>
+                    <div class="button_question">
+                            <input type="button" class="add_answer" id="add_answer_4" value="+" />
+                    </div>
                 </div>
                 <div class="question_choices" id="question_choices_4">
                     <label for="mandatory_yes_4">Mandatory : Yes</label><input type="radio" name="mandatory_4" value="yes" id="mandatory_yes_4"/>
@@ -107,6 +115,9 @@
                     <input type="text" name="question_name_5" id="question_name_5" class="question_top" size="45" placeholder="Question" maxlength="40" />
                     <div class="question_body" id="question_body_5">
                         <input type="text" size="53" placeholder="Answer" maxlength="50">
+                    </div>
+                    <div class="button_question">
+                            <input type="button" class="add_answer" id="add_answer_5" value="+" />
                     </div>
                 </div>
                 <div class="question_choices" id="question_choices_5">
@@ -128,6 +139,9 @@
                     <div class="question_body" id="question_body_6">
                         <input type="text" size="53" placeholder="Answer" maxlength="50">
                     </div>
+                    <div class="button_question">
+                            <input type="button" class="add_answer" id="add_answer_6" value="+" />
+                    </div>
                 </div>
                 <div class="question_choices" id="question_choices_6">
                     <label for="mandatory_yes_6">Mandatory : Yes</label><input type="radio" name="mandatory_6" value="yes" id="mandatory_yes_6"/>
@@ -147,6 +161,9 @@
                     <input type="text" name="question_name_7" id="question_name_7" class="question_top" size="45" placeholder="Question" maxlength="40" />
                     <div class="question_body" id="question_body_7">
                         <input type="text" size="53" placeholder="Answer" maxlength="50">
+                    </div>
+                    <div class="button_question">
+                            <input type="button" class="add_answer" id="add_answer_7" value="+" />
                     </div>
                 </div>
                 <div class="question_choices" id="question_choices_7">
@@ -168,6 +185,9 @@
                     <div class="question_body" id="question_body_8">
                         <input type="text" size="53" placeholder="Answer" maxlength="50">
                     </div>
+                    <div class="button_question">
+                            <input type="button" class="add_answer" id="add_answer_8" value="+" />
+                    </div>
                 </div>
                 <div class="question_choices" id="question_choices_8">
                     <label for="mandatory_yes_8">Mandatory : Yes</label><input type="radio" name="mandatory_8" value="yes" id="mandatory_yes_8"/>
@@ -188,6 +208,9 @@
                     <div class="question_body" id="question_body_9">
                         <input type="text" size="53" placeholder="Answer" maxlength="50">
                     </div>
+                    <div class="button_question">
+                            <input type="button" class="add_answer" id="add_answer_9" value="+" />
+                    </div>
                 </div>
                 <div class="question_choices" id="question_choices_9">
                     <label for="mandatory_yes_9">Mandatory : Yes</label><input type="radio" name="mandatory_9" value="yes" id="mandatory_yes_9"/>
@@ -207,6 +230,9 @@
                     <input type="text" name="question_name_10" id="question_name_10" class="question_top" size="45" placeholder="Question" maxlength="40" />
                     <div class="question_body" id="question_body_10">
                         <input type="text" size="53" placeholder="Answer" maxlength="50">
+                    </div>
+                    <div class="button_question">
+                            <input type="button" class="add_answer" id="add_answer_10" value="+" />
                     </div>
                 </div>
                 <div class="question_choices" id="question_choices_10">

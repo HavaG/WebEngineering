@@ -26,6 +26,10 @@ public class servlet_home extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                
+                String[] titles = {"Poll on Hobbies", "Poll on Pasta", "Poll on Events", "Poll on Sport", "Poll on Cinema", "Poll on Sleep"};
+                request.setAttribute("titles", titles);
+            
 		this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/home.jsp").forward(request, response);
 	}
 
