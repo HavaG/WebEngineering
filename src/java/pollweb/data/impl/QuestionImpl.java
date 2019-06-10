@@ -14,10 +14,10 @@ import pollweb.data.model.Question;
 public class QuestionImpl implements Question{
     
     int key;
-    int number;
+    int number;// position of question
     String type;//TODO: String or object type
     String text;
-    String note;
+    String note;//explanatory note
     boolean isMandatory;
 
     public QuestionImpl() { }

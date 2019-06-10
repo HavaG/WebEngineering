@@ -17,10 +17,6 @@ public interface User {
 
     void setKey(int newKey);
 
-    String getName();
-    
-    void setName(String newName);
-
     String getEmail();
     
     void setEmail(String newEmail);
@@ -28,18 +24,15 @@ public interface User {
     String getPassword();
     
     void setPassword(String newPassword);
+
     
-    boolean isValid() ;
-    
-    void setValid(boolean newValid);
-    
-    User getType();
-    
-    void setType(User newType);
-    
-    List<Poll> getAvailablePolls();
-    
-    void setAvailablePolls(List<Poll> polls);
+//    User getType();
+//    
+//    void setType(User newType);
+//    
+//    List<Poll> getAvailablePolls();
+//    
+//    void setAvailablePolls(List<Poll> polls);
     
     
 }

@@ -16,18 +16,14 @@ import pollweb.data.model.User;
 public class UserImpl implements User{
      private int key;
       private String password;
-      private String name;
       private String email;
-      public boolean valid;
-      public User type;	
-      List<Poll> polls;//TODO: delete
+//    public User type;	
+//    List<Poll> polls;//TODO: delete
 
     public UserImpl() {
         this.key = 0;
         this.password = "";
-        this.name = "";
         this.email = "";
-        this.valid = false;
     }
 
     
@@ -42,19 +38,10 @@ public class UserImpl implements User{
     }
 
      @Override
-    public String getName() {
-        return name;
-    }
-
-     @Override
     public String getEmail() {
         return email;
     }
 
-     @Override
-    public boolean isValid() {
-        return valid;
-    }
 
      @Override
     public void setKey(int key) {
@@ -67,40 +54,28 @@ public class UserImpl implements User{
     }
 
      @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
-     @Override
     public void setEmail(String email) {
         this.email = email;
     }
 
-     @Override
-    public void setValid(boolean valid) {
-        this.valid = valid;
-    }
-
-    @Override
-    public User getType() {
-        return type;
-    }
-
-    @Override
-    public void setType(User newType) {
-        this.type = newType;
-    }
-
-    @Override
-    public List<Poll> getAvailablePolls() {
-        return polls;
-    }
-
-    @Override
-    public void setAvailablePolls(List<Poll> polls) {
-        this.polls = polls;
-    }
-      
-    
-     
+//    @Override
+//    public User getType() {
+//        return type;
+//    }
+//
+//    @Override
+//    public void setType(User newType) {
+//        this.type = newType;
+//    }
+//
+//    @Override
+//    public List<Poll> getAvailablePolls() {
+//        return polls;
+//    }
+//
+//    @Override
+//    public void setAvailablePolls(List<Poll> polls) {
+//        this.polls = polls;
+//    }
+ 
 }
