@@ -5,6 +5,7 @@ section {
 	font-family: Verdana, Arial, Trebuchet MS;
         padding-top: 50px;
         padding-bottom: 50px;
+        max-width: 1300px;
 }
 
 #poll_list {

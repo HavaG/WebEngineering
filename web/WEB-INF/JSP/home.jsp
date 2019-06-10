@@ -15,16 +15,9 @@
         
         <section>
             <div id="poll_list">
-                <a href="Example">Poll 1</a>
-                <a href="Example">Poll 2</a>
-                <a href="Example">Poll 3</a>
-                <a href="Example">Poll 4</a>
-                <a href="Example">Poll 5</a>
-                <a href="Example">Poll 6</a>
-                <a href="Example">Poll 7</a>
-                <a href="Example">Poll 8</a>
-                <a href="Example">Poll 9</a>
-                <a href="Example">Poll 10</a>
+                <c:forEach items="${titles}" var="title">
+                    <a href="Example"><c:out value="${title}"/></a>
+                </c:forEach>
             </div>
         </section>
             
