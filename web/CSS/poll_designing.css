@@ -8,6 +8,7 @@ button, input, select, textarea {
 	font-weight: bold;
 	font-size: 1.5em;
 	text-align: center;
+	text-decoration: underline;
 }
 
 section {
@@ -49,6 +50,7 @@ form {
 	color: white;
 	opacity: 0.8;
 	text-align: center;
+	text-decoration: underline;
 }
 
 .question_body {
@@ -69,6 +71,11 @@ form {
 textarea {
 	border: none;
 	text-align: center;
+	text-decoration: underline;
+}
+
+.question_body textarea {
+	text-decoration: none;
 }
 
 #closing_text {

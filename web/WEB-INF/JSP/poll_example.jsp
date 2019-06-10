@@ -55,7 +55,7 @@
                 <textarea name="life" maxlength="200" rows="3" cols="56" required></textarea>
             </div>
 
-            <p class="text" id="closing_text">Thank you for your participation !</p>
+            <p class="text" id="closing_text">${closing_text}</p>
 
             <input type="submit" id="poll_send" value="Send" />
 
