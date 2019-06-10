@@ -26,7 +26,16 @@ public class servlet_poll_example extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/poll_example.jsp").forward(request, response);
+            String title = "Poll on Hobbies";
+            request.setAttribute("title", title);
+            
+            String opening_text = "Here is a form on hobbies, your data will remain private. Thank you for answering all the questions.";
+            request.setAttribute("opening_text", opening_text);
+            
+            String closing_text = "Thank you for your participation !";
+            request.setAttribute("closing_text", closing_text);
+            
+            this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/poll_example.jsp").forward(request, response);
 	}
 
 	/**

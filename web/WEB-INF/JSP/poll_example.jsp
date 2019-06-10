@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ include file="taglibs.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -15,9 +15,9 @@
         
         <section>
         <form method="post" action="treatment">    
-            <h3>Poll one Hobbies :</h3>
+            <h3><c:out value="${title}" /></h3>
 
-            <p class="text" id="opening_text">Here is a form on hobbies, your data will remain private. Thank you for answering all the questions.</p>
+            <p class="text" id="opening_text">${opening_text}</p>
 
             <div class="question" id="question1">
                 <div class="fond_question">Select your date of birth</div>
