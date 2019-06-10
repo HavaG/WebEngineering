@@ -1,53 +1,51 @@
-package com.octest.servlets;
+package pollweb.controller;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import pollweb.data.impl.UserImpl;
+import pollweb.data.dao.PollWebDataLayer;
 
 /**
  * Servlet implementation class servlet_home
  */
 @WebServlet("/servlet_login")
-public class servlet_login extends HttpServlet {
+public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public servlet_login() {
+    public Login() {
         super();
         // TODO Auto-generated constructor stub
     }
+    private void processBaseRequest(HttpServletRequest request, HttpServletResponse response) {
+            try {
 
+                
+                this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/login.jsp").forward(request, response);
+            } catch (ServletException | IOException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/login.jsp").forward(request, response);
+            processBaseRequest(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
             
-            UserImpl user = new UserImpl();
-            
-            user.setEmail(email);
-            user.setPassword(password);
-            
-            
-            
-            //this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
-	
-        
+            processBaseRequest(request, response);
         }
 
 }
