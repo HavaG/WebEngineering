@@ -10,6 +10,7 @@ import pollweb.data.dao.PollWebDataLayer;
 import pollweb.data.impl.UserImpl;
 import pollweb.data.model.User;
 import pollweb.data.util.DataException;
+import pollweb.security.SecurityLayer;
 
 public class Login extends PollWebBaseController {
 
@@ -54,7 +55,6 @@ public class Login extends PollWebBaseController {
                 //if there is no user with this name and pwd it throws exception
                 //create session
                 //redirect to homepage
-                //TODO
                 //SecurityLayer.createSession(request, user.getEmail(), user.getKey());
                 this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/home.jsp").forward(request, response);
 
