@@ -56,7 +56,7 @@ public class Login extends PollWebBaseController {
                 //redirect to homepage
                 //TODO
                 //SecurityLayer.createSession(request, user.getEmail(), user.getKey());
-                response.sendRedirect("/WEB-INF/JSP/home.jsp");
+                this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/home.jsp").forward(request, response);
 
             } catch (DataException ex) {
                 request.setAttribute("exception", ex);
