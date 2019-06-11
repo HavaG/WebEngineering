@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import pollweb.data.dao.PollWebDataLayer;
 import pollweb.data.impl.UserImpl;
 import pollweb.data.model.User;
@@ -16,17 +17,17 @@ public class Login extends PollWebBaseController {
 
     private void action_error(HttpServletRequest request, HttpServletResponse response) {
         String message;
-        
-            Exception ex = (Exception) request.getAttribute("exception");
 
-            if (ex != null && ex.getMessage() != null) {
-                message = ex.getMessage();
-            } else if (ex != null) {
-                message = ex.getClass().getName();
-            } else {
-                message = "Unknown Error";
-            }
-            request.setAttribute("message", message);
+        Exception ex = (Exception) request.getAttribute("exception");
+
+        if (ex != null && ex.getMessage() != null) {
+            message = ex.getMessage();
+        } else if (ex != null) {
+            message = ex.getClass().getName();
+        } else {
+            message = "Unknown Error";
+        }
+        request.setAttribute("message", message);
         try {
             this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/error.jsp").forward(request, response);
         } catch (ServletException | IOException ex1) {
@@ -37,7 +38,14 @@ public class Login extends PollWebBaseController {
     private void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         //add to the template a wrapper object that allows to call the stripslashes function
 
-        this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/login.jsp").forward(request, response);
+        HttpSession s = SecurityLayer.checkSession(request);
+        if (s == null) {
+            this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/login.jsp").forward(request, response);
+        } else {
+            request.setAttribute("exception", new Exception("You already logged in"));
+            action_error(request, response);
+        }
+
     }
 
     private void action_login(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -70,9 +78,10 @@ public class Login extends PollWebBaseController {
 
     private void action_create(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String userEmail = request.getParameter("email");
-        String password = request.getParameter("pwd");
+        String password = ""; //generated for the user
+        int poll_ID = 0; //the id of the poll, what the user is created for
 
-        if (!userEmail.isEmpty() && !password.isEmpty()) {
+        if (!userEmail.isEmpty()) {
             try {
 
                 //this is the create part
@@ -80,16 +89,20 @@ public class Login extends PollWebBaseController {
                 UserImpl user = new UserImpl();
                 user.setEmail(userEmail);
                 user.setPassword(password);
+                user.setPollID(poll_ID);
 
                 //add to database
                 ((PollWebDataLayer) request.getAttribute("datalayer")).getUserDAO().storeUser(user);
 
+                //redirect to homepage
+                this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/home.jsp").forward(request, response);
+
             } catch (DataException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ServletException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            //redirect to homepage
-            response.sendRedirect("issues");
         } else {
             request.setAttribute("exception", new Exception("Creation failed"));
             action_error(request, response);
