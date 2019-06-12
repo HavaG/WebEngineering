@@ -33,16 +33,8 @@ public interface Poll {
     
     void setCloseText(String text);
     
-    List<Question> getQuestions();
-
-    void setQuestions(List<Question> images);
-    
     boolean isReserved();
     
     void setReserved(boolean reserve);
-    
-    List<User> getParticipants();
-    
-    void setParticipants(List<User> participants);
     
 }

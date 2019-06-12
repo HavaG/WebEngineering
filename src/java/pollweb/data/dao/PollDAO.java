@@ -22,9 +22,13 @@ public interface PollDAO {
     
     Poll createPoll(ResultSet rs) throws DataException;
     
-    Poll getPoll(int poll_key) throws DataException; 
+    Poll getPoll(int poll_key) throws DataException;
     
+    List<Poll> getPolls(Manager manager) throws DataException;
+        
     List<Poll> getUnsignedPolls() throws DataException;
     
-    void storePoll(Poll poll) throws DataException;   
+    void storePoll(Poll poll) throws DataException;  
+    
+    void deleteUser(Poll poll) throws DataException;
 }
