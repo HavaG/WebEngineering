@@ -5,10 +5,23 @@
  */
 package pollweb.data.model;
 
+import java.util.List;
+
 /**
  *
  * @author venecia2
  */
-public interface Manager extends Person {
-        
+public interface Person {
+    
+    int getKey();
+
+    void setKey(int newKey);
+
+    String getEmail();
+    
+    void setEmail(String newEmail);
+    
+    String getPassword();
+    
+    void setPassword(String newPassword);
 }

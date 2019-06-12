@@ -25,7 +25,7 @@
                         <label for="password">Password :</label>
                         <input type="password" name="password" placeholder="Ex : C~&;3H:t5*dD" size="20" maxlength="12"/>
                     </div></div>
-                    <div id="button"><input type="submit" value="Add"/></div>
+                    <div id="button"><input type="submit" value="Add" name="create"/></div>
                 </form>
             </div>
 

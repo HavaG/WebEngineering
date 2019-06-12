@@ -11,12 +11,12 @@
   </servlet-mapping>
   
   <servlet>
-  	<servlet-name>servlet_admin</servlet-name>
-  	<servlet-class>com.octest.servlets.servlet_admin</servlet-class>
+  	<servlet-name>servlet_mana</servlet-name>
+  	<servlet-class>com.octest.servlets.servlet_mana</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>servlet_admin</servlet-name>
-  	<url-pattern>/Administrator</url-pattern>
+  	<servlet-name>servlet_mana</servlet-name>
+  	<url-pattern>/Manager</url-pattern>
   </servlet-mapping>
   
   <servlet>
@@ -29,12 +29,12 @@
   </servlet-mapping>
   
   <servlet>
-  	<servlet-name>servlet_mana</servlet-name>
-  	<servlet-class>com.octest.servlets.servlet_mana</servlet-class>
+  	<servlet-name>Administrator</servlet-name>
+  	<servlet-class>pollweb.controller.Administrator</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>servlet_mana</servlet-name>
-  	<url-pattern>/Manager</url-pattern>
+  	<servlet-name>Administrator</servlet-name>
+  	<url-pattern>/Administrator</url-pattern>
   </servlet-mapping>
   
   <servlet>

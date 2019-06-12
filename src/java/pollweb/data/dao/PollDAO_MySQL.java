@@ -145,7 +145,7 @@ public class PollDAO_MySQL extends DAO implements PollDAO{
 
     @Override
     public void storePoll(Poll polll) throws DataException {
-        
+        //TODO
     }
 
     @Override
