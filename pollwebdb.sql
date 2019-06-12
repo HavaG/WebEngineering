@@ -50,6 +50,7 @@ CREATE TABLE `poll` (
   `title` VARCHAR(100) COLLATE utf8_general_ci DEFAULT NULL,
   `open_tag` TEXT COLLATE utf8_general_ci,
   `close_tag` TEXT COLLATE utf8_general_ci,
+  `isReserved` TINYINT(1) DEFAULT 0,
   PRIMARY KEY USING BTREE (`ID`)
 ) ENGINE=InnoDB
 ROW_FORMAT=DYNAMIC CHARACTER SET 'utf8' COLLATE 'utf8_general_ci'
