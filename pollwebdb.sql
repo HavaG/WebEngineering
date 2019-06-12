@@ -1,4 +1,4 @@
-﻿﻿﻿﻿/* SQL Manager for MySQL                              5.7.2.52112 */
+﻿﻿﻿﻿﻿/* SQL Manager for MySQL                              5.7.2.52112 */
 /* -------------------------------------------------------------- */
 /* Host     : localhost                                           */
 /* Port     : 3306                                                */
@@ -97,7 +97,7 @@ CREATE TABLE `user` (
 ROW_FORMAT=DYNAMIC CHARACTER SET 'utf8' COLLATE 'utf8_general_ci'
 ;
 LOCK TABLES `poll` WRITE;
-INSERT INTO `poll` (`ID`, `managerID`, `title`,`open_tag`,`close_tag`) VALUES (1,1,'poll 1','hello','bye'),(2,1,'poll 2','hello world','bye world');
+INSERT INTO `poll` (`managerID`, `title`,`open_tag`,`close_tag`,`isReserved`) VALUES (1,'poll 1','hello','bye',0),(1,'poll 2','hello world','bye world',1);
 UNLOCK TABLES;
 
 LOCK TABLES `manager` WRITE;
