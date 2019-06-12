@@ -1,4 +1,4 @@
-﻿﻿﻿/* SQL Manager for MySQL                              5.7.2.52112 */
+﻿﻿﻿﻿/* SQL Manager for MySQL                              5.7.2.52112 */
 /* -------------------------------------------------------------- */
 /* Host     : localhost                                           */
 /* Port     : 3306                                                */
@@ -108,6 +108,9 @@ LOCK TABLES `user` WRITE;
 INSERT INTO `user` (`email`, `password`,`poll_ID`) VALUES ('tani-dan@ukr.net','12345',2),('abr@ukr.net','qwert',1);
 UNLOCK TABLES;
 
+LOCK TABLES `question` WRITE;
+INSERT INTO `question` (`poll_ID`, `type`,`isMandatory`,`text`,`answer`,`note`,`position`) VALUES (1,'date',0,'Select your date of birth',null,'',1), (1,'multiple_choice',0,'Select your interests','[ "Sport", "Cinema", "Museum","Party"]','',2);
+UNLOCK TABLES;
 
 
 
