@@ -21,7 +21,7 @@ public interface Poll {
 
     void setTitle(String title);
     
-    Integer getManagerID();
+    int getManagerID();
     
     void setManagerID(Integer managerID);
     

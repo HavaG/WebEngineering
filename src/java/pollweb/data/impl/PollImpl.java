@@ -6,7 +6,6 @@
 package pollweb.data.impl;
 
 import java.util.List;
-import pollweb.data.model.Manager;
 import pollweb.data.model.Poll;
 import pollweb.data.model.Question;
 import pollweb.data.model.User;
@@ -19,7 +18,7 @@ public class PollImpl implements Poll{
     
     int key;
     String title;
-    Integer managerID;
+    int managerID;
     String openText;
     String closeText;
     List<Question> questions;
@@ -49,7 +48,7 @@ public class PollImpl implements Poll{
     }
 
     @Override
-    public Integer getManagerID() {
+    public int getManagerID() {
         return managerID;
     }
 

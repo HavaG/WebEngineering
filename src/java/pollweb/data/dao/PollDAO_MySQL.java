@@ -11,8 +11,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import pollweb.data.impl.PollImpl;
 import pollweb.data.model.Manager;
 import pollweb.data.model.Poll;
@@ -41,10 +39,9 @@ public class PollDAO_MySQL extends DAO implements PollDAO{
         try{
             super.init();
             getPollById = connection.prepareStatement("SELECT * FROM poll WHERE ID=?");
-            //getPolls = connection.prepareStatement("SELECT ID AS pollID FROM poll");
-            getPollsByManager = connection.prepareStatement("SELECT ID AS pollID FROM poll WHERE managerID=?");
-            getPollsByUser = connection.prepareStatement("SELECT ID AS polID FROM poll WHERE FIND_IN_SET(?,participantsID)>0");
-            getUnsignPolls = connection.prepareStatement("SELECT ID AS pollID FROM poll WHERE userID IS NULL");
+            getPollsByManager = connection.prepareStatement("SELECT ID FROM poll WHERE managerID=?");
+            getPollsByUser = connection.prepareStatement("SELECT ID FROM poll WHERE FIND_IN_SET(?,participantsID)>0");
+            getUnsignPolls = connection.prepareStatement("SELECT ID FROM poll WHERE isReserved IS false");
             
             insertPoll = connection.prepareStatement("INSERT INTO poll (title,openText,closeText,questions,isReserved,managerID,participantsID) VALUES (?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             updatePoll = connection.prepareStatement("UPDATE poll SET title=?, openText=?, closeText=?, questions=?, isReserved=?,managerId=?,participantsId=?");
@@ -84,8 +81,8 @@ public class PollDAO_MySQL extends DAO implements PollDAO{
             p.setKey(rs.getInt("ID"));
             p.setManagerID(rs.getInt("managerID"));
             p.setTitle(rs.getString("title"));
-            p.setOpenText(rs.getString("openText"));
-            p.setCloseText(rs.getString("closeText"));
+            p.setOpenText(rs.getString("open_tag"));
+            p.setCloseText(rs.getString("close_tag"));
             p.setReserved(rs.getBoolean("isReserved"));
             //TODO: where and how to get users,questions?
             return p;

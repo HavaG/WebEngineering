@@ -13,29 +13,11 @@ import pollweb.data.model.User;
 import pollweb.data.util.DataException;
 import pollweb.security.SecurityLayer;
 
-<<<<<<< HEAD
+
 /**
  * Servlet implementation class servlet_home
  */
 
-@WebServlet("/servlet_login")
-public class Login extends PollWebBaseController {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Login() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-    @Override
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) {
-            try {                
-                this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/login.jsp").forward(request, response);
-            } catch (ServletException | IOException ex) {
-                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-=======
 public class Login extends PollWebBaseController {
 
     private void action_error(HttpServletRequest request, HttpServletResponse response) {
@@ -115,16 +97,12 @@ public class Login extends PollWebBaseController {
                         action_error(request, response);
                     }
                 }
->>>>>>> ced050112354d8aa283e2f0f86fd2da910f27a19
             }
         } else {
             request.setAttribute("exception", new Exception("Login failed"));
             action_error(request, response);
         }
     }
-<<<<<<< HEAD
-=======
-
     private void action_create(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         String userEmail = request.getParameter("email");
@@ -180,6 +158,5 @@ public class Login extends PollWebBaseController {
     public String getServletInfo() {
         return "Login and create servlet";
     }// </editor-fold>
->>>>>>> ced050112354d8aa283e2f0f86fd2da910f27a19
 
 }
