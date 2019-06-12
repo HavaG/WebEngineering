@@ -1,4 +1,4 @@
-﻿﻿/* SQL Manager for MySQL                              5.7.2.52112 */
+﻿﻿﻿/* SQL Manager for MySQL                              5.7.2.52112 */
 /* -------------------------------------------------------------- */
 /* Host     : localhost                                           */
 /* Port     : 3306                                                */
@@ -50,6 +50,7 @@ CREATE TABLE `poll` (
   `title` VARCHAR(100) COLLATE utf8_general_ci DEFAULT NULL,
   `open_tag` TEXT COLLATE utf8_general_ci,
   `close_tag` TEXT COLLATE utf8_general_ci,
+  `isReserved` TINYINT(1) DEFAULT 0,
   PRIMARY KEY USING BTREE (`ID`)
 ) ENGINE=InnoDB
 ROW_FORMAT=DYNAMIC CHARACTER SET 'utf8' COLLATE 'utf8_general_ci'
@@ -75,6 +76,7 @@ CREATE TABLE `question` (
   `type` ENUM('short_text','long_text','number','date','single_choice','multiple_choice') COLLATE utf8_general_ci DEFAULT NULL,
   `isMandatory` TINYINT(1) DEFAULT 0,
   `text` TEXT COLLATE utf8_general_ci,
+  `answer` JSON DEFAULT NULL,
   `note` TEXT COLLATE utf8_general_ci,
   `position` INTEGER(11) DEFAULT NULL COMMENT 'position of question in a poll',
   PRIMARY KEY USING BTREE (`ID`)
@@ -99,12 +101,14 @@ INSERT INTO `poll` (`ID`, `managerID`, `title`,`open_tag`,`close_tag`) VALUES (1
 UNLOCK TABLES;
 
 LOCK TABLES `manager` WRITE;
-INSERT INTO `manager` (`ID`, `email`, `password`) VALUES (1,'manager@gmail.com','manager');
+INSERT INTO `manager` (`email`, `password`) VALUES ('manager@gmail.com','manager'),("admin@admin.com", "admin");
 UNLOCK TABLES;
 
 LOCK TABLES `user` WRITE;
-INSERT INTO `user` (`ID`, `email`, `password`,`poll_ID`) VALUES (1,'tani-dan@ukr.net','12345',2),(2,'tani-dan@ukr.net','qwert',1);
+INSERT INTO `user` (`email`, `password`,`poll_ID`) VALUES ('tani-dan@ukr.net','12345',2),('abr@ukr.net','qwert',1);
 UNLOCK TABLES;
+
+
 
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
