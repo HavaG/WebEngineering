@@ -6,9 +6,9 @@ import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import pollweb.data.dao.PollWebDataLayer;
 import pollweb.data.impl.UserImpl;
+import pollweb.data.model.Manager;
 import pollweb.data.model.User;
 import pollweb.data.util.DataException;
 import pollweb.security.SecurityLayer;
@@ -38,13 +38,13 @@ public class Login extends PollWebBaseController {
     private void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         //add to the template a wrapper object that allows to call the stripslashes function
 
-        HttpSession s = SecurityLayer.checkSession(request);
-        if (s == null) {
-            this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/login.jsp").forward(request, response);
-        } else {
-            request.setAttribute("exception", new Exception("You already logged in"));
-            action_error(request, response);
-        }
+//        HttpSession s = SecurityLayer.checkSession(request);
+//        if (s == null) {
+        this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/login.jsp").forward(request, response);
+//        } else {
+//            request.setAttribute("exception", new Exception("You already logged in"));
+//            action_error(request, response);
+//        }
 
     }
 
@@ -63,12 +63,35 @@ public class Login extends PollWebBaseController {
                 //if there is no user with this name and pwd it throws exception
                 //create session
                 //redirect to homepage
-                //SecurityLayer.createSession(request, user.getEmail(), user.getKey());
+                SecurityLayer.createSession(request, user.getEmail(), user.getKey());
                 this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/home.jsp").forward(request, response);
 
             } catch (DataException ex) {
-                request.setAttribute("exception", ex);
-                action_error(request, response);
+                //if there is not user with these atributes
+                //chech is there any manager
+                String message;
+                if (ex != null && ex.getMessage() != null) {
+                    message = ex.getMessage();
+                    if (message.equals("Not existing user")) {
+                        try {
+                            Manager manager = ((PollWebDataLayer) request.getAttribute("datalayer")).
+                                    getManagerDAO().getManager(userEmail, password);
+                            SecurityLayer.createSession(request, manager.getEmail(), manager.getKey());
+                            
+                            if(!userEmail.equals("admin@admin.com")){
+                                this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/mana.jsp").forward(request, response);
+                            } else {
+                                this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/admin.jsp").forward(request, response);
+                            }
+                        } catch (DataException ex1) {
+                            request.setAttribute("exception", ex1);
+                            action_error(request, response);
+                        }
+                    } else {
+                        request.setAttribute("exception", ex);
+                        action_error(request, response);
+                    }
+                }
             }
         } else {
             request.setAttribute("exception", new Exception("Login failed"));
@@ -77,15 +100,13 @@ public class Login extends PollWebBaseController {
     }
 
     private void action_create(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
         String userEmail = request.getParameter("email");
-        String password = ""; //generated for the user
+        String password = new PasswordGenerator().generate(16); //generated for the user
         int poll_ID = 0; //the id of the poll, what the user is created for
 
         if (!userEmail.isEmpty()) {
             try {
-
-                //this is the create part
-                //this methos is not using userProxy!!
                 UserImpl user = new UserImpl();
                 user.setEmail(userEmail);
                 user.setPassword(password);
@@ -97,10 +118,9 @@ public class Login extends PollWebBaseController {
                 //redirect to homepage
                 this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/home.jsp").forward(request, response);
 
-            } catch (DataException ex) {
-                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ServletException ex) {
-                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (DataException | ServletException ex) {
+                request.setAttribute("exception", ex);
+                action_error(request, response);
             }
 
         } else {
