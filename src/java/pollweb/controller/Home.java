@@ -21,7 +21,7 @@ import pollweb.data.util.DataException;
  * @author venecia2
  */
 public class Home extends PollWebBaseController {
-
+    
     private void action_error(HttpServletRequest request, HttpServletResponse response) {
         String message;
 

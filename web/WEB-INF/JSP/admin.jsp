@@ -29,43 +29,17 @@
                 </form>
             </div>
 
-            <div id="manager_list">
-                <div class="manager">
-                    <p>Manager 1 :</p>
-                    <ul>
-                        <li><a href="Example">Poll 1</a></li>
-                        <li><a href="Example">Poll 2</a></li>
-                        <li><a href="Example">Poll 3</a></li>
-                    </ul>
-                </div>
-                <div class="manager">
-                    <p>Manager 2 :</p>
-                    <ul>
-                        <li><a href="Example">Poll 1</a></li>
-                    </ul>
-                </div>
-                <div class="manager">
-                    <p>Manager 3 :</p>
-                    <ul>
-                        <li><a href="Example">Poll 1</a></li>
-                        <li><a href="Example">Poll 2</a></li>
-                    </ul>
-                </div>
-                <div class="manager">
-                    <p>Manager 4 :</p>
-                    <ul>
-                        <li><a href="Example">Poll 1</a></li>
-                    </ul>
-                </div>
-                <div class="manager">
-                    <p>Manager 5 :</p>
-                    <ul>
-                        <li><a href="Example">Poll 1</a></li>
-                        <li><a href="Example">Poll 2</a></li>
-                        <li><a href="Example">Poll 3</a></li>
-                    </ul>
-                </div>
-
+            <div id="manager_list">                 
+                    <c:forEach items="${managers}" var="manager">
+                        <div  class="manager">
+                        <p><c:out value="${manager}"/></p>
+                        <ul>
+                            <c:forEach items="${polls}" var="poll">
+                                <li><c:out value="${poll}"/></li>
+                            </c:forEach>   
+                        </ul>
+                        </div>
+                    </c:forEach>                
             </div>
         </section>
             
