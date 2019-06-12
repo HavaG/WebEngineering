@@ -5,10 +5,7 @@
  */
 package pollweb.data.impl;
 
-import java.util.List;
 import pollweb.data.model.Poll;
-import pollweb.data.model.Question;
-import pollweb.data.model.User;
 
 /**
  *
@@ -21,9 +18,7 @@ public class PollImpl implements Poll{
     int managerID;
     String openText;
     String closeText;
-    List<Question> questions;
     boolean isReserved;
-    List<User> participants;
     
     public PollImpl(){}
 
@@ -78,16 +73,6 @@ public class PollImpl implements Poll{
     }
 
     @Override
-    public List<Question> getQuestions() {
-        return questions;
-    }
-
-    @Override
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
-    }
-
-    @Override
     public boolean isReserved() {
         return isReserved;
     }
@@ -96,16 +81,4 @@ public class PollImpl implements Poll{
     public void setReserved(boolean isReserved) {
         this.isReserved = isReserved;
     }
-
-    @Override
-    public List<User> getParticipants() {
-        return participants;
-    }
-
-    @Override
-    public void setParticipants(List<User> participants) {
-        this.participants = participants;
-    }
-     
- 
 }
