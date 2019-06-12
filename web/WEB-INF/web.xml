@@ -1,61 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
    
-  <servlet>
-  	<servlet-name>servlet_home</servlet-name>
-  	<servlet-class>com.octest.servlets.servlet_home</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>servlet_home</servlet-name>
-  	<url-pattern>/Home</url-pattern>
-  </servlet-mapping>
+    <servlet>
+        <servlet-name>Home</servlet-name>
+        <servlet-class>pollweb.controller.Home</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Home</servlet-name>
+        <url-pattern>/Home</url-pattern>
+    </servlet-mapping>
   
-  <servlet>
-  	<servlet-name>servlet_mana</servlet-name>
-  	<servlet-class>com.octest.servlets.servlet_mana</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>servlet_mana</servlet-name>
-  	<url-pattern>/Manager</url-pattern>
-  </servlet-mapping>
+    <servlet>
+        <servlet-name>servlet_mana</servlet-name>
+        <servlet-class>com.octest.servlets.servlet_mana</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>servlet_mana</servlet-name>
+        <url-pattern>/Manager</url-pattern>
+    </servlet-mapping>
   
-  <servlet>
-  	<servlet-name>Login</servlet-name>
-  	<servlet-class>pollweb.controller.Login</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>Login</servlet-name>
-  	<url-pattern>/Login</url-pattern>
-  </servlet-mapping>
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>pollweb.controller.Login</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
   
-  <servlet>
-  	<servlet-name>Administrator</servlet-name>
-  	<servlet-class>pollweb.controller.Administrator</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>Administrator</servlet-name>
-  	<url-pattern>/Administrator</url-pattern>
-  </servlet-mapping>
+    <servlet>
+        <servlet-name>Administrator</servlet-name>
+        <servlet-class>pollweb.controller.Administrator</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Administrator</servlet-name>
+        <url-pattern>/Administrator</url-pattern>
+    </servlet-mapping>
   
-  <servlet>
-  	<servlet-name>servlet_poll_designing</servlet-name>
-  	<servlet-class>com.octest.servlets.servlet_poll_designing</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>servlet_poll_designing</servlet-name>
-  	<url-pattern>/Designing</url-pattern>
-  </servlet-mapping>
+    <servlet>
+        <servlet-name>servlet_poll_designing</servlet-name>
+        <servlet-class>com.octest.servlets.servlet_poll_designing</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>servlet_poll_designing</servlet-name>
+        <url-pattern>/Designing</url-pattern>
+    </servlet-mapping>
   
-  <servlet>
-  	<servlet-name>servlet_poll_example</servlet-name>
-  	<servlet-class>com.octest.servlets.servlet_poll_example</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>servlet_poll_example</servlet-name>
-  	<url-pattern>/Example</url-pattern>
-  </servlet-mapping>
+    <servlet>
+        <servlet-name>servlet_poll_example</servlet-name>
+        <servlet-class>com.octest.servlets.servlet_poll_example</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>servlet_poll_example</servlet-name>
+        <url-pattern>/Example</url-pattern>
+    </servlet-mapping>
   
-  <resource-ref>
+    <resource-ref>
         <res-ref-name>jdbc/pollwebdb</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>

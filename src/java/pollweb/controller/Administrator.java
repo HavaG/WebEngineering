@@ -1,6 +1,7 @@
 package pollweb.controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import pollweb.data.dao.PollWebDataLayer;
 import pollweb.data.impl.ManagerImpl;
+import pollweb.data.model.Manager;
 import pollweb.data.util.DataException;
 import pollweb.security.SecurityLayer;
 
@@ -42,10 +44,25 @@ public class Administrator extends PollWebBaseController {
             this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/login.jsp").forward(request, response);
         } else if (s.getAttribute("username").equals("admin@admin.com")) {
             //you are the admin
+            action_load_managers(request, response);
             this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/admin.jsp").forward(request, response);
         } else {
             //you are logged in, but you are not admin
             request.setAttribute("exception", new Exception("You have no rights to open this page"));
+            action_error(request, response);
+        }
+
+    }
+    
+    
+    private void action_load_managers(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try {
+            List<Manager> managers = ((PollWebDataLayer) request.getAttribute("datalayer")).getManagerDAO().getManagers();
+            
+            //TODO: load everything to the user
+            
+        } catch (DataException ex) {
+            request.setAttribute("exception", ex);
             action_error(request, response);
         }
 
@@ -102,4 +119,5 @@ public class Administrator extends PollWebBaseController {
     public String getServletInfo() {
         return "Create manager and ??? servlet";
     }// </editor-fold>
+
 }

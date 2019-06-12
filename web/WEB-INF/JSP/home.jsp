@@ -15,8 +15,8 @@
         
         <section>
             <div id="poll_list">
-                <c:forEach items="${titles}" var="title">
-                    <a href="Example"><c:out value="${title}"/></a>
+                <c:forEach items="${polls}" var="poll">
+                    <a href="Example"><c:out value="${poll.title}"/></a>
                 </c:forEach>
             </div>
         </section>
@@ -25,4 +25,4 @@
             <%@ include file="footer.jsp"%>
         </footer>
     </body>
-</html>
+</html> 
