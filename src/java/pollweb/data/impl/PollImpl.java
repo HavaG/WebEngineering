@@ -5,6 +5,7 @@
  */
 package pollweb.data.impl;
 
+import pollweb.data.model.Manager;
 import pollweb.data.model.Poll;
 
 /**
@@ -15,7 +16,7 @@ public class PollImpl implements Poll{
     
     int key;
     String title;
-    int managerID;
+    Manager manager;
     String openText;
     String closeText;
     boolean isReserved;
@@ -43,13 +44,13 @@ public class PollImpl implements Poll{
     }
 
     @Override
-    public int getManagerID() {
-        return managerID;
+    public Manager getManager() {
+        return manager;
     }
 
     @Override
-    public void setManagerID(Integer managerID) {
-        this.managerID = managerID;
+    public void setManager(Manager manager) {
+        this.manager = manager;
     }
 
     @Override

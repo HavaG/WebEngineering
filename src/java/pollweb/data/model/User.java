@@ -5,8 +5,6 @@
  */
 package pollweb.data.model;
 
-import java.util.List;
-
 /**
  *
  * @author venecia2
@@ -14,7 +12,8 @@ import java.util.List;
 
 public interface User extends Person {
     
-    int getPollID();
+    public Poll getPoll();
+
+    public void setPoll(Poll newPoll);
     
-    void setPollID(int newPollID);
 }
