@@ -17,13 +17,13 @@ public interface Question {
 
     void setKey(int key);
     
-    int getNumber();
+    int getPosition();
 
-    void setNumber(int number);
+    void setPosition(int position);
     
-    String getQuestionType();
+    String getType();
 
-    void setQuestionType(String type);
+    void setType(String type);
 
     String getText();
 
@@ -36,5 +36,9 @@ public interface Question {
     boolean isMandatory();
     
     void setMandatory(boolean mandatory);
+    
+    int getPoll_ID();
+    
+    void setPoll_ID(int poll_ID);
     
 }

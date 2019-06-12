@@ -1,4 +1,4 @@
-﻿/* SQL Manager for MySQL                              5.7.2.52112 */
+﻿﻿/* SQL Manager for MySQL                              5.7.2.52112 */
 /* -------------------------------------------------------------- */
 /* Host     : localhost                                           */
 /* Port     : 3306                                                */
@@ -89,7 +89,7 @@ CREATE TABLE `user` (
   `ID` INTEGER(11) NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(20) COLLATE utf8_general_ci NOT NULL,
   `password` VARCHAR(20) COLLATE utf8_general_ci DEFAULT NULL,
-  `Poll_ID` INTEGER(10) DEFAULT NULL,
+  `poll_ID` INTEGER(10) NOT NULL,
   PRIMARY KEY USING BTREE (`ID`),
   UNIQUE KEY `password` USING BTREE (`password`)
 ) ENGINE=InnoDB

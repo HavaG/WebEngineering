@@ -14,11 +14,12 @@ import pollweb.data.model.Question;
 public class QuestionImpl implements Question{
     
     int key;
-    int number;// position of question
+    int position;// position of question
     String type;//TODO: String or object type
     String text;
     String note;//explanatory note
     boolean isMandatory;
+    int poll_ID;
 
     public QuestionImpl() { }
 
@@ -34,22 +35,22 @@ public class QuestionImpl implements Question{
     }
 
     @Override
-    public int getNumber() {
-        return number;
+    public int getPosition() {
+        return position;
     }
 
     @Override
-    public void setNumber(int number) {
-        this.number=number;
+    public void setPosition(int position) {
+        this.position=position;
     }
 
     @Override
-    public String getQuestionType() {
+    public String getType() {
         return type;
     }
 
     @Override
-    public void setQuestionType(String type) {
+    public void setType(String type) {
        this.type=type;
     }
 
@@ -81,6 +82,16 @@ public class QuestionImpl implements Question{
     @Override
     public void setMandatory(boolean mandatory) {
         this.isMandatory = mandatory;
+    }
+
+    @Override
+    public int getPoll_ID() {
+        return poll_ID;
+    }
+
+    @Override
+    public void setPoll_ID(int poll_ID) {
+        this.poll_ID=poll_ID;
     }
     
 }
