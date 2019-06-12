@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pollweb.data.impl.PollImpl;
 import pollweb.data.model.Manager;
 import pollweb.data.model.Poll;
@@ -27,10 +29,13 @@ public class PollDAO_MySQL extends DAO implements PollDAO{
     private PreparedStatement getPollById;
     private PreparedStatement getPollsByManager,getPollsByUser,getUnsignPolls;
     private PreparedStatement iPoll, uPoll, dPoll;
+    
+    protected DataLayer dataLayer;
 
 
     public PollDAO_MySQL(DataLayer d) {
         super(d);
+        this.dataLayer = d;
     }
     
     @Override
@@ -78,7 +83,8 @@ public class PollDAO_MySQL extends DAO implements PollDAO{
         PollImpl p = (PollImpl) createPoll();
         try{
             p.setKey(rs.getInt("ID"));
-            p.setManagerID(rs.getInt("managerID"));
+            Manager manager = ((ManagerDAO) dataLayer.getDAO(Manager.class)).getManager(rs.getInt("managerID"));
+            p.setManager(manager);
             p.setTitle(rs.getString("title"));
             p.setOpenText(rs.getString("open_tag"));
             p.setCloseText(rs.getString("close_tag"));
@@ -128,21 +134,45 @@ public class PollDAO_MySQL extends DAO implements PollDAO{
         try {
             if (poll.getKey() > 0) { //update
             
+                
+                if (poll.getTitle() != null) {
                 uPoll.setString(1, poll.getTitle());
+                } else {
+                    uPoll.setNull(1, java.sql.Types.INTEGER);
+                }
+                if (poll.getOpenText() != null) {
                 uPoll.setString(2, poll.getOpenText());
+                }else {
+                    uPoll.setNull(2, java.sql.Types.INTEGER);
+                }
+                if (poll.getCloseText() != null) {
                 uPoll.setString(3, poll.getCloseText());
+                }else {
+                    uPoll.setNull(3, java.sql.Types.INTEGER);
+                }
                 uPoll.setBoolean(4, poll.isReserved());
-                uPoll.setInt(5, poll.getManagerID());
+                uPoll.setInt(5, poll.getManager().getKey());
                 uPoll.setInt(6, poll.getKey());
-                uPoll.executeUpdate();
 
             } else { //insert
             
+                if (poll.getTitle() != null) {
                 iPoll.setString(1, poll.getTitle());
+                } else {
+                    iPoll.setNull(1, java.sql.Types.INTEGER);
+                }
+                if (poll.getOpenText() != null) {
                 iPoll.setString(2, poll.getOpenText());
+                }else {
+                    iPoll.setNull(2, java.sql.Types.INTEGER);
+                }
+                if (poll.getCloseText() != null) {
                 iPoll.setString(3, poll.getCloseText());
+                }else {
+                    iPoll.setNull(3, java.sql.Types.INTEGER);
+                }
                 iPoll.setBoolean(4, poll.isReserved());
-                iPoll.setInt(5, poll.getManagerID());
+                iPoll.setInt(5, poll.getManager().getKey());
 
                 if (iPoll.executeUpdate() == 1) {
                     try (ResultSet keys = iPoll.getGeneratedKeys()) {
@@ -155,7 +185,7 @@ public class PollDAO_MySQL extends DAO implements PollDAO{
             }
 
         } catch (SQLException ex) {
-            throw new DataException("Unable to store user", ex);
+            throw new DataException("Unable to store poll", ex);
         }
     }
 
@@ -174,13 +204,13 @@ public class PollDAO_MySQL extends DAO implements PollDAO{
     }
 
     @Override
-    public void deleteUser(Poll poll) throws DataException {
+    public void deletePoll(Poll poll) throws DataException {
         try {
             dPoll.setInt(1, poll.getKey());
             dPoll.executeUpdate();
 
         } catch (SQLException ex) {
-            throw new DataException("Unable to delete user", ex);
+            throw new DataException("Unable to delete poll", ex);
         }
     }
 }

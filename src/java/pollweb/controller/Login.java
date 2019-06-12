@@ -7,8 +7,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import pollweb.data.dao.PollWebDataLayer;
+import pollweb.data.impl.PollImpl;
 import pollweb.data.impl.UserImpl;
 import pollweb.data.model.Manager;
+import pollweb.data.model.Poll;
 import pollweb.data.model.User;
 import pollweb.data.util.DataException;
 import pollweb.security.SecurityLayer;
@@ -19,7 +21,7 @@ import pollweb.security.SecurityLayer;
  */
 
 public class Login extends PollWebBaseController {
-
+    
     private void action_error(HttpServletRequest request, HttpServletResponse response) {
         String message;
 
@@ -41,11 +43,10 @@ public class Login extends PollWebBaseController {
     }
 
     private void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        //add to the template a wrapper object that allows to call the stripslashes function
 
 //        HttpSession s = SecurityLayer.checkSession(request);
 //        if (s == null) {
-        this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/login.jsp").forward(request, response);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/login.jsp").forward(request, response);
 //        } else {
 //            request.setAttribute("exception", new Exception("You already logged in"));
 //            action_error(request, response);
@@ -107,14 +108,14 @@ public class Login extends PollWebBaseController {
 
         String userEmail = request.getParameter("email");
         String password = new PasswordGenerator().generate(16); //generated for the user
-        int poll_ID = 0; //the id of the poll, what the user is created for
+        Poll poll = new PollImpl(); //the poll, what the user is created for
 
         if (!userEmail.isEmpty()) {
             try {
                 UserImpl user = new UserImpl();
                 user.setEmail(userEmail);
                 user.setPassword(password);
-                user.setPollID(poll_ID);
+                user.setPoll(poll);
 
                 //add to database
                 ((PollWebDataLayer) request.getAttribute("datalayer")).getUserDAO().storeUser(user);

@@ -33,8 +33,7 @@ section a {
         text-decoration: none;
 }
 
-@media screen and (min-height: 768px) {
-    footer {
-    	position: absolute;
-    }
+footer {
+    position: absolute;
+    bottom: 0px;
 }

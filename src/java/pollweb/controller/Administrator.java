@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import pollweb.data.dao.PollWebDataLayer;
 import pollweb.data.impl.ManagerImpl;
 import pollweb.data.model.Manager;
+import pollweb.data.model.Poll;
 import pollweb.data.util.DataException;
 import pollweb.security.SecurityLayer;
 
@@ -58,6 +59,11 @@ public class Administrator extends PollWebBaseController {
     private void action_load_managers(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             List<Manager> managers = ((PollWebDataLayer) request.getAttribute("datalayer")).getManagerDAO().getManagers();
+            
+                String the_managers = "Gaabor, Tanya, Aurelien";
+                request.setAttribute("managers", the_managers);
+                String polls = "Poll 1, Poll 2, Poll 3";
+                request.setAttribute("polls", polls);
             
             //TODO: load everything to the user
             
