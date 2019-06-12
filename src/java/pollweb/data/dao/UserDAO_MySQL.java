@@ -43,7 +43,7 @@ public class UserDAO_MySQL extends DAO implements UserDAO {
             dUser = connection.prepareStatement("DELETE FROM user WHERE ID=?");
 
         } catch (SQLException ex) {
-            throw new DataException("Error initializing newspaper data layer", ex);
+            throw new DataException("Error initializing pollweb data layer", ex);
         }
     }
 
@@ -63,7 +63,7 @@ public class UserDAO_MySQL extends DAO implements UserDAO {
             dUser.close();
 
         } catch (SQLException ex) {
-            //
+            Logger.getLogger(ManagerDAO_MySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         super.destroy();
     }

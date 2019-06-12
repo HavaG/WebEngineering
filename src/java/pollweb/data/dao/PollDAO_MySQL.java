@@ -27,7 +27,8 @@ import pollweb.data.util.DataLayer;
  */
 public class PollDAO_MySQL extends DAO implements PollDAO{
     
-    private PreparedStatement getUnsignedPolls, getPollByID;
+    private PreparedStatement getPollById;
+    private PreparedStatement getPollsByManager,getPollsByUser,getUnsignPolls;
     private PreparedStatement insertPoll, updatePoll, deletePoll;
 
 
@@ -39,10 +40,14 @@ public class PollDAO_MySQL extends DAO implements PollDAO{
     public void init()throws DataException{
         try{
             super.init();
-            getUnsignedPolls = connection.prepareStatement("SELECT ID AS poll_ID FROM poll");
-            getPollByID = connection.prepareStatement("SELECT * FROM poll WHERE ID=?");
-            insertPoll = connection.prepareStatement("INSERT INTO poll (title,open_tag,close_tag,isReserved,managerID) VALUES (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-            updatePoll = connection.prepareStatement("UPDATE poll SET title=?, open_tag=?, close_tag=?, isReserved=?,managerId=?");
+            getPollById = connection.prepareStatement("SELECT * FROM poll WHERE ID=?");
+            //getPolls = connection.prepareStatement("SELECT ID AS pollID FROM poll");
+            getPollsByManager = connection.prepareStatement("SELECT ID AS pollID FROM poll WHERE managerID=?");
+            getPollsByUser = connection.prepareStatement("SELECT ID AS polID FROM poll WHERE FIND_IN_SET(?,participantsID)>0");
+            getUnsignPolls = connection.prepareStatement("SELECT ID AS pollID FROM poll WHERE userID IS NULL");
+            
+            insertPoll = connection.prepareStatement("INSERT INTO poll (title,openText,closeText,questions,isReserved,managerID,participantsID) VALUES (?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            updatePoll = connection.prepareStatement("UPDATE poll SET title=?, openText=?, closeText=?, questions=?, isReserved=?,managerId=?,participantsId=?");
             deletePoll = connection.prepareStatement("DELETE FROM poll WHERE ID=?");
             
         }catch(SQLException ex){
@@ -53,9 +58,12 @@ public class PollDAO_MySQL extends DAO implements PollDAO{
     @Override
     public void destroy()throws DataException{
         try{
-
-            getUnsignedPolls.close();
-            getPollByID.close();
+            getPollById.close();
+            //getPolls.close();
+            getPollsByManager.close();
+            getPollsByUser.close();
+            getUnsignPolls.close();
+            
             insertPoll.close();
             updatePoll.close();
             deletePoll.close();
@@ -76,8 +84,8 @@ public class PollDAO_MySQL extends DAO implements PollDAO{
             p.setKey(rs.getInt("ID"));
             p.setManagerID(rs.getInt("managerID"));
             p.setTitle(rs.getString("title"));
-            p.setOpenText(rs.getString("open_tag"));
-            p.setCloseText(rs.getString("close_tag"));
+            p.setOpenText(rs.getString("openText"));
+            p.setCloseText(rs.getString("closeText"));
             p.setReserved(rs.getBoolean("isReserved"));
             //TODO: where and how to get users,questions?
             return p;
@@ -89,8 +97,8 @@ public class PollDAO_MySQL extends DAO implements PollDAO{
     @Override
     public Poll getPoll(int poll_key) throws DataException {
          try {
-            getPollByID.setInt(1, poll_key);
-            try (ResultSet rs = getPollByID.executeQuery()) {
+            getPollById.setInt(1, poll_key);
+            try (ResultSet rs = getPollById.executeQuery()) {
                 if (rs.next()) {
                     return createPoll(rs);
                 }
@@ -102,15 +110,49 @@ public class PollDAO_MySQL extends DAO implements PollDAO{
     }
 
     @Override
-    public void storePoll(Poll poll) throws DataException {
+    public List<Poll> getPolls(Manager manager) throws DataException {
+        List<Poll> result = new ArrayList();
         
+        try{
+            getPollsByManager.setInt(1, manager.getKey());
+            try(ResultSet rs = getPollsByManager.executeQuery()){
+                while (rs.next()) {
+                    result.add(getPoll(rs.getInt("ID")));
+                }
+            }
+        } catch (SQLException ex) {
+            throw new DataException("Unable to load polls by manager", ex);
+        }
+        return result;
+    }
+
+
+    public List<Poll> getPolls(User user) throws DataException {
+         List<Poll> result = new ArrayList();
+         
+        try{
+            getPollsByUser.setInt(1, user.getKey());        
+            try(ResultSet rs = getPollsByUser.executeQuery()){
+                while (rs.next()) {
+                    result.add(getPoll(rs.getInt("ID")));
+                }
+            }
+        } catch (SQLException ex) {
+            throw new DataException("Unable to load polls by user", ex);
+        }
+        return result;
+    }
+
+    @Override
+    public void storePoll(Poll polll) throws DataException {
+        //TODO
     }
 
     @Override
     public List<Poll> getUnsignedPolls() throws DataException {
          List<Poll> result = new ArrayList();
         
-        try(ResultSet rs = getUnsignedPolls.executeQuery()){
+        try(ResultSet rs = getUnsignPolls.executeQuery()){
             while (rs.next()) {
                 result.add(getPoll(rs.getInt("ID")));
             }

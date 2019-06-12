@@ -27,5 +27,4 @@ public interface PollDAO {
     List<Poll> getUnsignedPolls() throws DataException;
     
     void storePoll(Poll poll) throws DataException;   
-    
 }

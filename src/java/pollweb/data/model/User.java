@@ -11,28 +11,10 @@ import java.util.List;
  *
  * @author venecia2
  */
-public interface User {
-    
-    int getKey();
 
-    void setKey(int newKey);
-
-    String getEmail();
+public interface User extends Person {
     
-    void setEmail(String newEmail);
+    int getPollID();
     
-    String getPassword();
-    
-    void setPassword(String newPassword);
-
-    
-//    User getType();
-//    
-//    void setType(User newType);
-//    
-//    List<Poll> getAvailablePolls();
-//    
-//    void setAvailablePolls(List<Poll> polls);
-    
-    
+    void setPollID(int newPollID);
 }

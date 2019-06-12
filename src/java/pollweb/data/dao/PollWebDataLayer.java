@@ -25,13 +25,15 @@ public class PollWebDataLayer extends DataLayer{
         super(datasource);
     }
     
+    
+    
     @Override
     public void init() throws DataException {
         registerDAO(Administrator.class, new AdministratorDAO_MySQL(this));
         registerDAO(Manager.class, new ManagerDAO_MySQL(this));
-        registerDAO(User.class, new UserDAO_MySQL(this));
         registerDAO(Poll.class, new PollDAO_MySQL(this));
-        registerDAO(Question.class, new QuestionDAO_MySQL(this));       
+        registerDAO(User.class, new UserDAO_MySQL(this));   
+        registerDAO(Question.class, new QuestionDAO_MySQL(this));   
     }
     
     public AdministratorDAO getAdministratorDAO(){
