@@ -13,8 +13,9 @@ import pollweb.data.dao.PollWebDataLayer;
 /**
  * Servlet implementation class servlet_home
  */
+
 @WebServlet("/servlet_login")
-public class Login extends HttpServlet {
+public class Login extends PollWebBaseController {
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -24,28 +25,13 @@ public class Login extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-    private void processBaseRequest(HttpServletRequest request, HttpServletResponse response) {
-            try {
-
-                
+    @Override
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) {
+            try {                
                 this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/login.jsp").forward(request, response);
             } catch (ServletException | IOException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
     }
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            processBaseRequest(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            
-            processBaseRequest(request, response);
-        }
 
 }
