@@ -14,7 +14,6 @@ import java.util.List;
 import pollweb.data.impl.PollImpl;
 import pollweb.data.model.Manager;
 import pollweb.data.model.Poll;
-import pollweb.data.model.User;
 import pollweb.data.util.DAO;
 import pollweb.data.util.DataException;
 import pollweb.data.util.DataLayer;
@@ -27,7 +26,7 @@ public class PollDAO_MySQL extends DAO implements PollDAO{
     
     private PreparedStatement getPollById;
     private PreparedStatement getPollsByManager,getPollsByUser,getUnsignPolls;
-    private PreparedStatement insertPoll, updatePoll, deletePoll;
+    private PreparedStatement iPoll, uPoll, dPoll;
 
 
     public PollDAO_MySQL(DataLayer d) {
@@ -40,12 +39,11 @@ public class PollDAO_MySQL extends DAO implements PollDAO{
             super.init();
             getPollById = connection.prepareStatement("SELECT * FROM poll WHERE ID=?");
             getPollsByManager = connection.prepareStatement("SELECT ID FROM poll WHERE managerID=?");
-            getPollsByUser = connection.prepareStatement("SELECT ID FROM poll WHERE FIND_IN_SET(?,participantsID)>0");
             getUnsignPolls = connection.prepareStatement("SELECT ID FROM poll WHERE isReserved IS false");
             
-            insertPoll = connection.prepareStatement("INSERT INTO poll (title,openText,closeText,questions,isReserved,managerID,participantsID) VALUES (?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-            updatePoll = connection.prepareStatement("UPDATE poll SET title=?, openText=?, closeText=?, questions=?, isReserved=?,managerId=?,participantsId=?");
-            deletePoll = connection.prepareStatement("DELETE FROM poll WHERE ID=?");
+            iPoll = connection.prepareStatement("INSERT INTO poll (title,open_tag,close_tag,isReserved,managerID) VALUES (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            uPoll = connection.prepareStatement("UPDATE poll SET title=?, open_tag=?, close_tag=?, isReserved=?,managerID=? WHERE ID=?");
+            dPoll = connection.prepareStatement("DELETE FROM poll WHERE ID=?");
             
         }catch(SQLException ex){
             throw new DataException("Error initializing pollweb data layer",ex);
@@ -61,15 +59,16 @@ public class PollDAO_MySQL extends DAO implements PollDAO{
             getPollsByUser.close();
             getUnsignPolls.close();
             
-            insertPoll.close();
-            updatePoll.close();
-            deletePoll.close();
+            iPoll.close();
+            uPoll.close();
+            dPoll.close();
         }catch(SQLException ex){
             throw new DataException("Error destroying pollweb data layer",ex);
         }
         super.destroy();
     }
     
+    @Override
     public Poll createPoll() {
         return new PollImpl();
     }
@@ -124,25 +123,40 @@ public class PollDAO_MySQL extends DAO implements PollDAO{
     }
 
     @Override
-    public List<Poll> getPolls(User user) throws DataException {
-         List<Poll> result = new ArrayList();
-         
-        try{
-            getPollsByUser.setInt(1, user.getKey());        
-            try(ResultSet rs = getPollsByUser.executeQuery()){
-                while (rs.next()) {
-                    result.add(getPoll(rs.getInt("ID")));
+    public void storePoll(Poll poll) throws DataException {
+        int key = poll.getKey();
+        try {
+            if (poll.getKey() > 0) { //update
+            
+                uPoll.setString(1, poll.getTitle());
+                uPoll.setString(2, poll.getOpenText());
+                uPoll.setString(3, poll.getCloseText());
+                uPoll.setBoolean(4, poll.isReserved());
+                uPoll.setInt(5, poll.getManagerID());
+                uPoll.setInt(6, poll.getKey());
+                uPoll.executeUpdate();
+
+            } else { //insert
+            
+                iPoll.setString(1, poll.getTitle());
+                iPoll.setString(2, poll.getOpenText());
+                iPoll.setString(3, poll.getCloseText());
+                iPoll.setBoolean(4, poll.isReserved());
+                iPoll.setInt(5, poll.getManagerID());
+
+                if (iPoll.executeUpdate() == 1) {
+                    try (ResultSet keys = iPoll.getGeneratedKeys()) {
+                        if (keys.next()) {
+                            key = keys.getInt(1);
+                        }
+                    }
+                    poll.setKey(key);
                 }
             }
-        } catch (SQLException ex) {
-            throw new DataException("Unable to load polls by user", ex);
-        }
-        return result;
-    }
 
-    @Override
-    public void storePoll(Poll polll) throws DataException {
-        //TODO
+        } catch (SQLException ex) {
+            throw new DataException("Unable to store user", ex);
+        }
     }
 
     @Override
@@ -154,9 +168,19 @@ public class PollDAO_MySQL extends DAO implements PollDAO{
                 result.add(getPoll(rs.getInt("ID")));
             }
         } catch (SQLException ex) {
-            throw new DataException("Unable to load polls", ex);
+            throw new DataException("Unable to load unsigned polls", ex);
         }
         return result;
     }
-    
+
+    @Override
+    public void deleteUser(Poll poll) throws DataException {
+        try {
+            dPoll.setInt(1, poll.getKey());
+            dPoll.executeUpdate();
+
+        } catch (SQLException ex) {
+            throw new DataException("Unable to delete user", ex);
+        }
+    }
 }

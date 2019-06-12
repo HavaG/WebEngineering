@@ -25,10 +25,10 @@ public interface PollDAO {
     Poll getPoll(int poll_key) throws DataException;
     
     List<Poll> getPolls(Manager manager) throws DataException;
-    
-    List<Poll> getPolls(User user) throws DataException;
-    
+        
     List<Poll> getUnsignedPolls() throws DataException;
     
-    void storePoll(Poll polll) throws DataException;   
+    void storePoll(Poll poll) throws DataException;  
+    
+    void deleteUser(Poll poll) throws DataException;
 }
