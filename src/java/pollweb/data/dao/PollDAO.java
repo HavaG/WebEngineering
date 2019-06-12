@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.util.List;
 import pollweb.data.model.Manager;
 import pollweb.data.model.Poll;
-import pollweb.data.model.User;
 import pollweb.data.util.DataException;
 
 /**
@@ -30,5 +29,5 @@ public interface PollDAO {
     
     void storePoll(Poll poll) throws DataException;  
     
-    void deleteUser(Poll poll) throws DataException;
+    void deletePoll(Poll poll) throws DataException;
 }
