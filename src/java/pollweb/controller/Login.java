@@ -16,7 +16,7 @@ import pollweb.data.util.DataException;
 import pollweb.security.SecurityLayer;
 
 public class Login extends PollWebBaseController {
-
+    
     private void action_error(HttpServletRequest request, HttpServletResponse response) {
         String message;
 
