@@ -7,6 +7,7 @@ package pollweb.data.dao;
 
 import java.sql.ResultSet;
 import java.util.List;
+import pollweb.data.impl.QuestionImpl;
 import pollweb.data.model.Poll;
 import pollweb.data.model.Question;
 import pollweb.data.util.DataException;
@@ -25,6 +26,6 @@ public interface QuestionDAO {
         
     List<Question> getQuestionsByPoll(Poll poll) throws DataException;
     
-    void storeQuestion (Question polll) throws DataException;   
+    void storeQuestion (QuestionImpl question) throws DataException;   
     
 }

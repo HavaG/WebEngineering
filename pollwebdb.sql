@@ -73,12 +73,12 @@ ROW_FORMAT=DYNAMIC CHARACTER SET 'utf8' COLLATE 'utf8_general_ci'
 CREATE TABLE `question` (
   `ID` INTEGER(11) NOT NULL AUTO_INCREMENT,
   `poll_ID` INTEGER(11) NOT NULL,
-  `type` ENUM('short_text','long_text','number','date','single_choice','multiple_choice') COLLATE utf8_general_ci DEFAULT NULL,
+  `type` ENUM('short_text','long_text','number','date','single_choice','multiple_choice') COLLATE utf8_general_ci NOT NULL DEFAULT 'short_text',
   `isMandatory` TINYINT(1) DEFAULT 0,
   `text` TEXT COLLATE utf8_general_ci,
   `answer` JSON DEFAULT NULL,
   `note` TEXT COLLATE utf8_general_ci,
-  `position` INTEGER(11) DEFAULT NULL COMMENT 'position of question in a poll',
+  `position` INTEGER(11) NOT NULL COMMENT 'position of question in a poll',
   PRIMARY KEY USING BTREE (`ID`)
 ) ENGINE=InnoDB
 ROW_FORMAT=DYNAMIC CHARACTER SET 'utf8' COLLATE 'utf8_general_ci'

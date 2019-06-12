@@ -5,6 +5,7 @@
  */
 package pollweb.data.impl;
 
+import pollweb.data.model.Poll;
 import pollweb.data.model.Question;
 
 /**
@@ -17,9 +18,10 @@ public class QuestionImpl implements Question{
     int position;// position of question
     String type;//TODO: String or object type
     String text;
+    String answer;//answer options
     String note;//explanatory note
     boolean isMandatory;
-    int poll_ID;
+    Poll poll;
 
     public QuestionImpl() { }
 
@@ -63,10 +65,20 @@ public class QuestionImpl implements Question{
     public void setText(String text) {
         this.text = text;
     }
-
-    @Override
+    
+      @Override
     public String getNote() {
         return note;
+    }
+
+    @Override
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
+    @Override
+    public String getAnswer() {
+        return answer;
     }
 
     @Override
@@ -85,13 +97,13 @@ public class QuestionImpl implements Question{
     }
 
     @Override
-    public int getPoll_ID() {
-        return poll_ID;
+    public Poll getPoll() {
+        return poll;
     }
 
     @Override
-    public void setPoll_ID(int poll_ID) {
-        this.poll_ID=poll_ID;
+    public void setPoll(Poll poll) {
+        this.poll=poll;
     }
     
 }

@@ -25,28 +25,32 @@ import pollweb.data.util.DataLayer;
 public class QuestionDAO_MySQL extends DAO implements QuestionDAO{
     
     private PreparedStatement getQuestionByID,getQuestionsByPoll;
-    private PreparedStatement insertQuestion, updateQuestion, deleteQuestion;
+    private PreparedStatement iQuestion, uQuestion, dQuestion;
+    
+    DataLayer dataLayer;
+    PollWebDataLayer pd;
+
     
     public QuestionDAO_MySQL(DataLayer d) {
         super(d);
+        dataLayer = d;
     }
     
         public void init() throws DataException {
         try {
             super.init();
-
-            //precompiliamo tutte le query utilizzate nella classe
+            
             //precompile all the queries uses in this class
             getQuestionByID = connection.prepareStatement("SELECT * FROM question WHERE ID=?");
             getQuestionsByPoll = connection.prepareStatement("SELECT ID AS questionID FROM article WHERE poll_ID=? ORDER BY position");
             
-            //notare l'ultimo paametro extra di questa chiamata a
-            //prepareStatement: lo usiamo per assicurarci che il JDBC
-            //restituisca la chiave generata automaticamente per il
-            //record inserito
+
             //note the last parameter in this call to prepareStatement:
             //it is used to ensure that the JDBC will sotre and return
             //the auto generated key for the inserted recors
+            iQuestion = connection.prepareStatement("INSERT INTO question (poll_ID,type,isMandatory,text,answer,note,position) VALUES(?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            uQuestion = connection.prepareStatement("UPDATE question SET poll_ID=?,type=?,isMandatory=?,text=?,answer=?,note=?,position=? WHERE ID=?");
+            dQuestion = connection.prepareStatement("DELETE FROM question WHERE ID=?");
 
         } catch (SQLException ex) {
             throw new DataException("Error initializing pollweb data layer", ex);
@@ -56,9 +60,12 @@ public class QuestionDAO_MySQL extends DAO implements QuestionDAO{
      @Override
     public void destroy()throws DataException{
         try{
-
             getQuestionByID.close();
             getQuestionsByPoll.close();
+            
+            iQuestion.close();
+            uQuestion.close();
+            uQuestion.close();
 
         }catch(SQLException ex){
             throw new DataException("Error destroying pollweb data layer",ex);
@@ -74,9 +81,11 @@ public class QuestionDAO_MySQL extends DAO implements QuestionDAO{
     public Question createQuestion(ResultSet rs) throws DataException {
         QuestionImpl q = (QuestionImpl) createQuestion();
        try{
-            q.setKey(rs.getInt("ID"));
-            q.setPoll_ID(rs.getInt("poll_ID"));
+            q.setKey(rs.getInt("ID"));            
+            //q.setPoll(((PollDAO) dataLayer.getDAO(Poll.class)).getPoll(rs.getInt("poll_ID")));
+            q.setPoll(pd.getPollDAO().getPoll(rs.getInt("poll_ID")));//get poll by poll_ID in question database
             q.setText(rs.getString("text"));
+            q.setAnswer(rs.getString("answer"));
             q.setType(rs.getString("type"));
             q.setNote(rs.getString("note"));
             q.setPosition(rs.getInt("position"));
@@ -122,10 +131,62 @@ public class QuestionDAO_MySQL extends DAO implements QuestionDAO{
     }
 
     @Override
-    public void storeQuestion(Question polll) throws DataException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void storeQuestion(QuestionImpl question) throws DataException {       
+        int key = question.getKey();
+        try {
+            if (question.getKey() > 0) { //update
+                uQuestion.setInt(1, question.getPoll().getKey());
+                uQuestion.setString(2, question.getType());
+                uQuestion.setBoolean(3,question.isMandatory());
+                uQuestion.setString(4, question.getText());          
+                if (question.getAnswer() != null) {
+                    uQuestion.setString(5, question.getAnswer());
+                } else {
+                    uQuestion.setNull(5, java.sql.Types.INTEGER);
+                }
+                if (question.getNote() != null) {                
+                    uQuestion.setString(6, question.getNote());
+                } else {
+                    uQuestion.setNull(6, java.sql.Types.INTEGER);
+                }
+                uQuestion.setInt(6, question.getPosition());
+                uQuestion.executeUpdate();
+            } else { //insert
+                iQuestion.setInt(1, question.getPoll().getKey());
+                iQuestion.setString(2, question.getType());
+                iQuestion.setBoolean(3,question.isMandatory());
+                iQuestion.setString(4, question.getText());          
+                if (question.getAnswer() != null) {
+                    iQuestion.setString(5, question.getAnswer());
+                } else {
+                    iQuestion.setNull(5, java.sql.Types.INTEGER);
+                }
+                if (question.getNote() != null) {                
+                    iQuestion.setString(6, question.getNote());
+                } else {
+                    iQuestion.setNull(6, java.sql.Types.INTEGER);
+                }
+                if (iQuestion.executeUpdate() == 1) {
+                    //to read the generated record key from the database
+                    //we use the getGeneratedKeys method on the same statement
+                    try (ResultSet keys = iQuestion.getGeneratedKeys()) {
+                        //the returned value is a ResultSet with a distinct record for
+                        //each generated key
+                        if (keys.next()) {
+                            //the record fields are the key componenets
+                            //(a single integer in our case)
+                            key = keys.getInt(1);
+                        }
+                    }
+                    //after an insert, uopdate the object key
+                    question.setKey(key);
+                }
+            }
+            
+        } catch (SQLException ex) {
+            throw new DataException("Unable to store article", ex);
+        }
     }
-
-  
     
+  
 }

@@ -27,7 +27,11 @@ public interface Question {
 
     String getText();
 
-    void setText(String Text);//Or type is Data?
+    void setText(String Text);
+    
+    String getAnswer();
+    
+    void setAnswer(String answer);
     
     String getNote();
     
@@ -37,8 +41,8 @@ public interface Question {
     
     void setMandatory(boolean mandatory);
     
-    int getPoll_ID();
+    Poll getPoll();
     
-    void setPoll_ID(int poll_ID);
+    void setPoll(Poll poll);
     
 }
