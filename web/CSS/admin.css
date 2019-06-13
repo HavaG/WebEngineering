@@ -42,7 +42,7 @@ form {
 }
 
 #manager_list {
-	display: flex;
+        display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
 	margin-right: 50px;

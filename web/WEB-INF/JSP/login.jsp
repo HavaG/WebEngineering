@@ -25,7 +25,8 @@
                         <label for="password">Password :</label>
                         <input type="password" name="password" placeholder="Ex : C~&;3H:t5*dD" size="20" maxlength="20"/>
                     </div></div>
-                    <div id="button"><input type="submit" value="Login" name="login"/></div>
+                    <a href = "<c:url value = "${redirect}"/>" id="button"><button name="login">Login</button></a>
+                    
                 </form>
             </div>
 

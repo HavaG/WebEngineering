@@ -44,6 +44,7 @@ public class Home extends PollWebBaseController {
 
     private void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
+            //TODO have to check session
             String log = "Login";
             request.setAttribute("log", log);            
             List<Poll> polls = ((PollWebDataLayer) request.getAttribute("datalayer")).getPollDAO().getUnsignedPolls();

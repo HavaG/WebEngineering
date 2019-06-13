@@ -12,6 +12,6 @@
 <nav>
     <ul>
         <li><a href="Home">Home</a></li>
-        <li><a href="Login"><c:out value="${log}"> </c:out></a></li>
+        <li><a href="Login" name="login"><c:out value="${log}"> </c:out></a></li>
     </ul>
 </nav>

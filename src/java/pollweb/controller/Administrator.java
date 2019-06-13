@@ -1,7 +1,10 @@
 package pollweb.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -42,9 +45,13 @@ public class Administrator extends PollWebBaseController {
         HttpSession s = SecurityLayer.checkSession(request);
         if (s == null) {
             //you have to login
+            String log = "Login";
+            request.setAttribute("log", log);
             this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/login.jsp").forward(request, response);
         } else if (s.getAttribute("username").equals("admin@admin.com")) {
             //you are the admin
+            String log = "Logout";
+            request.setAttribute("log", log);
             action_load_managers(request, response);
             this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/admin.jsp").forward(request, response);
         } else {
@@ -54,27 +61,17 @@ public class Administrator extends PollWebBaseController {
         }
 
     }
-    
-    
+
     private void action_load_managers(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            String log = "Login";
-            request.setAttribute("log", log);            
-            
+
             List<Manager> managers = ((PollWebDataLayer) request.getAttribute("datalayer")).getManagerDAO().getManagers();
-            
-                String the_managers = "Gaabor, Tanya, Aurelien";
-                request.setAttribute("managers", the_managers);
-                String polls = "Poll 1, Poll 2, Poll 3";
-                request.setAttribute("polls", polls);
-            
-            //TODO: load everything to the user
-            
+            request.setAttribute("managers", managers);
+
         } catch (DataException ex) {
             request.setAttribute("exception", ex);
             action_error(request, response);
         }
-
     }
 
     private void action_create_manager(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -92,7 +89,8 @@ public class Administrator extends PollWebBaseController {
                 ((PollWebDataLayer) request.getAttribute("datalayer")).getManagerDAO().storeManager(manager);
 
                 //redirect to admin page
-                this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/admin.jsp").forward(request, response);
+                //reload the page with the new data
+                action_default(request, response);
 
             } catch (DataException | ServletException ex) {
                 request.setAttribute("exception", ex);

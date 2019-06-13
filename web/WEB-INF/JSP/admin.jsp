@@ -32,12 +32,7 @@
             <div id="manager_list">                 
                     <c:forEach items="${managers}" var="manager">
                         <div  class="manager">
-                        <p><c:out value="${manager}"/></p>
-                        <ul>
-                            <c:forEach items="${polls}" var="poll">
-                                <li><c:out value="${poll}"/></li>
-                            </c:forEach>   
-                        </ul>
+                        <p><c:out value="${manager.email}"/></p>
                         </div>
                     </c:forEach>                
             </div>

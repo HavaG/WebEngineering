@@ -15,13 +15,11 @@ import pollweb.data.model.User;
 import pollweb.data.util.DataException;
 import pollweb.security.SecurityLayer;
 
-
 /**
  * Servlet implementation class servlet_home
  */
-
 public class Login extends PollWebBaseController {
-    
+
     private void action_error(HttpServletRequest request, HttpServletResponse response) {
         String message;
 
@@ -44,9 +42,12 @@ public class Login extends PollWebBaseController {
 
     private void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
+        String log = "Login";
+        request.setAttribute("log", log);
+
 //        HttpSession s = SecurityLayer.checkSession(request);
 //        if (s == null) {
-            this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/login.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/login.jsp").forward(request, response);
 //        } else {
 //            request.setAttribute("exception", new Exception("You already logged in"));
 //            action_error(request, response);
@@ -64,16 +65,13 @@ public class Login extends PollWebBaseController {
             //load userid from user database
 
             try {
-                String log = "Login";
-                request.setAttribute("log", log);                  
-                
                 User user = ((PollWebDataLayer) request.getAttribute("datalayer")).getUserDAO().getUser(userEmail, password);
 
                 //if there is no user with this name and pwd it throws exception
                 //create session
                 //redirect to homepage
                 SecurityLayer.createSession(request, user.getEmail(), user.getKey());
-                this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/home.jsp").forward(request, response);
+                System.out.println("redirected");
 
             } catch (DataException ex) {
                 //if there is not user with these atributes
@@ -86,8 +84,8 @@ public class Login extends PollWebBaseController {
                             Manager manager = ((PollWebDataLayer) request.getAttribute("datalayer")).
                                     getManagerDAO().getManager(userEmail, password);
                             SecurityLayer.createSession(request, manager.getEmail(), manager.getKey());
-                            
-                            if(!userEmail.equals("admin@admin.com")){
+
+                            if (!userEmail.equals("admin@admin.com")) {
                                 this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/mana.jsp").forward(request, response);
                             } else {
                                 this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/admin.jsp").forward(request, response);
@@ -107,6 +105,8 @@ public class Login extends PollWebBaseController {
             action_error(request, response);
         }
     }
+
+    //I gonna need this :D
     private void action_create(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         String userEmail = request.getParameter("email");
@@ -124,9 +124,9 @@ public class Login extends PollWebBaseController {
                 ((PollWebDataLayer) request.getAttribute("datalayer")).getUserDAO().storeUser(user);
 
                 //redirect to homepage
-                this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/home.jsp").forward(request, response);
-
-            } catch (DataException | ServletException ex) {
+                response.sendRedirect("/WEB-INF/JSP/home.jsp");
+                
+            } catch (DataException ex) {
                 request.setAttribute("exception", ex);
                 action_error(request, response);
             }
@@ -141,6 +141,11 @@ public class Login extends PollWebBaseController {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         try {
             if (request.getParameter("login") != null) {
+                System.out.println("home");
+                
+                System.out.println("redirect");
+                String redirect = "/WEB-INF/JSP/home.jsp";
+                request.setAttribute("redirect", redirect);
                 action_login(request, response);
             } else if (request.getParameter("create") != null) {
                 action_create(request, response);

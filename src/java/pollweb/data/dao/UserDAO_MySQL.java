@@ -169,7 +169,7 @@ public class UserDAO_MySQL extends DAO implements UserDAO {
             a.setKey(rs.getInt("ID"));
             a.setPassword(rs.getString("password"));
             a.setEmail(rs.getString("email"));
-            a.setPoll(((PollDAO) dl.getDAO(Poll.class)).getPoll(rs.getInt("poll")));
+            a.setPoll(((PollDAO) dl.getDAO(Poll.class)).getPoll(rs.getInt("poll_ID")));
         
         } catch (SQLException ex) {
             throw new DataException("Unable to create user object form ResultSet", ex);

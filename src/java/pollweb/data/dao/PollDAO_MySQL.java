@@ -127,7 +127,7 @@ public class PollDAO_MySQL extends DAO implements PollDAO{
         }
         return result;
     }
-
+    
     @Override
     public void storePoll(Poll poll) throws DataException {
         int key = poll.getKey();
