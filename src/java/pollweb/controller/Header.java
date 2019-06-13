@@ -20,8 +20,8 @@ import pollweb.data.util.DataException;
  *
  * @author venecia2
  */
-public class Home extends PollWebBaseController {
-
+public class Header extends PollWebBaseController {
+    
     private void action_error(HttpServletRequest request, HttpServletResponse response) {
         String message;
 
@@ -43,20 +43,7 @@ public class Home extends PollWebBaseController {
     }
 
     private void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        try {
-            String log = "Login";
-            request.setAttribute("log", log);            
-            List<Poll> polls = ((PollWebDataLayer) request.getAttribute("datalayer")).getPollDAO().getUnsignedPolls();
-            if(polls.isEmpty()){
-                action_error(request, response);
-            }
-            request.setAttribute("polls", polls);
-            this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/home.jsp").forward(request, response);
-
-        } catch (DataException ex) {
-            request.setAttribute("exception", ex);
-            action_error(request, response);
-        }
+        this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/header.jsp").forward(request, response);
     }
 
     @Override

@@ -58,6 +58,9 @@ public class Login extends PollWebBaseController {
             //load userid from user database
 
             try {
+                String log = "Login";
+                request.setAttribute("log", log);                  
+                
                 User user = ((PollWebDataLayer) request.getAttribute("datalayer")).getUserDAO().getUser(userEmail, password);
 
                 //if there is no user with this name and pwd it throws exception
