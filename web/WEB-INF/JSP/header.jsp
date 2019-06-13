@@ -1,3 +1,4 @@
+<%@ include file="taglibs.jsp"%>
 <link rel="stylesheet" href="CSS/header.css" />
 
 <div id="logo">
@@ -11,6 +12,6 @@
 <nav>
     <ul>
         <li><a href="Home">Home</a></li>
-        <li><a href="Login">Login</a></li>
+        <li><a href="Login"><c:out value="${log}"> </c:out></a></li>
     </ul>
 </nav>

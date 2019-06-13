@@ -58,6 +58,9 @@ public class Administrator extends PollWebBaseController {
     
     private void action_load_managers(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
+            String log = "Login";
+            request.setAttribute("log", log);            
+            
             List<Manager> managers = ((PollWebDataLayer) request.getAttribute("datalayer")).getManagerDAO().getManagers();
             
                 String the_managers = "Gaabor, Tanya, Aurelien";

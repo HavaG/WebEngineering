@@ -14,7 +14,7 @@
         </header>
         
         <section>
-            <form method="post" action="poll_designing">
+            <form method="post" action="Designing">
                 <input type="text" name="poll_title" id="poll_title" class="champ" size="25" placeholder="Name of the Poll" maxlength="40" required/>
                 
                 <textarea name="opening_text" id="opening_text" class="text" placeholder="Opening text" maxlength="200" rows="3" cols="56" required></textarea>
@@ -258,6 +258,12 @@
                      <label for="reserved_no">No</label><input type="radio" name="reserved" value="no" id="reserved_no" checked/></div>
 
                 <input type="submit" id="poll_send" value="Ok" />
+                
+                <c:if test="${ !empty poll_title }"><p><c:out value="Title : ${poll_title}" /></p></c:if>
+                <c:if test="${ !empty opening_text }"><p><c:out value="Opening text : ${ opening_text}" /></p></c:if>
+                <c:if test="${ !empty closing_text }"><p><c:out value="Closing text : ${closing_text}" /></p></c:if>
+                <p><c:out value="Poll reserved : ${poll_reserved}" /></p>
+                
             </form>
         </section>
             
