@@ -21,10 +21,10 @@ public interface Poll {
 
     void setTitle(String title);
     
-    int getManagerID();
-    
-    void setManagerID(Integer managerID);
-    
+    Manager getManager();
+
+    void setManager(Manager manager);
+            
     String getOpenText();
     
     void setOpenText(String text);

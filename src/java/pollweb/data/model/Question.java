@@ -17,17 +17,21 @@ public interface Question {
 
     void setKey(int key);
     
-    int getNumber();
+    int getPosition();
 
-    void setNumber(int number);
+    void setPosition(int position);
     
-    String getQuestionType();
+    String getType();
 
-    void setQuestionType(String type);
+    void setType(String type);
 
     String getText();
 
-    void setText(String Text);//Or type is Data?
+    void setText(String Text);
+    
+    String getAnswer();
+    
+    void setAnswer(String answer);
     
     String getNote();
     
@@ -36,5 +40,9 @@ public interface Question {
     boolean isMandatory();
     
     void setMandatory(boolean mandatory);
+    
+    Poll getPoll();
+    
+    void setPoll(Poll poll);
     
 }

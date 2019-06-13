@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pollweb.data.impl.UserImpl;
+import pollweb.data.model.Poll;
 import pollweb.data.model.User;
 import pollweb.data.util.DAO;
 import pollweb.data.util.DataException;
@@ -16,12 +17,16 @@ import pollweb.data.util.DataLayer;
 
 public class UserDAO_MySQL extends DAO implements UserDAO {
 
+    protected DataLayer dl;
+
+
     public UserDAO_MySQL(DataLayer d) {
         super(d);
+        this.dl = d;
     }
 
     private PreparedStatement sUsersByID;
-    private PreparedStatement sUsers, sUsersByEmailAndPwd, sUsersByEmail, sUsersByPollID;
+    private PreparedStatement sUsers, sUsersByEmailAndPwd, sUsersByEmail;
     private PreparedStatement iUser, uUser, dUser;
 
     @Override
@@ -32,7 +37,6 @@ public class UserDAO_MySQL extends DAO implements UserDAO {
             //precompile all the queries uses in this class
             sUsersByID = connection.prepareStatement("SELECT * FROM user WHERE ID=?");
             sUsersByEmailAndPwd = connection.prepareStatement("SELECT ID FROM user WHERE email=? AND password=?");
-            sUsersByPollID = connection.prepareStatement("SELECT ID FROM user WHERE poll_ID=?");
             sUsers = connection.prepareStatement("SELECT ID FROM user");
 
             //note the last parameter in this call to prepareStatement:
@@ -128,28 +132,21 @@ public class UserDAO_MySQL extends DAO implements UserDAO {
 
                 uUser.setString(1, user.getEmail());
                 uUser.setString(2, user.getPassword());
-                uUser.setInt(3, user.getPollID());
+                uUser.setInt(3, user.getPoll().getKey());
                 uUser.setInt(4, user.getKey());
                 uUser.executeUpdate();
 
             } else { //insert
                 iUser.setString(1, user.getEmail());
                 iUser.setString(2, user.getPassword());
-                iUser.setInt(3, user.getPollID());
+                iUser.setInt(3, user.getPoll().getKey());
 
                 if (iUser.executeUpdate() == 1) {
-                    //to read the generated record key from the database
-                    //we use the getGeneratedKeys method on the same statement
                     try (ResultSet keys = iUser.getGeneratedKeys()) {
-                        //the returned value is a ResultSet with a distinct record for
-                        //each generated key (only one in our case)
                         if (keys.next()) {
-                            //the record fields are the key componenets
-                            //(a single integer in our case)
                             key = keys.getInt(1);
                         }
                     }
-                    //after an insert, uopdate the object key
                     user.setKey(key);
                 }
             }
@@ -172,6 +169,8 @@ public class UserDAO_MySQL extends DAO implements UserDAO {
             a.setKey(rs.getInt("ID"));
             a.setPassword(rs.getString("password"));
             a.setEmail(rs.getString("email"));
+            a.setPoll(((PollDAO) dl.getDAO(Poll.class)).getPoll(rs.getInt("poll")));
+        
         } catch (SQLException ex) {
             throw new DataException("Unable to create user object form ResultSet", ex);
         }

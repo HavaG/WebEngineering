@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package pollweb.data.impl;
+import pollweb.data.model.Poll;
 import pollweb.data.model.User;
 
 /**
@@ -12,22 +13,22 @@ import pollweb.data.model.User;
  */
 public class UserImpl extends PersonImpl implements User{
     
-    private int pollID;
+    private Poll poll;
 
     public UserImpl() {
         this.key = 0;
         this.password = "";
         this.email = "";
-        this.pollID = 0;
+        this.poll = null;
     }
     
     @Override
-    public int getPollID() {
-        return pollID;
+    public Poll getPoll() {
+        return poll;
     }
 
     @Override
-    public void setPollID(int newPollID) {
-        pollID = newPollID;
+    public void setPoll(Poll newPoll) {
+        poll = newPoll;
     }
 }

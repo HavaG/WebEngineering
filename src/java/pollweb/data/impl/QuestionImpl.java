@@ -5,6 +5,7 @@
  */
 package pollweb.data.impl;
 
+import pollweb.data.model.Poll;
 import pollweb.data.model.Question;
 
 /**
@@ -14,11 +15,13 @@ import pollweb.data.model.Question;
 public class QuestionImpl implements Question{
     
     int key;
-    int number;// position of question
+    int position;// position of question
     String type;//TODO: String or object type
     String text;
+    String answer;//answer options
     String note;//explanatory note
     boolean isMandatory;
+    Poll poll;
 
     public QuestionImpl() { }
 
@@ -34,22 +37,22 @@ public class QuestionImpl implements Question{
     }
 
     @Override
-    public int getNumber() {
-        return number;
+    public int getPosition() {
+        return position;
     }
 
     @Override
-    public void setNumber(int number) {
-        this.number=number;
+    public void setPosition(int position) {
+        this.position=position;
     }
 
     @Override
-    public String getQuestionType() {
+    public String getType() {
         return type;
     }
 
     @Override
-    public void setQuestionType(String type) {
+    public void setType(String type) {
        this.type=type;
     }
 
@@ -62,10 +65,20 @@ public class QuestionImpl implements Question{
     public void setText(String text) {
         this.text = text;
     }
-
-    @Override
+    
+      @Override
     public String getNote() {
         return note;
+    }
+
+    @Override
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
+    @Override
+    public String getAnswer() {
+        return answer;
     }
 
     @Override
@@ -81,6 +94,16 @@ public class QuestionImpl implements Question{
     @Override
     public void setMandatory(boolean mandatory) {
         this.isMandatory = mandatory;
+    }
+
+    @Override
+    public Poll getPoll() {
+        return poll;
+    }
+
+    @Override
+    public void setPoll(Poll poll) {
+        this.poll=poll;
     }
     
 }
