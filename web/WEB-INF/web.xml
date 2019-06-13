@@ -47,11 +47,11 @@
     </servlet-mapping>
   
     <servlet>
-        <servlet-name>servlet_poll_example</servlet-name>
-        <servlet-class>com.octest.servlets.servlet_poll_example</servlet-class>
+        <servlet-name>Poll_example</servlet-name>
+        <servlet-class>pollweb.controller.Poll_example</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>servlet_poll_example</servlet-name>
+        <servlet-name>Poll_example</servlet-name>
         <url-pattern>/Example</url-pattern>
     </servlet-mapping>
   

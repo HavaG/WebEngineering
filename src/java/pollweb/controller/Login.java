@@ -45,7 +45,7 @@ public class Login extends PollWebBaseController {
     private void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
 //        HttpSession s = SecurityLayer.checkSession(request);
-//        if (s == null) {
+//        if (s == null) {    
             this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/login.jsp").forward(request, response);
 //        } else {
 //            request.setAttribute("exception", new Exception("You already logged in"));
@@ -63,9 +63,7 @@ public class Login extends PollWebBaseController {
             //if the identity validation succeeds
             //load userid from user database
 
-            try {
-                String log = "Login";
-                request.setAttribute("log", log);                  
+            try {              
                 
                 User user = ((PollWebDataLayer) request.getAttribute("datalayer")).getUserDAO().getUser(userEmail, password);
 
