@@ -167,18 +167,11 @@ public class QuestionDAO_MySQL extends DAO implements QuestionDAO{
                     iQuestion.setNull(6, java.sql.Types.INTEGER);
                 }
                 if (iQuestion.executeUpdate() == 1) {
-                    //to read the generated record key from the database
-                    //we use the getGeneratedKeys method on the same statement
                     try (ResultSet keys = iQuestion.getGeneratedKeys()) {
-                        //the returned value is a ResultSet with a distinct record for
-                        //each generated key
                         if (keys.next()) {
-                            //the record fields are the key componenets
-                            //(a single integer in our case)
                             key = keys.getInt(1);
                         }
                     }
-                    //after an insert, uopdate the object key
                     question.setKey(key);
                 }
             }
