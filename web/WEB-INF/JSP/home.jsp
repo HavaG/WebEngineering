@@ -16,7 +16,10 @@
         <section>
             <div id="poll_list">
                 <c:forEach items="${polls}" var="poll">
-                    <a href="Example"><c:out value="${poll.title}"/></a>
+                    <c:url var="URL" value="/Example">
+                        <c:param name="ID" value="${poll.ID}"/>
+                    </c:url>
+                    <a href="URL">"${poll.title}"</a>
                 </c:forEach>
             </div>
         </section>

@@ -1,4 +1,4 @@
-package com.octest.servlets;
+package pollweb.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -10,14 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class servlet_home
  */
-@WebServlet("/servlet_poll_example")
-public class servlet_poll_example extends HttpServlet {
+@WebServlet("/Poll_example")
+public class Poll_example extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public servlet_poll_example() {
+    public Poll_example() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,6 +34,12 @@ public class servlet_poll_example extends HttpServlet {
             
             String closing_text = "Thank you for your participation !";
             request.setAttribute("closing_text", closing_text);
+            
+            String question_name_1 = "Select your date of birth";
+            request.setAttribute("question_name_1", question_name_1);
+            
+            String[] questions = {"Question 1", "Question 2", "Question 3"};
+            request.setAttribute("questions.text", questions);
             
             this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/poll_example.jsp").forward(request, response);
 	}
