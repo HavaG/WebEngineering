@@ -20,7 +20,7 @@
             <p class="text" id="open_tag">${poll.open_tag}</p>
             
             <div class="question">
-                
+                <!--
                 <c:forEach items="${questions}" var="question">
 
                     <div class="question_top"><c:out value="${question.text}"/></div>
@@ -44,6 +44,7 @@
                             </c:when>                                                    
                         </c:choose>                 
                 </c:forEach>
+                -->
             </div>
 
             <p class="text" id="closing_text">${closing_text}</p>

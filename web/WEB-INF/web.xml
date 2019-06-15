@@ -48,7 +48,7 @@
   
     <servlet>
         <servlet-name>Poll_example</servlet-name>
-        <servlet-class>pollweb.controller.Poll_example</servlet-class>
+        <servlet-class>pollweb.controller.ShowPoll</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Poll_example</servlet-name>

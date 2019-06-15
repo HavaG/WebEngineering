@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import pollweb.data.dao.PollWebDataLayer;
@@ -21,6 +22,7 @@ import pollweb.data.util.DataException;
  *
  * @author venecia2
  */
+@WebServlet("/Poll_example")
 public class ShowPoll extends PollWebBaseController {
     
     private void action_error(HttpServletRequest request, HttpServletResponse response) {
