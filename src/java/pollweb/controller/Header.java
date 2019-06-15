@@ -6,16 +6,13 @@
 package pollweb.controller;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import pollweb.data.dao.PollWebDataLayer;
-import pollweb.data.model.Poll;
-import pollweb.data.util.DataException;
-
+import javax.servlet.http.HttpSession;
+import pollweb.security.SecurityLayer;
 /**
  *
  * @author venecia2
@@ -23,6 +20,15 @@ import pollweb.data.util.DataException;
 public class Header extends PollWebBaseController {
     
     private void action_error(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession s = SecurityLayer.checkSession(request);
+        String log;
+        if (s == null) {
+            log = "Login";
+        } else {
+            log = "Logout";
+        }
+        request.setAttribute("log", log);
+        
         String message;
 
         Exception ex = (Exception) request.getAttribute("exception");
@@ -45,11 +51,11 @@ public class Header extends PollWebBaseController {
     private void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/header.jsp").forward(request, response);
     }
-
+     
     @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         try {
-            action_default(request, response);
+                action_default(request, response);
         } catch (IOException ex) {
             request.setAttribute("exception", ex);
             action_error(request, response);

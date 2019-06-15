@@ -11,8 +11,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import pollweb.data.impl.PollImpl;
 import pollweb.data.model.Manager;
 import pollweb.data.model.Poll;
@@ -127,7 +125,7 @@ public class PollDAO_MySQL extends DAO implements PollDAO{
         }
         return result;
     }
-
+    
     @Override
     public void storePoll(Poll poll) throws DataException {
         int key = poll.getKey();

@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import pollweb.data.dao.PollWebDataLayer;
 import pollweb.data.impl.PollImpl;
 import pollweb.data.impl.UserImpl;
@@ -15,14 +16,21 @@ import pollweb.data.model.User;
 import pollweb.data.util.DataException;
 import pollweb.security.SecurityLayer;
 
-
 /**
  * Servlet implementation class servlet_home
  */
-
 public class Login extends PollWebBaseController {
- 
+
     private void action_error(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession s = SecurityLayer.checkSession(request);
+        String log;
+        if (s == null) {
+            log = "Login";
+        } else {
+            log = "Logout";
+        }
+        request.setAttribute("log", log);
+
         String message;
 
         Exception ex = (Exception) request.getAttribute("exception");
@@ -44,67 +52,67 @@ public class Login extends PollWebBaseController {
 
     private void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-//        HttpSession s = SecurityLayer.checkSession(request);
-//        if (s == null) {    
-            this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/login.jsp").forward(request, response);
-//        } else {
-//            request.setAttribute("exception", new Exception("You already logged in"));
-//            action_error(request, response);
-//        }
-
+        String log = "Login";
+        request.setAttribute("log", log);
+        HttpSession s = SecurityLayer.checkSession(request);
+        if (s != null) {    
+            SecurityLayer.disposeSession(request);
+        }
+        this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/login.jsp").forward(request, response);
     }
 
-    private void action_login(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    private void action_login_logout(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        
         String userEmail = request.getParameter("email");
         String password = request.getParameter("password");
+        Exception exNoUser = null;
         //... IDENTITY CHECKS ...
 
         if (!userEmail.isEmpty() && !password.isEmpty()) {
             //if the identity validation succeeds
             //load userid from user database
 
-            try {              
-                
+            try {
                 User user = ((PollWebDataLayer) request.getAttribute("datalayer")).getUserDAO().getUser(userEmail, password);
-
                 //if there is no user with this name and pwd it throws exception
                 //create session
                 //redirect to homepage
-                SecurityLayer.createSession(request, user.getEmail(), user.getKey());
-                this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/home.jsp").forward(request, response);
-
+                    SecurityLayer.createSession(request, user.getEmail(), user.getKey(), "user");
+                //redirect user
+                response.sendRedirect(request.getContextPath() + "/Home");
             } catch (DataException ex) {
                 //if there is not user with these atributes
-                //chech is there any manager
-                String message;
-                if (ex != null && ex.getMessage() != null) {
-                    message = ex.getMessage();
-                    if (message.equals("Not existing user")) {
-                        try {
-                            Manager manager = ((PollWebDataLayer) request.getAttribute("datalayer")).
-                                    getManagerDAO().getManager(userEmail, password);
-                            SecurityLayer.createSession(request, manager.getEmail(), manager.getKey());
-                            
-                            if(!userEmail.equals("admin@admin.com")){
-                                this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/mana.jsp").forward(request, response);
-                            } else {
-                                this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/admin.jsp").forward(request, response);
-                            }
-                        } catch (DataException ex1) {
-                            request.setAttribute("exception", ex1);
-                            action_error(request, response);
-                        }
-                    } else {
-                        request.setAttribute("exception", ex);
-                        action_error(request, response);
-                    }
+                exNoUser = ex;
+            }
+
+            //chech is there any manager
+            try {
+                
+                Manager manager = ((PollWebDataLayer) request.getAttribute("datalayer")).
+                        getManagerDAO().getManager(userEmail, password);
+                
+                if(manager.getEmail().equals("admin@admin.com"))
+                    SecurityLayer.createSession(request, manager.getEmail(), manager.getKey(), "admin");
+                else
+                    SecurityLayer.createSession(request, manager.getEmail(), manager.getKey(), "manager");
+                
+                response.sendRedirect(request.getContextPath() + "/Home");
+                
+            } catch (DataException ex1) {
+                if (exNoUser != null) {
+                    request.setAttribute("exception", exNoUser);
+                } else {
+                    request.setAttribute("exception", ex1);
                 }
+                action_error(request, response);
             }
         } else {
             request.setAttribute("exception", new Exception("Login failed"));
             action_error(request, response);
         }
     }
+
+    //I gonna need this :D
     private void action_create(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         String userEmail = request.getParameter("email");
@@ -122,9 +130,9 @@ public class Login extends PollWebBaseController {
                 ((PollWebDataLayer) request.getAttribute("datalayer")).getUserDAO().storeUser(user);
 
                 //redirect to homepage
-                this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/home.jsp").forward(request, response);
+                response.sendRedirect("/WEB-INF/JSP/home.jsp");
 
-            } catch (DataException | ServletException ex) {
+            } catch (DataException ex) {
                 request.setAttribute("exception", ex);
                 action_error(request, response);
             }
@@ -139,7 +147,7 @@ public class Login extends PollWebBaseController {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         try {
             if (request.getParameter("login") != null) {
-                action_login(request, response);
+                action_login_logout(request, response);
             } else if (request.getParameter("create") != null) {
                 action_create(request, response);
             } else {

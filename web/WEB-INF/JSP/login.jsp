@@ -25,10 +25,16 @@
                         <label for="password">Password :</label>
                         <input type="password" name="password" placeholder="Ex : C~&;3H:t5*dD" size="20" maxlength="20"/>
                     </div></div>
-                    <div id="button"><input type="submit" value="Login" name="login"/></div>
+                    <a href = "<c:url value = "${redirect}"/>" id="button"><button name="login">Login</button></a>
+                    
                 </form>
             </div>
-
+                    <c:if test="${not empty message}">
+                        <div class="login">
+                            <p>Error message: ${message}</p>
+                        </div>
+                    </c:if>
+                
             <a href="Administrator" id="admin_page">Administrator</a><a href="Manager" id="mana_page">Manager</a>
         </section>
             

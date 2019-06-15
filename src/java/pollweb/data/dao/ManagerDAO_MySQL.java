@@ -138,7 +138,7 @@ public class ManagerDAO_MySQL extends DAO implements ManagerDAO{
 
         try (ResultSet rs = sManagers.executeQuery()) {
             while (rs.next()) {
-                result.add((Manager) getManager(rs.getInt("userID")));
+                result.add((Manager) getManager(rs.getInt("ID")));
             }
         } catch (SQLException ex) {
             throw new DataException("Unable to load managers", ex);
