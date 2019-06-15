@@ -19,7 +19,11 @@ import pollweb.security.SecurityLayer;
  * Servlet implementation class servlet_home
  */
 public class Login extends PollWebBaseController {
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> a9b4f562b2bb7e797b8641cbad8949db3f9f2475
     private void action_error(HttpServletRequest request, HttpServletResponse response) {
         String message;
 
@@ -46,8 +50,13 @@ public class Login extends PollWebBaseController {
         request.setAttribute("log", log);
 
 //        HttpSession s = SecurityLayer.checkSession(request);
+<<<<<<< HEAD
 //        if (s == null) {
         this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/login.jsp").forward(request, response);
+=======
+//        if (s == null) {    
+            this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/login.jsp").forward(request, response);
+>>>>>>> a9b4f562b2bb7e797b8641cbad8949db3f9f2475
 //        } else {
 //            request.setAttribute("exception", new Exception("You already logged in"));
 //            action_error(request, response);
@@ -64,7 +73,12 @@ public class Login extends PollWebBaseController {
             //if the identity validation succeeds
             //load userid from user database
 
+<<<<<<< HEAD
             try {
+=======
+            try {              
+                
+>>>>>>> a9b4f562b2bb7e797b8641cbad8949db3f9f2475
                 User user = ((PollWebDataLayer) request.getAttribute("datalayer")).getUserDAO().getUser(userEmail, password);
 
                 //if there is no user with this name and pwd it throws exception
