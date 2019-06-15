@@ -22,7 +22,13 @@ import pollweb.security.SecurityLayer;
 public class Login extends PollWebBaseController {
 
     private void action_error(HttpServletRequest request, HttpServletResponse response) {
-        String log = "Login";
+        HttpSession s = SecurityLayer.checkSession(request);
+        String log;
+        if (s == null) {
+            log = "Login";
+        } else {
+            log = "Logout";
+        }
         request.setAttribute("log", log);
 
         String message;

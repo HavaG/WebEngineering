@@ -11,6 +11,8 @@ import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import pollweb.security.SecurityLayer;
 /**
  *
  * @author venecia2
@@ -18,6 +20,15 @@ import javax.servlet.http.HttpServletResponse;
 public class Header extends PollWebBaseController {
     
     private void action_error(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession s = SecurityLayer.checkSession(request);
+        String log;
+        if (s == null) {
+            log = "Login";
+        } else {
+            log = "Logout";
+        }
+        request.setAttribute("log", log);
+        
         String message;
 
         Exception ex = (Exception) request.getAttribute("exception");
@@ -40,21 +51,11 @@ public class Header extends PollWebBaseController {
     private void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/header.jsp").forward(request, response);
     }
-
-     private void action_logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        
-            action_error(request, response);
-    }
      
     @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         try {
-            if (    request.getParameter("login") != null && 
-                    request.getParameter("log").equals("Logout")) {
-                action_logout(request, response);
-            } else {
                 action_default(request, response);
-            }
         } catch (IOException ex) {
             request.setAttribute("exception", ex);
             action_error(request, response);

@@ -19,10 +19,16 @@ import pollweb.security.SecurityLayer;
 public class Manager extends PollWebBaseController {
 
     private void action_error(HttpServletRequest request, HttpServletResponse response) {
-        //TODO
-        String log = "Login";
+        
+        HttpSession s = SecurityLayer.checkSession(request);
+        String log;
+        if (s == null) {
+            log = "Login";
+        } else {
+            log = "Logout";
+        }
         request.setAttribute("log", log);
-
+        
         String message;
 
         Exception ex = (Exception) request.getAttribute("exception");
