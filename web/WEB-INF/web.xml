@@ -38,21 +38,21 @@
     </servlet-mapping>
   
     <servlet>
-        <servlet-name>Poll_designing</servlet-name>
-        <servlet-class>pollweb.controller.Poll_designing</servlet-class>
+        <servlet-name>PollShow</servlet-name>
+        <servlet-class>pollweb.controller.PollShow</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>Poll_designing</servlet-name>
-        <url-pattern>/Designing</url-pattern>
-    </servlet-mapping>
-  
-    <servlet>
-        <servlet-name>Poll_example</servlet-name>
-        <servlet-class>pollweb.controller.Poll_example</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Poll_example</servlet-name>
+        <servlet-name>PollShow</servlet-name>
         <url-pattern>/Example</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>PollCreate</servlet-name>
+        <servlet-class>pollweb.controller.PollCreate</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PollCreate</servlet-name>
+        <url-pattern>/PollCreate</url-pattern>
     </servlet-mapping>
   
     <resource-ref>
@@ -61,5 +61,4 @@
         <res-auth>Container</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>
     </resource-ref>
-  
 </web-app>

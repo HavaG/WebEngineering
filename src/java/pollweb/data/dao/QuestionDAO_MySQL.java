@@ -22,28 +22,26 @@ import pollweb.data.util.DataLayer;
  *
  * @author venecia2
  */
-public class QuestionDAO_MySQL extends DAO implements QuestionDAO{
-    
-    private PreparedStatement getQuestionByID,getQuestionsByPoll;
-    private PreparedStatement iQuestion, uQuestion, dQuestion;
-    
-    DataLayer dataLayer;
-    PollWebDataLayer pd;
+public class QuestionDAO_MySQL extends DAO implements QuestionDAO {
 
-    
+    private PreparedStatement getQuestionByID, getQuestionsByPoll;
+    private PreparedStatement iQuestion, uQuestion, dQuestion;
+
+    DataLayer dataLayer;
+
     public QuestionDAO_MySQL(DataLayer d) {
         super(d);
         dataLayer = d;
     }
-    
-        public void init() throws DataException {
+
+    @Override
+    public void init() throws DataException {
         try {
             super.init();
-            
+
             //precompile all the queries uses in this class
             getQuestionByID = connection.prepareStatement("SELECT * FROM question WHERE ID=?");
-            getQuestionsByPoll = connection.prepareStatement("SELECT ID AS questionID FROM article WHERE poll_ID=? ORDER BY position");
-            
+            getQuestionsByPoll = connection.prepareStatement("SELECT ID AS questionID FROM question WHERE poll_ID=? ORDER BY position");
 
             //note the last parameter in this call to prepareStatement:
             //it is used to ensure that the JDBC will sotre and return
@@ -56,47 +54,48 @@ public class QuestionDAO_MySQL extends DAO implements QuestionDAO{
             throw new DataException("Error initializing pollweb data layer", ex);
         }
     }
-        
-     @Override
-    public void destroy()throws DataException{
-        try{
+
+    @Override
+    public void destroy() throws DataException {
+        try {
             getQuestionByID.close();
             getQuestionsByPoll.close();
-            
+
             iQuestion.close();
             uQuestion.close();
             uQuestion.close();
 
-        }catch(SQLException ex){
-            throw new DataException("Error destroying pollweb data layer",ex);
+        } catch (SQLException ex) {
+            throw new DataException("Error destroying pollweb data layer", ex);
         }
         super.destroy();
     }
+
     @Override
     public Question createQuestion() {
-       return new QuestionImpl();
+        return new QuestionImpl();
     }
 
     @Override
     public Question createQuestion(ResultSet rs) throws DataException {
         QuestionImpl q = (QuestionImpl) createQuestion();
-       try{
-            q.setKey(rs.getInt("ID"));            
+        try {
+            q.setKey(rs.getInt("ID"));
             //q.setPoll(((PollDAO) dataLayer.getDAO(Poll.class)).getPoll(rs.getInt("poll_ID")));
-            q.setPoll(pd.getPollDAO().getPoll(rs.getInt("poll_ID")));//get poll by poll_ID in question database
+            q.setPoll(((PollDAO) dataLayer.getDAO(Poll.class)).getPoll(rs.getInt("poll_ID")));//get poll by poll_ID in question database
             q.setText(rs.getString("text"));
             q.setAnswer(rs.getString("answer"));
             q.setType(rs.getString("type"));
             q.setNote(rs.getString("note"));
             q.setPosition(rs.getInt("position"));
             q.setMandatory(rs.getBoolean("isMandatory"));
-           
+
             return q;
-       }catch(SQLException ex){
-            throw new DataException("Unable to create question object from ResultSet",ex);
-       }
+        } catch (SQLException ex) {
+            throw new DataException("Unable to create question object from ResultSet", ex);
+        }
     }
-    
+
     @Override
     public Question getQuestion(int question_ID) throws DataException {
         try {
@@ -131,20 +130,20 @@ public class QuestionDAO_MySQL extends DAO implements QuestionDAO{
     }
 
     @Override
-    public void storeQuestion(QuestionImpl question) throws DataException {       
+    public void storeQuestion(QuestionImpl question) throws DataException {
         int key = question.getKey();
         try {
             if (question.getKey() > 0) { //update
                 uQuestion.setInt(1, question.getPoll().getKey());
                 uQuestion.setString(2, question.getType());
-                uQuestion.setBoolean(3,question.isMandatory());
-                uQuestion.setString(4, question.getText());          
+                uQuestion.setBoolean(3, question.isMandatory());
+                uQuestion.setString(4, question.getText());
                 if (question.getAnswer() != null) {
                     uQuestion.setString(5, question.getAnswer());
                 } else {
                     uQuestion.setNull(5, java.sql.Types.INTEGER);
                 }
-                if (question.getNote() != null) {                
+                if (question.getNote() != null) {
                     uQuestion.setString(6, question.getNote());
                 } else {
                     uQuestion.setNull(6, java.sql.Types.INTEGER);
@@ -154,14 +153,14 @@ public class QuestionDAO_MySQL extends DAO implements QuestionDAO{
             } else { //insert
                 iQuestion.setInt(1, question.getPoll().getKey());
                 iQuestion.setString(2, question.getType());
-                iQuestion.setBoolean(3,question.isMandatory());
-                iQuestion.setString(4, question.getText());          
+                iQuestion.setBoolean(3, question.isMandatory());
+                iQuestion.setString(4, question.getText());
                 if (question.getAnswer() != null) {
                     iQuestion.setString(5, question.getAnswer());
                 } else {
                     iQuestion.setNull(5, java.sql.Types.INTEGER);
                 }
-                if (question.getNote() != null) {                
+                if (question.getNote() != null) {
                     iQuestion.setString(6, question.getNote());
                 } else {
                     iQuestion.setNull(6, java.sql.Types.INTEGER);
@@ -182,11 +181,10 @@ public class QuestionDAO_MySQL extends DAO implements QuestionDAO{
                     question.setKey(key);
                 }
             }
-            
+
         } catch (SQLException ex) {
-            throw new DataException("Unable to store article", ex);
+            throw new DataException("Unable to store question", ex);
         }
     }
-    
-  
+
 }

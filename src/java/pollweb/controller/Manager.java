@@ -84,16 +84,12 @@ public class Manager extends PollWebBaseController {
             action_error(request, response);
         }
     }
-    
-    private void action_add_poll(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        //TODO
-    }
-        
+   
     @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         try {
             if (request.getParameter("addPoll") != null) {
-                action_add_poll(request, response);
+                
             } else {
                 action_default(request, response);
             }

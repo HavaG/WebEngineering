@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pollweb.controller;
 
 import java.io.IOException;
@@ -15,15 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import pollweb.data.dao.PollWebDataLayer;
 import pollweb.data.model.Poll;
+import pollweb.data.model.Question;
 import pollweb.data.util.DataException;
 import pollweb.security.SecurityLayer;
 
 /**
- *
- * @author venecia2
+ * Servlet implementation class servlet_home
  */
-public class Home extends PollWebBaseController {
-
+public class PollShow extends PollWebBaseController {
+    
     private void action_error(HttpServletRequest request, HttpServletResponse response) {
         HttpSession s = SecurityLayer.checkSession(request);
         String log;
@@ -33,7 +28,7 @@ public class Home extends PollWebBaseController {
             log = "Logout";
         }
         request.setAttribute("log", log);
-        
+
         String message;
 
         Exception ex = (Exception) request.getAttribute("exception");
@@ -55,21 +50,25 @@ public class Home extends PollWebBaseController {
 
     private void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
-            String log;
-            //check session
-            HttpSession s = SecurityLayer.checkSession(request);
-        if (s == null) {
-            //you have to login
-            log = "Login";
-            request.setAttribute("log", log);
-        } else {
-            log = "Logout";
-            request.setAttribute("log", log);  
-        }          
-            List<Poll> polls = ((PollWebDataLayer) request.getAttribute("datalayer")).getPollDAO().getUnsignedPolls();
+            int poll_id = 1;
             
-            request.setAttribute("polls", polls);
-            this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/home.jsp").forward(request, response);
+                //TODO: get the poll ID
+//            if (request.getParameter("pollID") != null) {   
+//                System.out.println(request.getParameter("pollID"));        
+//                poll_id = Integer.parseInt(request.getParameter("pollID"));
+//                System.out.println(poll_id);
+//            } else {
+//              throw new NumberFormatException("String argument is null");
+//            }
+
+            Poll poll = ((PollWebDataLayer) request.getAttribute("datalayer")).getPollDAO().getPoll(poll_id);
+            List<Question> questions = ((PollWebDataLayer) request.getAttribute("datalayer")).getQuestionDAO().getQuestionsByPoll(poll);
+            if(questions.isEmpty()){
+                action_error(request, response);
+            }
+            request.setAttribute("poll", poll);
+            request.setAttribute("questions", questions);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/poll_example.jsp").forward(request, response);
 
         } catch (DataException ex) {
             request.setAttribute("exception", ex);
@@ -79,7 +78,8 @@ public class Home extends PollWebBaseController {
 
     @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-        try {
+
+        try { 
             action_default(request, response);
         } catch (IOException ex) {
             request.setAttribute("exception", ex);
