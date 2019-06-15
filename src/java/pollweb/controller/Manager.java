@@ -9,14 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import pollweb.data.dao.PollWebDataLayer;
-import pollweb.data.impl.ManagerImpl;
-import pollweb.data.model.Manager;
+import pollweb.data.model.Poll;
 import pollweb.data.util.DataException;
 import pollweb.security.SecurityLayer;
 
-public class Administrator extends PollWebBaseController {
+/**
+ * Servlet implementation class servlet_home
+ */
+public class Manager extends PollWebBaseController {
 
     private void action_error(HttpServletRequest request, HttpServletResponse response) {
+        //TODO
+        String log = "Login";
+        request.setAttribute("log", log);
+
         String message;
 
         Exception ex = (Exception) request.getAttribute("exception");
@@ -46,66 +52,42 @@ public class Administrator extends PollWebBaseController {
             request.setAttribute("message", "You have to log in");
             
             this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/login.jsp").forward(request, response);
-        } else if (s.getAttribute("role").equals("admin")) {
-            //you are the admin
+        } else if (s.getAttribute("role").equals("manager")) {
             String log = "Logout";
             request.setAttribute("log", log);
-            action_load_managers(request, response);
-            this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/admin.jsp").forward(request, response);
+            action_load_polls(request, response);
         } else {
-            //you are logged in, but you are not admin
+            //you are logged in, but you are not manager
             request.setAttribute("exception", new Exception("You have no rights to open this page"));
             action_error(request, response);
         }
-
     }
 
-    private void action_load_managers(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void action_load_polls(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
-
-            List<Manager> managers = ((PollWebDataLayer) request.getAttribute("datalayer")).getManagerDAO().getManagers();
-            request.setAttribute("managers", managers);
-
+            HttpSession s = SecurityLayer.checkSession(request);
+            int managerID = (int) s.getAttribute("userid");
+            pollweb.data.model.Manager manager = 
+                            ((PollWebDataLayer) request.getAttribute("datalayer")).
+                            getManagerDAO().getManager(managerID);
+            List<Poll> polls = ((PollWebDataLayer) request.getAttribute("datalayer")).getPollDAO().getPolls(manager);
+            request.setAttribute("polls", polls);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/mana.jsp").forward(request, response);
         } catch (DataException ex) {
             request.setAttribute("exception", ex);
             action_error(request, response);
         }
     }
-
-    private void action_create_manager(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-        String managerEmail = request.getParameter("email");
-        String managerPassword = request.getParameter("password");
-
-        if (!managerEmail.isEmpty() && !managerPassword.isEmpty()) {
-            try {
-                ManagerImpl manager = new ManagerImpl();
-                manager.setEmail(managerEmail);
-                manager.setPassword(managerPassword);
-
-                //add to database
-                ((PollWebDataLayer) request.getAttribute("datalayer")).getManagerDAO().storeManager(manager);
-
-                //redirect to admin page
-                //reload the page with the new data
-                action_default(request, response);
-
-            } catch (DataException | ServletException ex) {
-                request.setAttribute("exception", ex);
-                action_error(request, response);
-            }
-
-        } else {
-            request.setAttribute("exception", new Exception("Creation failed"));
-            action_error(request, response);
-        }
+    
+    private void action_add_poll(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        //TODO
     }
-
+        
     @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         try {
-            if (request.getParameter("create") != null) {
-                action_create_manager(request, response);
+            if (request.getParameter("addPoll") != null) {
+                action_add_poll(request, response);
             } else {
                 action_default(request, response);
             }
@@ -122,7 +104,7 @@ public class Administrator extends PollWebBaseController {
      */
     @Override
     public String getServletInfo() {
-        return "Create manager and ??? servlet";
+        return "Login and create servlet";
     }// </editor-fold>
 
 }

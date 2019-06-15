@@ -11,24 +11,14 @@
     </servlet-mapping>
   
     <servlet>
-        <servlet-name>servlet_mana</servlet-name>
-        <servlet-class>com.octest.servlets.servlet_mana</servlet-class>
+        <servlet-name>Manager</servlet-name>
+        <servlet-class>pollweb.controller.Manager</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>servlet_mana</servlet-name>
+        <servlet-name>Manager</servlet-name>
         <url-pattern>/Manager</url-pattern>
     </servlet-mapping>
     
-    
-    <servlet>
-        <servlet-name>Error</servlet-name>
-        <servlet-class>pollweb.controller.Error</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Error</servlet-name>
-        <url-pattern>/Error</url-pattern>
-    </servlet-mapping>
-  
     <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>pollweb.controller.Login</servlet-class>

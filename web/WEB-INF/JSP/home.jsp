@@ -19,7 +19,7 @@
                     <c:url var="URL" value="/Example">
                         <c:param name="ID" value="${poll.key}"/>
                     </c:url>
-                    <a href="URL">"${poll.title}"</a>
+                    <a href="URL">${poll.title}</a>
                 </c:forEach>
             </div>
         </section>

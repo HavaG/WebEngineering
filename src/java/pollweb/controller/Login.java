@@ -71,7 +71,7 @@ public class Login extends PollWebBaseController {
                 //if there is no user with this name and pwd it throws exception
                 //create session
                 //redirect to homepage
-                SecurityLayer.createSession(request, user.getEmail(), user.getKey());
+                    SecurityLayer.createSession(request, user.getEmail(), user.getKey(), "user");
                 //redirect user
                 response.sendRedirect(request.getContextPath() + "/Home");
             } catch (DataException ex) {
@@ -88,7 +88,7 @@ public class Login extends PollWebBaseController {
                 if(manager.getEmail().equals("admin@admin.com"))
                     SecurityLayer.createSession(request, manager.getEmail(), manager.getKey(), "admin");
                 else
-                    SecurityLayer.createSession(request, manager.getEmail(), manager.getKey());
+                    SecurityLayer.createSession(request, manager.getEmail(), manager.getKey(), "manager");
                 
                 response.sendRedirect(request.getContextPath() + "/Home");
                 

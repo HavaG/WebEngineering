@@ -10,10 +10,10 @@
 </div>
 
 <nav>
-    <ul>
+    <ul>   
         <li><a href="Home">Home</a></li>
         <li><a href="Administrator">Administrator</a></li>
         <li><a href="Manager">Manager</a></li>
-        <li><a href="Login" name="login"><c:out value="${log}"> </c:out></a></li>
+        <li><a href="Login"><c:out value="${log}"> </c:out></a></li>
     </ul>
 </nav>
