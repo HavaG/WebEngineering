@@ -17,7 +17,7 @@
             <div id="poll_list">
                 <c:forEach items="${polls}" var="poll">
                     <c:url var="URL" value="/Example">
-                        <c:param name="ID" value="${poll.ID}"/>
+                        <c:param name="ID" value="${poll.key}"/>
                     </c:url>
                     <a href="URL">"${poll.title}"</a>
                 </c:forEach>

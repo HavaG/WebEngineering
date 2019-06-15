@@ -12,9 +12,11 @@ import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import pollweb.data.dao.PollWebDataLayer;
 import pollweb.data.model.Poll;
 import pollweb.data.util.DataException;
+import pollweb.security.SecurityLayer;
 
 /**
  *
@@ -44,9 +46,17 @@ public class Home extends PollWebBaseController {
 
     private void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
-            //TODO have to check session
-            String log = "Login";
-            request.setAttribute("log", log);            
+            String log;
+            //check session
+            HttpSession s = SecurityLayer.checkSession(request);
+        if (s == null) {
+            //you have to login
+            log = "Login";
+            request.setAttribute("log", log);
+        } else {
+            log = "Logout";
+            request.setAttribute("log", log);  
+        }          
             List<Poll> polls = ((PollWebDataLayer) request.getAttribute("datalayer")).getPollDAO().getUnsignedPolls();
             if(polls.isEmpty()){
                 action_error(request, response);

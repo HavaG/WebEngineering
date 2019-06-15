@@ -18,6 +18,16 @@
         <servlet-name>servlet_mana</servlet-name>
         <url-pattern>/Manager</url-pattern>
     </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>Error</servlet-name>
+        <servlet-class>pollweb.controller.Error</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Error</servlet-name>
+        <url-pattern>/Error</url-pattern>
+    </servlet-mapping>
   
     <servlet>
         <servlet-name>Login</servlet-name>

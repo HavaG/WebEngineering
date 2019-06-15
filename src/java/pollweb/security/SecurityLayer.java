@@ -64,6 +64,16 @@ public class SecurityLayer {
         }
     }
 
+    public static HttpSession createSession(HttpServletRequest request, String username, int userid, String role){
+        HttpSession s = request.getSession(true);
+        s.setAttribute("username", username);
+        s.setAttribute("ip", request.getRemoteHost());
+        s.setAttribute("inizio-sessione", Calendar.getInstance());
+        s.setAttribute("userid", userid);
+        s.setAttribute("role", role);
+        return s;
+    }
+    
     public static HttpSession createSession(HttpServletRequest request, String username, int userid) {
         HttpSession s = request.getSession(true);
         s.setAttribute("username", username);

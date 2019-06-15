@@ -1,10 +1,7 @@
 package pollweb.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -14,7 +11,6 @@ import javax.servlet.http.HttpSession;
 import pollweb.data.dao.PollWebDataLayer;
 import pollweb.data.impl.ManagerImpl;
 import pollweb.data.model.Manager;
-import pollweb.data.model.Poll;
 import pollweb.data.util.DataException;
 import pollweb.security.SecurityLayer;
 
@@ -47,6 +43,8 @@ public class Administrator extends PollWebBaseController {
             //you have to login
             String log = "Login";
             request.setAttribute("log", log);
+            request.setAttribute("message", "You have to log in");
+            
             this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/login.jsp").forward(request, response);
         } else if (s.getAttribute("username").equals("admin@admin.com")) {
             //you are the admin

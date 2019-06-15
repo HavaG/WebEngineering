@@ -16,8 +16,9 @@
         <section>
             <div class="error">
                 <form method="post" action="error">
-                    <div class="top_login"><p>Error message:</p></div>
-                        <input type="text" name="message" value='<%=request.getAttribute("message")%>'/> 
+                    <div class="login">
+                            <p>Error message: ${message}</p>
+                    </div>
                 </form>
             </div>
         </section>

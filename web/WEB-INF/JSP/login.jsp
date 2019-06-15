@@ -29,7 +29,12 @@
                     
                 </form>
             </div>
-
+                    <c:if test="${not empty message}">
+                        <div class="login">
+                            <p>Error message: ${message}</p>
+                        </div>
+                    </c:if>
+                
             <a href="Administrator" id="admin_page">Administrator</a><a href="Manager" id="mana_page">Manager</a>
         </section>
             
