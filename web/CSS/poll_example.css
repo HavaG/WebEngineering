@@ -13,6 +13,7 @@ h3 {
 	text-align: center;
 }
 
+
 section {
 	display: flex;
 	flex-direction: column;
@@ -56,6 +57,12 @@ input {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+}
+
+.note{
+        color: #666666;
+        font-style: italic;
+        margin-top: 10px;
 }
 
 #poll_send {

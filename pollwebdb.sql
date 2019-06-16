@@ -11,7 +11,6 @@
 /*!40101 SET NAMES 'utf8' */;
 
 
-
 DROP DATABASE IF EXISTS `pollwebdb`;
 
 CREATE DATABASE `pollwebdb`
@@ -76,7 +75,7 @@ CREATE TABLE `question` (
   `type` ENUM('short_text','long_text','number','date','single_choice','multiple_choice') COLLATE utf8_general_ci NOT NULL DEFAULT 'short_text',
   `isMandatory` TINYINT(1) DEFAULT 0,
   `text` TEXT COLLATE utf8_general_ci,
-  `answer` JSON DEFAULT NULL,
+  `answer` TEXT DEFAULT NULL,
   `note` TEXT COLLATE utf8_general_ci,
   `position` INTEGER(11) NOT NULL COMMENT 'position of question in a poll',
   PRIMARY KEY USING BTREE (`ID`)
@@ -109,10 +108,9 @@ INSERT INTO `user` (`email`, `password`,`poll_ID`) VALUES ('tani-dan@ukr.net','1
 UNLOCK TABLES;
 
 LOCK TABLES `question` WRITE;
-INSERT INTO `question` (`poll_ID`, `type`,`isMandatory`,`text`,`answer`,`note`,`position`) VALUES (1,'date',0,'Select your date of birth',null,'',1), (1,'multiple_choice',0,'Select your interests','[ "Sport", "Cinema", "Museum","Party"]','',2),(2,'short_text',1,'What is your favourite color?',null,'',1),
-                                                                                                  (3,'number',0,'What is your favourite number?',null,'',1);
+INSERT INTO `question` (`poll_ID`, `type`,`isMandatory`,`text`,`answer`,`note`,`position`) VALUES (1,'date',0,'Select your date of birth',null,null,1), (1,'multiple_choice',0,'Select your interests','Sport,Cinema,Museum,Party',null,2),(2,'short_text',1,'What is your favourite color?',null,null,1),
+                                                                                                  (3,'number',0,'What is your favourite number?',null,'it\'s a note',1);
 UNLOCK TABLES;
-
 
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -52,14 +52,15 @@ public class PollShow extends PollWebBaseController {
     private void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
             int poll_id;
+            
             if (request.getParameter("pollID") != null) {   
                 System.out.println(request.getParameter("pollID"));        
                 poll_id = Integer.parseInt(request.getParameter("pollID"));
-                System.out.println(poll_id);
             } else {
               throw new NumberFormatException("String argument is null");
             }
-
+            
+            
             Poll poll = ((PollWebDataLayer) request.getAttribute("datalayer")).getPollDAO().getPoll(poll_id);
             List<Question> questions = ((PollWebDataLayer) request.getAttribute("datalayer")).getQuestionDAO().getQuestionsByPoll(poll);
             if(questions.isEmpty()){

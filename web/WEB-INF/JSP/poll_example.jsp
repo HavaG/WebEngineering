@@ -19,13 +19,14 @@
 
             <p class="text" id="open_tag">${poll.openText}</p>
             
-            <div class="question">
-                <!--
-                <c:forEach items="${questions}" var="question">
 
-                    <div class="question_top"><c:out value="${question.text}"/></div>
+            <c:forEach items="${questions}" var="question">
+                <div class="question">
+                    <div class="fond_question"><c:out value="${question.text}"/></div>
+                    <c:if test = "${question.note!=null}">
+                        <p class="note"><c:out value = "${question.note}"/></p> <%-- TODO: make note class visible --%>
+                    </c:if>
                     <div class="question_body">
-                        <textarea class="note">"${question.note}"</textarea>
                     
                         <c:choose>
                             <c:when test="${question.type == 'short_text'}"><input type="text"/></c:when>
@@ -33,19 +34,26 @@
                             <c:when test="${question.type == 'number'}"><input type="number"/></c:when>
                             <c:when test="${question.type == 'date'}"><input type="date"/></c:when>
                             <c:when test="${question.type == 'single_choice'}">                                     
-                                <c:forEach var="choice" items="${answer}"> 
-                                    <input type="radio" name="${question.position}"/><label>"${choice}"</label>>
+                                <c:forEach var="choice" items="${question.answer}"> 
+                                    <div>
+                                        <input type="radio" name="${question.position}"/><label>"${choice}"</label><br/>
+                                    </div>
                                 </c:forEach>
                             </c:when>
-                            <c:when test="${question.type == 'multiple_choice'}">                                     
-                                <c:forEach var="choice" items="${answer}"> 
-                                    <input type="checkbox" name="${question.position}"/><label>"${choice}"</label>>
+                            <c:when test="${question.type == 'multiple_choice'}">
+                                <c:forEach var="choice" items="${question.answer}">
+                                    <div>
+                                        <input type="checkbox" name="${question.position}"/><label>"${choice}"</label><br/>
+                                    </div>
                                 </c:forEach>
                             </c:when>                                                    
-                        </c:choose>                 
-                </c:forEach>
-                -->
-            </div>
+                        </c:choose>   
+                                    
+                    </div>
+                </div>        
+            </c:forEach>
+
+            
 
             <p class="text" id="closing_text">${poll.closeText}</p>
 
