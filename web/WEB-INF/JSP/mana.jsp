@@ -14,10 +14,10 @@
         </header>
         
         <section>
-            <a id="add_poll" href="Designing" name="addPoll">Add a poll</a>
+            <a id="add_poll" href="PollCreate" name="addPoll">Add a poll</a>
             <div id="poll_list">
                 <c:forEach items="${polls}" var="poll">
-                    <a href="URL">${poll.title}</a>
+                    <a href="Example">${poll.title}</a>
                 </c:forEach>
             </div>
         </section>

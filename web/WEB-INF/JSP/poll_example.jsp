@@ -17,7 +17,7 @@
         <form method="post" action="Example">    
             <h3><c:out value="${poll.title}" /></h3>
 
-            <p class="text" id="open_tag">${poll.open_tag}</p>
+            <p class="text" id="open_tag">${poll.openText}</p>
             
             <div class="question">
                 <!--
@@ -47,7 +47,7 @@
                 -->
             </div>
 
-            <p class="text" id="closing_text">${closing_text}</p>
+            <p class="text" id="closing_text">${poll.closeText}</p>
 
             <input type="submit" id="poll_send" value="Send" />
 
