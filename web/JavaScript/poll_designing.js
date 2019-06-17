@@ -51,13 +51,13 @@ $(document).ready(function(){
 	$('#question_type_1').change(function(e){
 		e.preventDefault();
 		if ($('#question_type_1').val()=="short_text") {
-			$('#type_answer_1').html("<input type='text' size='53' placeholder='Answer' maxlength='50' />");
+			$('#type_answer_1').html("<input type='text' size='50' placeholder='Answer' maxlength='40' />");
 			$('#add_answer_1').css({
 				'display' : 'none'
 			});
 		}
 		else if ($('#question_type_1').val()=="long_text") {
-			$('#type_answer_1').html("<textarea name='reponse' placeholder='Answer' rows='3' cols='52' maxlength='200'></textarea>");
+			$('#type_answer_1').html("<textarea name='reponse' placeholder='Answer' rows='3' cols='50' maxlength='200'></textarea>");
 			$('#add_answer_1').css({
 				'display' : 'none'
 			});

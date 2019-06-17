@@ -121,6 +121,7 @@ public class PollCreate extends PollWebBaseController {
                 question.setMandatory(mandatory);
                 ((PollWebDataLayer) request.getAttribute("datalayer")).getQuestionDAO().storeQuestion(question);
                 position++;
+                System.out.println(position);
             }
 
             if (reserved) {
