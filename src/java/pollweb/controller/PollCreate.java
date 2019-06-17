@@ -21,35 +21,6 @@ public class PollCreate extends PollWebBaseController {
 
     private Poll tempPoll = null;
 
-    private void action_error(HttpServletRequest request, HttpServletResponse response) {
-        HttpSession s = SecurityLayer.checkSession(request);
-        String log;
-        if (s == null) {
-            log = "Login";
-        } else {
-            log = "Logout";
-        }
-        request.setAttribute("log", log);
-
-        String message;
-
-        Exception ex = (Exception) request.getAttribute("exception");
-
-        if (ex != null && ex.getMessage() != null) {
-            message = ex.getMessage();
-        } else if (ex != null) {
-            message = ex.getClass().getName();
-        } else {
-            message = "Unknown Error";
-        }
-        request.setAttribute("message", message);
-        try {
-            this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/error.jsp").forward(request, response);
-        } catch (ServletException | IOException ex1) {
-            Logger.getLogger(PollCreate.class.getName()).log(Level.SEVERE, null, ex1);
-        }
-    }
-
     private void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         HttpSession s = SecurityLayer.checkSession(request);
@@ -63,6 +34,7 @@ public class PollCreate extends PollWebBaseController {
         } else if (s.getAttribute("role").equals("manager")) {
             String log = "Logout";
             request.setAttribute("log", log);
+            request.setAttribute("manager", "yes");
             this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/poll_designing.jsp").forward(request, response);
         } else {
             //you are logged in, but you are not manager

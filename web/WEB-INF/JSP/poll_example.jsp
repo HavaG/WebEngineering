@@ -15,7 +15,7 @@
         
         <section>
         <form method="post" action="Example">    
-            <h3><c:out value="${poll.title}" /></h3>
+            <h3><c:out value="${poll.title}"/></h3>
 
             <p class="text" id="open_tag">${poll.openText}</p>
             
@@ -29,23 +29,23 @@
                     <div class="question_body">
                     
                         <c:choose>
-                            <c:when test="${question.type == 'short_text'}"><input type="text"/></c:when>
-                            <c:when test="${question.type == 'long_text'}"><textarea></textarea></c:when>
-                            <c:when test="${question.type == 'number'}"><input type="number"/></c:when>
-                            <c:when test="${question.type == 'date'}"><input type="date"/></c:when>
+                            <c:when test="${question.type == 'short_text'}"><input type="text" name="${question.position}"/></c:when>
+                            <c:when test="${question.type == 'long_text'}"><textarea name="${question.position}"></textarea></c:when>
+                            <c:when test="${question.type == 'number'}"><input type="number" name="${question.position}"/></c:when>
+                            <c:when test="${question.type == 'date'}"><input type="date" name="${question.position}"/></c:when>
                             <c:when test="${question.type == 'single_choice'}">                                     
-                                <c:forEach var="choice" items="${question.answer}"> 
+                                <c:forTokens items = "${question.answer}" delims = "," var = "choice">
                                     <div>
                                         <input type="radio" name="${question.position}"/><label>"${choice}"</label><br/>
                                     </div>
-                                </c:forEach>
+                                </c:forTokens>  
                             </c:when>
                             <c:when test="${question.type == 'multiple_choice'}">
-                                <c:forEach var="choice" items="${question.answer}">
+                                 <c:forTokens items = "${question.answer}" delims = "," var = "choice">
                                     <div>
                                         <input type="checkbox" name="${question.position}"/><label>"${choice}"</label><br/>
                                     </div>
-                                </c:forEach>
+                                </c:forTokens>                               
                             </c:when>                                                    
                         </c:choose>   
                                     

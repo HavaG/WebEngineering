@@ -81,8 +81,7 @@ public class QuestionDAO_MySQL extends DAO implements QuestionDAO {
         QuestionImpl q = (QuestionImpl) createQuestion();
         try {
             q.setKey(rs.getInt("ID"));
-            //q.setPoll(((PollDAO) dataLayer.getDAO(Poll.class)).getPoll(rs.getInt("poll_ID")));
-            q.setPoll(((PollDAO) dataLayer.getDAO(Poll.class)).getPoll(rs.getInt("poll_ID")));//get poll by poll_ID in question database
+            q.setPoll(((PollDAO) dataLayer.getDAO(Poll.class)).getPoll(rs.getInt("poll_ID")));
             q.setText(rs.getString("text"));
             q.setAnswer(rs.getString("answer"));
             q.setType(rs.getString("type"));
