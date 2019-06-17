@@ -21,10 +21,10 @@
 
                  <c:forEach var = "i" begin = "1" end = "10">
                     <div class="question" id="question_${i}">
-                        <input type="text" name="question_name"  id="question_name_${i}" class="question_top" size="45" placeholder="Question" maxlength="40" />
+                        <input type="text" name="question_name"  id="question_name_${i}" class="question_top" size="45" placeholder="Question" maxlength="40" required/>
                         <div class="question_body"  id="question_body_${i}">
                             <textarea  name="question_note" id="question_note_${i}" class="note" placeholder="Explanatory note" maxlength="40" rows="2" cols="50"></textarea>
-                            <div class="type_answer" id="type_answer_${i}"> <input type="text" size="53" placeholder="Answer" maxlength="50"></div>
+                            <div class="type_answer" id="type_answer_${i}"> <input type="text" size="50" placeholder="Answer" maxlength="40"></div>
                         </div>
                         <div class="button_question">
                                 <input type="button" class="add_answer" id="add_answer_${i}" value="+" />
