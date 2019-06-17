@@ -59,7 +59,7 @@
 
             <input type="submit" id="poll_send" value="Send" />
             
-            <c:if test="${not empty manager}">
+            <c:if test="${not empty save}">
                             <input type="submit" id="poll_send" value="Save" name="save"/>
             </c:if>
 

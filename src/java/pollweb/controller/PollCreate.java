@@ -105,8 +105,9 @@ public class PollCreate extends PollWebBaseController {
             tempPoll.setReserved(reserved);
          
             ((PollWebDataLayer) request.getAttribute("datalayer")).getPollDAO().storePoll(tempPoll);
+            
+            //TODO
             String answer;//answer options ','
-            String userAnswer;
 
             int position = 1;
             while (!request.getParameter("question_name_" + position).equals("")) {
