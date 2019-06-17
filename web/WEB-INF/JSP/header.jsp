@@ -11,6 +11,9 @@
 
 <nav>
     <ul>   
+        <c:if test="${not empty signed_poll}">
+            <li><a href="Example?pollID=${signed_poll.key}">Assigned Poll</a></li>
+            </c:if>
         <li><a href="Home">Home</a></li>
         <li><a href="Administrator">Administrator</a></li>
         <li><a href="Manager">Manager</a></li>

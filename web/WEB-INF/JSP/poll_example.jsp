@@ -58,6 +58,10 @@
             <p class="text" id="closing_text">${poll.closeText}</p>
 
             <input type="submit" id="poll_send" value="Send" />
+            
+            <c:if test="${not empty manager}">
+                            <input type="submit" id="poll_send" value="Save" name="save"/>
+            </c:if>
 
         </form>
         </section>

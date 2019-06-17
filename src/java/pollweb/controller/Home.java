@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import pollweb.data.dao.PollWebDataLayer;
 import pollweb.data.model.Poll;
+import pollweb.data.model.User;
 import pollweb.data.util.DataException;
 import pollweb.security.SecurityLayer;
 
@@ -58,14 +59,19 @@ public class Home extends PollWebBaseController {
             String log;
             //check session
             HttpSession s = SecurityLayer.checkSession(request);
-        if (s == null) {
-            //you have to login
-            log = "Login";
-            request.setAttribute("log", log);
-        } else {
-            log = "Logout";
-            request.setAttribute("log", log);  
-        }          
+            if (s == null) {
+                log = "Login";
+                request.setAttribute("log", log);
+            } else {
+                log = "Logout";
+                request.setAttribute("log", log);
+                if (s.getAttribute("role") == "user") {
+                    User user = ((PollWebDataLayer) request.getAttribute("datalayer")).getUserDAO().getUser((int) s.getAttribute("userid"));
+                    if(user.getPoll() != null) {   
+                        request.setAttribute("signed_poll", user.getPoll());
+                    }
+                }
+            }       
             List<Poll> polls = ((PollWebDataLayer) request.getAttribute("datalayer")).getPollDAO().getUnsignedPolls();
             
             request.setAttribute("polls", polls);
