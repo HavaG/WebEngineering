@@ -45,4 +45,8 @@ public interface Question {
     
     void setPoll(Poll poll);
     
+    void setUserAnswer(String userAnswer);
+    
+    String getUserAnswer();
+    
 }

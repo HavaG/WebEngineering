@@ -5,7 +5,9 @@
  */
 package pollweb.controller;
 
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import pollweb.data.dao.PollWebDataLayer;
+import pollweb.data.impl.PollImpl;
 import pollweb.data.model.Poll;
 import pollweb.data.model.Question;
 import pollweb.data.util.DataException;
@@ -24,7 +27,10 @@ import pollweb.data.util.DataException;
  */
 @WebServlet("/Poll_example")
 public class ShowPoll extends PollWebBaseController {
-    
+    static{
+    Poll poll = new PollImpl();
+    List<Question> questions;
+    }
     private void action_error(HttpServletRequest request, HttpServletResponse response) {
         String message;
 
@@ -60,7 +66,38 @@ public class ShowPoll extends PollWebBaseController {
             action_error(request, response);
         }
     }
+    private void action_write_answers(HttpServletRequest request, HttpServletResponse response, int poll_id) throws IOException, ServletException{
+        try{
+                        
+            Poll poll = ((PollWebDataLayer) request.getAttribute("datalayer")).getPollDAO().getPoll(poll_id);
+            List<Question> questions = ((PollWebDataLayer) request.getAttribute("datalayer")).getQuestionDAO().getQuestionsByPoll(poll);
+            
+            FileWriter fileWriter = new FileWriter("user_answers.csv");
 
+            StringBuffer FILE_HEADER = new StringBuffer();
+           
+            for(Question question:questions){
+                FILE_HEADER.append(question.getText());
+            }
+            
+            FILE_HEADER.append(poll.getCloseText());
+
+            fileWriter.append(FILE_HEADER.toString());
+            fileWriter.append(System.lineSeparator());
+            
+            for(Question question:questions){
+                String answer = request.getParameter(String.valueOf(question.getPosition()));
+            }
+            
+            if(questions.isEmpty()){
+                action_error(request, response);
+            }
+              
+            } catch (Exception e) {
+
+            }
+    }
+    
     @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         int poll_id;

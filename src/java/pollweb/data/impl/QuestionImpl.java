@@ -22,7 +22,7 @@ public class QuestionImpl implements Question{
     String note;//explanatory note
     boolean isMandatory;
     Poll poll;
-
+    String userAnswer;
     public QuestionImpl() { }
 
 
@@ -81,6 +81,16 @@ public class QuestionImpl implements Question{
         return answer;
     }
 
+     @Override
+    public void setUserAnswer(String userAnswer) {
+        this.userAnswer = userAnswer;
+    }
+
+    @Override
+    public String getUserAnswer() {
+        return userAnswer;
+    }
+    
     @Override
     public void setNote(String note) {
         this.note = note;
