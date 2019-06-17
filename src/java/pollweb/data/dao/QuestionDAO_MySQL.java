@@ -164,6 +164,7 @@ public class QuestionDAO_MySQL extends DAO implements QuestionDAO {
                 } else {
                     iQuestion.setNull(6, java.sql.Types.INTEGER);
                 }
+                iQuestion.setInt(7, question.getPosition());
                 if (iQuestion.executeUpdate() == 1) {
                     try (ResultSet keys = iQuestion.getGeneratedKeys()) {
                         if (keys.next()) {

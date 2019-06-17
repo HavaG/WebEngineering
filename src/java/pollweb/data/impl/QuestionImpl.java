@@ -16,13 +16,14 @@ public class QuestionImpl implements Question{
     
     int key;
     int position;// position of question
-    String type;//TODO: String or object type
+    String type;
     String text;
     String answer;//answer options
     String note;//explanatory note
     boolean isMandatory;
     Poll poll;
     String userAnswer;
+    
     public QuestionImpl() { }
 
 

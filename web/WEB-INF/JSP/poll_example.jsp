@@ -36,14 +36,14 @@
                             <c:when test="${question.type == 'single_choice'}">                                     
                                 <c:forTokens items = "${question.answer}" delims = "," var = "choice">
                                     <div>
-                                        <input type="radio" name="${question.position}"/><label>"${choice}"</label><br/>
+                                        <input type="radio" name="${question.position}"/><label>${choice}</label><br/>
                                     </div>
                                 </c:forTokens>  
                             </c:when>
                             <c:when test="${question.type == 'multiple_choice'}">
                                  <c:forTokens items = "${question.answer}" delims = "," var = "choice">
                                     <div>
-                                        <input type="checkbox" name="${question.position}"/><label>"${choice}"</label><br/>
+                                        <input type="checkbox" name="${question.position}"/><label>${choice}</label><br/>
                                     </div>
                                 </c:forTokens>                               
                             </c:when>                                                    
