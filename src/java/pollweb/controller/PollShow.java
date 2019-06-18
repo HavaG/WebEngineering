@@ -78,10 +78,6 @@ public class PollShow extends PollWebBaseController {
             request.setAttribute("poll", poll);
             request.setAttribute("questions", questions);
 
-            //TODO
-            //if the s.getManagerID = poll.managerID --> MODIFY
-            //request.setAttribute("manager", questions);
-
             this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/poll_example.jsp").forward(request, response);
 
         } catch (DataException ex) {
