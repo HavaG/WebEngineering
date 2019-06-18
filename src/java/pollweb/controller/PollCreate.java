@@ -1,6 +1,7 @@
 package pollweb.controller;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -115,11 +116,26 @@ public class PollCreate extends PollWebBaseController {
                 question.setType(request.getParameter("question_type_" + position));
                 Boolean mandatory = question_mandatory.equals("yes");
                 question.setMandatory(mandatory);
-                if(question.getType().equals("single_chioce") || question.getType().equals("multiple_choice")){
-                    //question.setAnswer();
+                if (question.getType().equals("single_choice") || question.getType().equals("multiple_choice")) {
+                    String answer = "";
+                    int option_numb = 0;
+                    while (!request.getParameter("option_" + position + option_numb).equals("")) {
+                    System.out.println("option_" + position + option_numb);
+                        answer += request.getParameter("option_" + position + option_numb);
+                        answer+= ',';
+                        option_numb++;
+                        if(option_numb == 4) {
+                            break;
+                        }
+                    }
+                    question.setAnswer(answer);
+
                 }
                 ((PollWebDataLayer) request.getAttribute("datalayer")).getQuestionDAO().storeQuestion(question);
                 position++;
+                if(position == 11) {
+                    break;
+                }
             }
 
             if (reserved) {

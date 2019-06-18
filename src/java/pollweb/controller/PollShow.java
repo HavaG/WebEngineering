@@ -22,17 +22,10 @@ import pollweb.security.SecurityLayer;
  * Servlet implementation class servlet_home
  */
 public class PollShow extends PollWebBaseController {
-<<<<<<< HEAD
     int poll_id = 0;
     private void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
             if (request.getParameter("pollID") != null) {
-=======
-    int poll_id=0;
-    private void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        try {
-                       if (request.getParameter("pollID") != null) {
->>>>>>> ec1b17eb40a6c5f991ea5eade03c29593bf20e57
                 System.out.println(request.getParameter("pollID"));
                 poll_id = Integer.parseInt(request.getParameter("pollID"));
             } else {
@@ -84,10 +77,6 @@ public class PollShow extends PollWebBaseController {
             request.setAttribute("log", log);
             request.setAttribute("poll", poll);
             request.setAttribute("questions", questions);
-
-            //TODO
-            //if the s.getManagerID = poll.managerID --> MODIFY
-            //request.setAttribute("manager", questions);
 
             this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/poll_example.jsp").forward(request, response);
 
