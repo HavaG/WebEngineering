@@ -10,7 +10,7 @@
     
     <body>
         <header>
-
+            <%@ include file="header.jsp"%>
         </header>
         
         <section>
@@ -19,13 +19,14 @@
                         <th class="side">Poll</th>
                         <th class="center">User</th>
                         <th class="side">File</th>
-                    </tr>                    
+                    </tr>
+
                     <c:forEach items="${files}" var="file">  
                         <td class="side">${file.poll}</td>
                         <td class="center">${file.username}</td>
                         <td class="side"><a href="Example?pollID=${poll.key}">${file.name}</a><td>
                     </c:forEach>
-                            
+                    
                     <tr>
                         <td class="side">Poll on Hobbies</td>
                         <td class="center">Michel</td>
@@ -41,7 +42,7 @@
         </section>
             
         <footer>
-
+            <%@ include file="footer.jsp"%>
         </footer>
 
     </body>

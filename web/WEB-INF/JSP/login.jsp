@@ -29,7 +29,7 @@
                 </form>
             </div>
                     <c:if test="${not empty message}">
-                        <div class="login">
+                        <div id="error">
                             <p>Error message: ${message}</p>
                         </div>
                     </c:if>

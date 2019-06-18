@@ -55,6 +55,15 @@
         <url-pattern>/PollCreate</url-pattern>
     </servlet-mapping>
   
+    <servlet>
+        <servlet-name>Answers</servlet-name>
+        <servlet-class>pollweb.controller.Answers</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Answers</servlet-name>
+        <url-pattern>/Answers</url-pattern>
+    </servlet-mapping>
+  
     <resource-ref>
         <res-ref-name>jdbc/pollwebdb</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
