@@ -8,9 +8,7 @@ package pollweb.data.dao;
 import java.sql.ResultSet;
 import java.util.List;
 import pollweb.data.impl.AnswerImpl;
-import pollweb.data.impl.UserImpl;
 import pollweb.data.model.Answer;
-import pollweb.data.model.User;
 import pollweb.data.util.DataException;
 
 /**

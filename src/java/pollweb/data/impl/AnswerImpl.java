@@ -60,6 +60,4 @@ public class AnswerImpl implements Answer{
     public void setBlob(Blob newBlob) {
         this.blob = newBlob;
     }
-    
-    
 }

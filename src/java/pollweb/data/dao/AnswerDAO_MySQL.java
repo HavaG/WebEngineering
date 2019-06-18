@@ -1,11 +1,5 @@
 package pollweb.data.dao;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -174,8 +168,6 @@ public class AnswerDAO_MySQL extends DAO implements AnswerDAO {
         return a;
         
     }
-
-
 
     @Override
     public void deleteAnswer(Answer answer) throws DataException {
