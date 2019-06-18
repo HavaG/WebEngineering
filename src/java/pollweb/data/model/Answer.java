@@ -5,7 +5,7 @@
  */
 package pollweb.data.model;
 
-import java.sql.Blob;
+import java.io.File;
 
 /**
  *
@@ -25,7 +25,7 @@ public interface Answer {
 
     void setPoll(Poll newPoll);
     
-    Blob getBlob();
+    File getFile();
 
-    void setBlob(Blob newBlob);
+    void setFile(File newFile);
 }

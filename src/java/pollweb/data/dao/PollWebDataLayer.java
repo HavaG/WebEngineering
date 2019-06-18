@@ -8,6 +8,7 @@ package pollweb.data.dao;
 import java.sql.SQLException;
 import javax.sql.DataSource;
 import pollweb.data.model.Administrator;
+import pollweb.data.model.Answer;
 import pollweb.data.model.Manager;
 import pollweb.data.model.Poll;
 import pollweb.data.model.Question;
@@ -33,7 +34,8 @@ public class PollWebDataLayer extends DataLayer{
         registerDAO(Manager.class, new ManagerDAO_MySQL(this));
         registerDAO(Poll.class, new PollDAO_MySQL(this));
         registerDAO(User.class, new UserDAO_MySQL(this));   
-        registerDAO(Question.class, new QuestionDAO_MySQL(this));   
+        registerDAO(Question.class, new QuestionDAO_MySQL(this));
+        registerDAO(Answer.class, new AnswerDAO_MySQL(this));
     }
     
     public AdministratorDAO getAdministratorDAO(){
@@ -55,6 +57,9 @@ public class PollWebDataLayer extends DataLayer{
     public ManagerDAO getManagerDAO(){
         return (ManagerDAO) getDAO(Manager.class);
     }
-     
+    
+     public AnswerDAO getAnswerDAO(){
+        return (AnswerDAO) getDAO(Answer.class);
+    }
     
 }

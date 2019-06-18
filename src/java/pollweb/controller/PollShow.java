@@ -1,5 +1,8 @@
 package pollweb.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -7,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import pollweb.data.dao.PollWebDataLayer;
+import pollweb.data.impl.AnswerImpl;
+import pollweb.data.model.Answer;
 import pollweb.data.model.Poll;
 import pollweb.data.model.Question;
 import pollweb.data.model.User;
@@ -17,11 +22,9 @@ import pollweb.security.SecurityLayer;
  * Servlet implementation class servlet_home
  */
 public class PollShow extends PollWebBaseController {
-
+    int poll_id = 0;
     private void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
-            int poll_id;
-
             if (request.getParameter("pollID") != null) {
                 System.out.println(request.getParameter("pollID"));
                 poll_id = Integer.parseInt(request.getParameter("pollID"));
@@ -90,13 +93,73 @@ public class PollShow extends PollWebBaseController {
     private void action_modify(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         response.sendRedirect(request.getContextPath() + "/Home");
     }
+    
+    private void action_write_answers(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+        AnswerImpl tempAnswer = null;
+        String contextPath = getServletContext().getRealPath("/");
+        String csvFilePath=contextPath+"\\test";
+        File answerFile = new File(csvFilePath);
+        FileWriter fr = new FileWriter(answerFile);
+        
+        StringBuffer header = new StringBuffer();
+        final String commaDelimeter = ",";        
+        try{
+        HttpSession s = SecurityLayer.checkSession(request);
+        
+            int user_id = 0; 
+            if (s == null) {
+            } else if (s.getAttribute("userid") != null) {
+                user_id = (int) s.getAttribute("userid");
+            }      
+            
+            Poll poll = ((PollWebDataLayer) request.getAttribute("datalayer")).getPollDAO().getPoll(poll_id);
+            User user = ((PollWebDataLayer) request.getAttribute("datalayer")).getUserDAO().getUser(user_id);
+            List<Question> questions = ((PollWebDataLayer) request.getAttribute("datalayer")).getQuestionDAO().getQuestionsByPoll(poll);
+        
+            try{
+            for(Question question:questions){
+                header.append(question.getText());
+                header.append(commaDelimeter);
+            }
+            fr.append(header.toString());
+            fr.append(System.lineSeparator());           
+
+            for(Question question:questions){
+                String answer = request.getParameter(String.valueOf(question.getPosition()));
+                fr.append(answer);
+                fr.append(commaDelimeter);
+            }
+            
+            } catch (Exception ex) {
+                request.setAttribute("exception", ex);
+                action_error(request, response);           
+
+            }finally {
+                fr.flush();
+                fr.close();            
+        }
+        System.out.println(answerFile);
+        answerFile = new File(csvFilePath);
+
+        tempAnswer = new AnswerImpl();
+        tempAnswer.setUser(user);
+        tempAnswer.setPoll(poll);
+        tempAnswer.setFile(answerFile);
+        ((PollWebDataLayer) request.getAttribute("datalayer")).getAnswerDAO().storeAnswer(tempAnswer);
+        
+        }catch (DataException ex) {
+            request.setAttribute("exception", ex);
+            action_error(request, response);
+        }
+        
+        response.sendRedirect(request.getContextPath() + "/Home");
+    }
 
     @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-
         try {
-            if (request.getParameter("save") != null) {
-                action_modify(request, response);
+            if (request.getParameter("Send") != null) {
+                action_write_answers(request, response);
             } else {
                 action_default(request, response);
             }

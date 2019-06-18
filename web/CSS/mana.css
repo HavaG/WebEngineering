@@ -49,6 +49,9 @@ section a {
         font-size: 1.5em;
 }
 
-footer{
-    position : relative;
+ @media screen and (min-height: 768px) {
+    footer {
+    	position: absolute;
+        bottom : 0px;
+    }
 }

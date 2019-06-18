@@ -1,5 +1,7 @@
 package pollweb.data.dao;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -122,16 +124,24 @@ public class AnswerDAO_MySQL extends DAO implements AnswerDAO {
         int key = answer.getKey();
         try {
             if (answer.getKey() > 0) { //update
-            
+           
                 uAnswer.setInt(1, answer.getPoll().getKey());
-                uAnswer.setInt(2, answer.getUser().getKey());
-                uAnswer.setBlob(3, answer.getBlob());
+                if(answer.getUser() != null) {
+                    uAnswer.setInt(2, answer.getUser().getKey());
+                } else {
+                    uAnswer.setInt(2,0);
+                }
+                uAnswer.setBinaryStream(3, new FileInputStream(answer.getFile()),answer.getFile().length());
                 uAnswer.executeUpdate();
 
             } else { //insert
                 iAnswer.setInt(1, answer.getPoll().getKey());
-                iAnswer.setInt(2, answer.getUser().getKey());
-                iAnswer.setBlob(3, answer.getBlob());
+                if(answer.getUser() != null) {
+                    iAnswer.setInt(2, answer.getUser().getKey());
+                } else {
+                    iAnswer.setInt(2,0);
+                }
+                iAnswer.setBinaryStream(3, new FileInputStream(answer.getFile()),answer.getFile().length());
 
                 if (iAnswer.executeUpdate() == 1) {
                     try (ResultSet keys = iAnswer.getGeneratedKeys()) {
@@ -145,6 +155,8 @@ public class AnswerDAO_MySQL extends DAO implements AnswerDAO {
 
         } catch (SQLException ex) {
             throw new DataException("Unable to store answer", ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AnswerDAO_MySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -160,7 +172,7 @@ public class AnswerDAO_MySQL extends DAO implements AnswerDAO {
             a.setKey(rs.getInt("ID"));
             a.setUser(((UserDAO) dl.getDAO(User.class)).getUser(rs.getInt("user_ID")));
             a.setPoll(((PollDAO) dl.getDAO(Poll.class)).getPoll(rs.getInt("poll_ID")));
-            a.setBlob(rs.getBlob("answers"));
+            //a.setFile(rs.getBlob("answers"));
         
         } catch (SQLException ex) {
             throw new DataException("Unable to create answer object form ResultSet", ex);

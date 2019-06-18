@@ -19,7 +19,7 @@ public class AnswerImpl implements Answer{
     private int key;
     private User user;
     private Poll poll;
-    private Blob blob;
+    private File file;
 
     @Override
     public int getKey() {
@@ -52,12 +52,12 @@ public class AnswerImpl implements Answer{
     }
 
     @Override
-    public Blob getBlob() {
-        return blob;
+    public File getFile() {
+        return file;
     }
 
     @Override
-    public void setBlob(Blob newBlob) {
-        this.blob = newBlob;
+    public void setFile(File newFile) {
+        this.file = newFile;
     }
 }
