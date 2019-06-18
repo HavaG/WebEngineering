@@ -46,8 +46,6 @@ public class PollCreate extends PollWebBaseController {
     }
 
     private void action_create_users(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-        System.out.println("createUser");
         String emails = request.getParameter("emails");
         String[] emailArray;
 
@@ -126,7 +124,16 @@ public class PollCreate extends PollWebBaseController {
             }
 
             if (reserved) {
+                if (s.getAttribute("role").equals("manager")) {
+                    String log = "Logout";
+                    request.setAttribute("log", log);
+                    request.setAttribute("manager", "yes");
                 getServletContext().getRequestDispatcher("/WEB-INF/JSP/poll_user.jsp").forward(request, response);
+                } else {
+                    //you are logged in, but you are not manager
+                    request.setAttribute("exception", new Exception("You have no rights to open this page"));
+                    action_error(request, response);
+                }
             }
             
             //redirect at the end
