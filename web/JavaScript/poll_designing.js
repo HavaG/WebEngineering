@@ -51,10 +51,10 @@ $(document).ready(function(){
 	$('#question_type_1').change(function(e){
 		e.preventDefault();
 		if ($('#question_type_1').val()=="short_text") {
-			$('#type_answer_1').html("<input type='text' size='50' placeholder='Answer' maxlength='40' />");
+			$('#type_answer_1').html("<input type='text' size='40' placeholder='Answer' maxlength='40' />");
 		}
 		else if ($('#question_type_1').val()=="long_text") {
-			$('#type_answer_1').html("<textarea name='reponse' placeholder='Answer' rows='3' cols='50' maxlength='200'></textarea>");
+			$('#type_answer_1').html("<textarea name='reponse' placeholder='Answer' rows='3' cols='40' maxlength='200'></textarea>");
 			$('#add_answer_1').css({
 				'display' : 'none'
 			});
@@ -88,13 +88,13 @@ $(document).ready(function(){
 	$('#question_type_2').change(function(e){
 		e.preventDefault();
 		if ($('#question_type_2').val()=="short_text") {
-			$('#type_answer_2').html("<input type='text' size='53' placeholder='Answer' maxlength='50' />");
+			$('#type_answer_2').html("<input type='text' size='40' placeholder='Answer' maxlength='50' />");
 			$('#add_answer_2').css({
 				'display' : 'none'
 			});
 		}
 		else if ($('#question_type_2').val()=="long_text") {
-			$('#type_answer_2').html("<textarea name='reponse' placeholder='Answer' rows='3' cols='52' maxlength='200'></textarea>");
+			$('#type_answer_2').html("<textarea name='reponse' placeholder='Answer' rows='3' cols='40' maxlength='200'></textarea>");
 			$('#add_answer_2').css({
 				'display' : 'none'
 			});
@@ -128,13 +128,13 @@ $(document).ready(function(){
 	$('#question_type_3').change(function(e){
 		e.preventDefault();
 		if ($('#question_type_3').val()=="short_text") {
-			$('#type_answer_3').html("<input type='text' size='53' placeholder='Answer' maxlength='50' />");
+			$('#type_answer_3').html("<input type='text' size='40' placeholder='Answer' maxlength='50' />");
 			$('#add_answer_3').css({
 				'display' : 'none'
 			});
 		}
 		else if ($('#question_type_3').val()=="long_text") {
-			$('#type_answer_3').html("<textarea name='reponse' placeholder='Answer' rows='3' cols='52' maxlength='200'></textarea>");
+			$('#type_answer_3').html("<textarea name='reponse' placeholder='Answer' rows='3' cols='40' maxlength='200'></textarea>");
 			$('#add_answer_3').css({
 				'display' : 'none'
 			});
@@ -168,13 +168,13 @@ $(document).ready(function(){
 	$('#question_type_4').change(function(e){
 		e.preventDefault();
 		if ($('#question_type_4').val()=="short_text") {
-			$('#type_answer_4').html("<input type='text' size='53' placeholder='Answer' maxlength='50' />");
+			$('#type_answer_4').html("<input type='text' size='40' placeholder='Answer' maxlength='50' />");
 			$('#add_answer_4').css({
 				'display' : 'none'
 			});
 		}
 		else if ($('#question_type_4').val()=="long_text") {
-			$('#type_answer_4').html("<textarea name='reponse' placeholder='Answer' rows='3' cols='52' maxlength='200'></textarea>");
+			$('#type_answer_4').html("<textarea name='reponse' placeholder='Answer' rows='3' cols='40' maxlength='200'></textarea>");
 			$('#add_answer_4').css({
 				'display' : 'none'
 			});			$('#add_answer_1').css({
@@ -210,13 +210,13 @@ $(document).ready(function(){
 	$('#question_type_5').change(function(e){
 		e.preventDefault();
 		if ($('#question_type_5').val()=="short_text") {
-			$('#type_answer_5').html("<input type='text' size='53' placeholder='Answer' maxlength='50' />");
+			$('#type_answer_5').html("<input type='text' size='40' placeholder='Answer' maxlength='50' />");
 			$('#add_answer_5').css({
 				'display' : 'none'
 			});
 		}
 		else if ($('#question_type_5').val()=="long_text") {
-			$('#type_answer_5').html("<textarea name='reponse' placeholder='Answer' rows='3' cols='52' maxlength='200'></textarea>");
+			$('#type_answer_5').html("<textarea name='reponse' placeholder='Answer' rows='3' cols='40' maxlength='200'></textarea>");
 			$('#add_answer_5').css({
 				'display' : 'none'
 			});
@@ -250,13 +250,13 @@ $(document).ready(function(){
 	$('#question_type_6').change(function(e){
 		e.preventDefault();
 		if ($('#question_type_6').val()=="short_text") {
-			$('#type_answer_6').html("<input type='text' size='53' placeholder='Answer' maxlength='50' />");
+			$('#type_answer_6').html("<input type='text' size='40' placeholder='Answer' maxlength='50' />");
 			$('#add_answer_6').css({
 				'display' : 'none'
 			});
 		}
 		else if ($('#question_type_6').val()=="long_text") {
-			$('#type_answer_6').html("<textarea name='reponse' placeholder='Answer' rows='3' cols='52' maxlength='200'></textarea>");
+			$('#type_answer_6').html("<textarea name='reponse' placeholder='Answer' rows='3' cols='40' maxlength='200'></textarea>");
 			$('#add_answer_6').css({
 				'display' : 'none'
 			});
@@ -290,13 +290,13 @@ $(document).ready(function(){
 	$('#question_type_7').change(function(e){
 		e.preventDefault();
 		if ($('#question_type_7').val()=="short_text") {
-			$('#type_answer_7').html("<input type='text' size='53' placeholder='Answer' maxlength='50' />");
+			$('#type_answer_7').html("<input type='text' size='40' placeholder='Answer' maxlength='50' />");
 			$('#add_answer_7').css({
 				'display' : 'none'
 			});
 		}
 		else if ($('#question_type_7').val()=="long_text") {
-			$('#type_answer_7').html("<textarea name='reponse' placeholder='Answer' rows='3' cols='52' maxlength='200'></textarea>");
+			$('#type_answer_7').html("<textarea name='reponse' placeholder='Answer' rows='3' cols='40' maxlength='200'></textarea>");
 			$('#add_answer_7').css({
 				'display' : 'none'
 			});
@@ -330,13 +330,13 @@ $(document).ready(function(){
 	$('#question_type_8').change(function(e){
 		e.preventDefault();
 		if ($('#question_type_8').val()=="short_text") {
-			$('#type_answer_8').html("<input type='text' size='53' placeholder='Answer' maxlength='50' />");
+			$('#type_answer_8').html("<input type='text' size='40' placeholder='Answer' maxlength='50' />");
 			$('#add_answer_8').css({
 				'display' : 'none'
 			});
 		}
 		else if ($('#question_type_8').val()=="long_text") {
-			$('#type_answer_8').html("<textarea name='reponse' placeholder='Answer' rows='3' cols='52' maxlength='200'></textarea>");
+			$('#type_answer_8').html("<textarea name='reponse' placeholder='Answer' rows='3' cols='40' maxlength='200'></textarea>");
 			$('#add_answer_8').css({
 				'display' : 'none'
 			});
@@ -370,13 +370,13 @@ $(document).ready(function(){
 	$('#question_type_9').change(function(e){
 		e.preventDefault();
 		if ($('#question_type_9').val()=="short_text") {
-			$('#type_answer_9').html("<input type='text' size='53' placeholder='Answer' maxlength='50' />");
+			$('#type_answer_9').html("<input type='text' size='40' placeholder='Answer' maxlength='50' />");
 			$('#add_answer_9').css({
 				'display' : 'none'
 			});
 		}
 		else if ($('#question_type_9').val()=="long_text") {
-			$('#type_answer_9').html("<textarea name='reponse' placeholder='Answer' rows='3' cols='52' maxlength='200'></textarea>");
+			$('#type_answer_9').html("<textarea name='reponse' placeholder='Answer' rows='3' cols='40' maxlength='200'></textarea>");
 			$('#add_answer_9').css({
 				'display' : 'none'
 			});
@@ -410,13 +410,13 @@ $(document).ready(function(){
 	$('#question_type_10').change(function(e){
 		e.preventDefault();
 		if ($('#question_type_10').val()=="short_text") {
-			$('#type_answer_10').html("<input type='text' size='53' placeholder='Answer' maxlength='50' />");
+			$('#type_answer_10').html("<input type='text' size='40' placeholder='Answer' maxlength='50' />");
 			$('#add_answer_10').css({
 				'display' : 'none'
 			});
 		}
 		else if ($('#question_type_10').val()=="long_text") {
-			$('#type_answer_10').html("<textarea name='reponse' placeholder='Answer' rows='3' cols='52' maxlength='200'></textarea>");
+			$('#type_answer_10').html("<textarea name='reponse' placeholder='Answer' rows='3' cols='40' maxlength='200'></textarea>");
 			$('#add_answer_10').css({
 				'display' : 'none'
 			});

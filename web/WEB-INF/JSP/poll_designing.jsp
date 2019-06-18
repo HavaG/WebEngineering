@@ -25,7 +25,7 @@
                         <input type="text" name="question_name_${i}"  id="question_name_${i}" class="question_top" size="45" placeholder="Question" maxlength="40"/>
                         <div class="question_body"  id="question_body_${i}">
                             <textarea  name="question_note" id="question_note_${i}" class="note" placeholder="Explanatory note" maxlength="40" rows="2" cols="50"></textarea>
-                            <div class="type_answer" id="type_answer_${i}"> <input type="text" size="50" placeholder="Answer" maxlength="40"></div>
+                            <div class="type_answer" id="type_answer_${i}"> <input type="text" size="40" placeholder="Answer" maxlength="40"></div>
 
                         </div>
                         <div class="button_question">
