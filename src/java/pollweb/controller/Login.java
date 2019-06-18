@@ -21,48 +21,19 @@ import pollweb.security.SecurityLayer;
  */
 public class Login extends PollWebBaseController {
 
-    private void action_error(HttpServletRequest request, HttpServletResponse response) {
-        HttpSession s = SecurityLayer.checkSession(request);
-        String log;
-        if (s == null) {
-            log = "Login";
-        } else {
-            log = "Logout";
-        }
-        request.setAttribute("log", log);
-
-        String message;
-
-        Exception ex = (Exception) request.getAttribute("exception");
-
-        if (ex != null && ex.getMessage() != null) {
-            message = ex.getMessage();
-        } else if (ex != null) {
-            message = ex.getClass().getName();
-        } else {
-            message = "Unknown Error";
-        }
-        request.setAttribute("message", message);
-        try {
-            this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/error.jsp").forward(request, response);
-        } catch (ServletException | IOException ex1) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex1);
-        }
-    }
-
     private void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         String log = "Login";
         request.setAttribute("log", log);
         HttpSession s = SecurityLayer.checkSession(request);
-        if (s != null) {    
+        if (s != null) {
             SecurityLayer.disposeSession(request);
         }
         this.getServletContext().getRequestDispatcher("/WEB-INF/JSP/login.jsp").forward(request, response);
     }
 
     private void action_login_logout(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        
+
         String userEmail = request.getParameter("email");
         String password = request.getParameter("password");
         Exception exNoUser = null;
@@ -77,7 +48,7 @@ public class Login extends PollWebBaseController {
                 //if there is no user with this name and pwd it throws exception
                 //create session
                 //redirect to homepage
-                    SecurityLayer.createSession(request, user.getEmail(), user.getKey(), "user");
+                SecurityLayer.createSession(request, user.getEmail(), user.getKey(), "user");
                 //redirect user
                 response.sendRedirect(request.getContextPath() + "/Home");
             } catch (DataException ex) {
@@ -87,17 +58,17 @@ public class Login extends PollWebBaseController {
 
             //chech is there any manager
             try {
-                
+
                 Manager manager = ((PollWebDataLayer) request.getAttribute("datalayer")).
                         getManagerDAO().getManager(userEmail, password);
-                
-                if(manager.getEmail().equals("admin@admin.com"))
+
+                if (manager.getEmail().equals("admin@admin.com")) {
                     SecurityLayer.createSession(request, manager.getEmail(), manager.getKey(), "admin");
-                else
+                } else {
                     SecurityLayer.createSession(request, manager.getEmail(), manager.getKey(), "manager");
-                
+                }
                 response.sendRedirect(request.getContextPath() + "/Home");
-                
+
             } catch (DataException ex1) {
                 if (exNoUser != null) {
                     request.setAttribute("exception", exNoUser);

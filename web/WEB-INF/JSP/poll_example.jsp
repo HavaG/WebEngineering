@@ -36,14 +36,14 @@
                             <c:when test="${question.type == 'single_choice'}">                                     
                                 <c:forTokens items = "${question.answer}" delims = "," var = "choice">
                                     <div>
-                                        <input type="radio" name="${question.position}"/><label>"${choice}"</label><br/>
+                                        <input type="radio" name="${question.position}"/><label>${choice}</label><br/>
                                     </div>
                                 </c:forTokens>  
                             </c:when>
                             <c:when test="${question.type == 'multiple_choice'}">
                                  <c:forTokens items = "${question.answer}" delims = "," var = "choice">
                                     <div>
-                                        <input type="checkbox" name="${question.position}"/><label>"${choice}"</label><br/>
+                                        <input type="checkbox" name="${question.position}"/><label>${choice}</label><br/>
                                     </div>
                                 </c:forTokens>                               
                             </c:when>                                                    
@@ -58,6 +58,10 @@
             <p class="text" id="closing_text">${poll.closeText}</p>
 
             <input type="submit" id="poll_send" value="Send" name="Send"/>
+            
+            <c:if test="${not empty save}">
+                            <input type="submit" id="poll_send" value="Save" name="save"/>
+            </c:if>
 
         </form>
         </section>

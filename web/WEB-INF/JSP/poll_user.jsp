@@ -10,7 +10,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <link rel="stylesheet" href="CSS/poll_user.css" />
+        <link rel="stylesheet" href="CSS/login.css" />
         <title>PollWeb - UNIVAQ</title>
         <link rel="shortcut icon" href="CSS/pictures/logo_univaq.png" />
     </head>
@@ -22,16 +22,20 @@
 
         <section>
             <form method="post" action="PollCreate">
-                <div name="message">Add all the users' email addres. Divide with ',' caracters</div>
+                <div class="login">
+                    <div name="message">Add all the users' email addres. Divide with ',' caracters</div>
 
-                <div class="row">
-                    <div>
-                        Emails<textarea type="text" name="emails"/></textarea>
-                    </div>
+                    <div class="row">
+                        <div>
+                            <p>Emails</p>
+                            <textarea type="text" name="emails"/></textarea>
+                        </div>
 
-                    <div>
-                        <button name="submit">Submit</button>
+                        <div>
+                            <button name="submit">Submit</button>
+                        </div>
                     </div>
+                </div>
             </form>
         </section>
 

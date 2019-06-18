@@ -6,7 +6,7 @@
     <ul>
         <li id="developers">Developers :</li>
         <li>Tanya Zvereva</li>
-        <li>Gaabor Havasi</li>
+        <li>Gabor Havasi</li>
         <li>Aurélien Lebrun</li>
     </ul>
 </div>

@@ -75,6 +75,10 @@ section a {
         text-decoration: none;
 }
 
+footer{
+    position : relative;
+}
+
 /*// @media screen and (min-height: 768px) {
 //    footer {
 //    	position: absolute;

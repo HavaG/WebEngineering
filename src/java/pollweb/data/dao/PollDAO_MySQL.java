@@ -87,7 +87,6 @@ public class PollDAO_MySQL extends DAO implements PollDAO{
             p.setOpenText(rs.getString("open_tag"));
             p.setCloseText(rs.getString("close_tag"));
             p.setReserved(rs.getBoolean("isReserved"));
-            //TODO: where and how to get users,questions?
             return p;
         }catch(SQLException ex){
             throw new DataException("Unable to create poll object from ResultSet",ex);

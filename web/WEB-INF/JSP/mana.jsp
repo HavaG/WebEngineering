@@ -15,9 +15,10 @@
         
         <section>
             <a id="add_poll" href="PollCreate" name="addPoll">Add a poll</a>
+            <a id="add_poll" href="PollCreate" name="addPoll">Answers</a>
             <div id="poll_list">
                 <c:forEach items="${polls}" var="poll">
-                    <a href="Example">${poll.title}</a>
+                    <a href="Example?pollID=${poll.key}">${poll.title}</a>
                 </c:forEach>
             </div>
         </section>
