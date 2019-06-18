@@ -20,7 +20,7 @@
                     <a href="Example?pollID=${poll.key}">${poll.title}</a>
                 </c:forEach>               
             </div>
-
+            
         </section>
             
         <footer>
