@@ -52,9 +52,6 @@ $(document).ready(function(){
 		e.preventDefault();
 		if ($('#question_type_1').val()=="short_text") {
 			$('#type_answer_1').html("<input type='text' size='50' placeholder='Answer' maxlength='40' />");
-			$('#add_answer_1').css({
-				'display' : 'none'
-			});
 		}
 		else if ($('#question_type_1').val()=="long_text") {
 			$('#type_answer_1').html("<textarea name='reponse' placeholder='Answer' rows='3' cols='50' maxlength='200'></textarea>");
@@ -75,15 +72,15 @@ $(document).ready(function(){
 			});
 		}
 		else if ($('#question_type_1').val()=="single_choice") {
-			$('#type_answer_1').html("<input type='radio' name='single'/><input type='text' size='43' maxlength='40' placeholder='Choice'/>");
+			$('#type_answer_1').html("<input type='radio' name='single'/><input type='text' id='option_10' size='43' maxlength='40' placeholder='Choice'/><br/><br/><input type='radio' name='single'/><input type='text' id='option_11' size='43' maxlength='40' placeholder='Choice'/><br/><br/><input type='radio' name='single'/><input type='text' id='option_12' size='43' maxlength='40' placeholder='Choice (optional)'/><br/><br/><input type='radio' name='single'/><input type='text' id='option_13' size='43' maxlength='40' placeholder='Choice (optional)'/>");
 			$('#add_answer_1').css({
-				'display' : 'block'
+				'display' : 'none'
 			});
 		}
 		else if ($('#question_type_1').val()=="multiple_choice") {
-			$('#type_answer_1').html("<input type='checkbox'/><input type='text' size='43' maxlength='40' placeholder='Choice'/>");
+			$('#type_answer_1').html("<input type='checkbox'/><input type='text' id='option_10' size='43' maxlength='40' placeholder='Choice'/><br/><br/><input type='checkbox'/><input type='text' id='option_11' size='43' maxlength='40' placeholder='Choice'/><br/><br/><input type='checkbox'/><input type='text' id='option_12' size='43' maxlength='40' placeholder='Choice (optional)'/><br/><br/><input type='checkbox'/><input type='text' id='option_13' size='43' maxlength='40' placeholder='Choice (optional)'/>");
 			$('#add_answer_1').css({
-				'display' : 'block'
+				'display' : 'none'
 			});
 		}
 	});
@@ -115,15 +112,15 @@ $(document).ready(function(){
 			});
 		}
 		else if ($('#question_type_2').val()=="single_choice") {
-			$('#type_answer_2').html("<input type='radio' name='single'/><input type='text' size='43' maxlength='40' placeholder='Choice'/>");
+			$('#type_answer_2').html("<input type='radio' name='single'/><input type='text' id='option_20' size='43' maxlength='40' placeholder='Choice'/><br/><br/><input type='radio' name='single'/><input type='text' id='option_21' size='43' maxlength='40' placeholder='Choice'/><br/><br/><input type='radio' name='single'/><input type='text' id='option_22' size='43' maxlength='40' placeholder='Choice (optional)'/><br/><br/><input type='radio' name='single'/><input type='text' id='option_23' size='43' maxlength='40' placeholder='Choice (optional)'/>");
 			$('#add_answer_2').css({
-				'display' : 'block'
+				'display' : 'none'
 			});
 		}
 		else if ($('#question_type_2').val()=="multiple_choice") {
 			$('#type_answer_2').html("<input type='checkbox'/><input type='text' size='43' maxlength='40' placeholder='Choice'/>");
 			$('#add_answer_2').css({
-				'display' : 'block'
+				'display' : 'none'
 			});
 		}
 	});
@@ -155,15 +152,15 @@ $(document).ready(function(){
 			});
 		}
 		else if ($('#question_type_3').val()=="single_choice") {
-			$('#type_answer_3').html("<input type='radio' name='single'/><input type='text' size='43' maxlength='40' placeholder='Choice'/>");
+			$('#type_answer_3').html("<input type='radio' name='single'/><input type='text' id='option_30' size='43' maxlength='40' placeholder='Choice'/><br/><br/><input type='radio' name='single'/><input type='text' id='option_31' size='43' maxlength='40' placeholder='Choice'/><br/><br/><input type='radio' name='single'/><input type='text' id='option_32' size='43' maxlength='40' placeholder='Choice (optional)'/><br/><br/><input type='radio' name='single'/><input type='text' id='option_43' size='43' maxlength='40' placeholder='Choice (optional)'/>");
 			$('#add_answer_3').css({
-				'display' : 'block'
+				'display' : 'none'
 			});
 		}
 		else if ($('#question_type_3').val()=="multiple_choice") {
 			$('#type_answer_3').html("<input type='checkbox'/><input type='text' size='43' maxlength='40' placeholder='Choice'/>");
 			$('#add_answer_3').css({
-				'display' : 'block'
+				'display' : 'none'
 			});
 		}
 	});
@@ -197,15 +194,15 @@ $(document).ready(function(){
 			});
 		}
 		else if ($('#question_type_4').val()=="single_choice") {
-			$('#type_answer_4').html("<input type='radio' name='single'/><input type='text' size='43' maxlength='40' placeholder='Choice'/>");
+			$('#type_answer_4').html("<input type='radio' name='single'/><input type='text' id='option_40' size='43' maxlength='40' placeholder='Choice'/><br/><br/><input type='radio' name='single'/><input type='text' id='option_41' size='43' maxlength='40' placeholder='Choice'/><br/><br/><input type='radio' name='single'/><input type='text' id='option_42' size='43' maxlength='40' placeholder='Choice (optional)'/><br/><br/><input type='radio' name='single'/><input type='text' id='option_43' size='43' maxlength='40' placeholder='Choice (optional)'/>");
 			$('#add_answer_4').css({
-				'display' : 'block'
+				'display' : 'none'
 			});
 		}
 		else if ($('#question_type_4').val()=="multiple_choice") {
 			$('#type_answer_4').html("<input type='checkbox'/><input type='text' size='43' maxlength='40' placeholder='Choice'/>");
 			$('#add_answer_4').css({
-				'display' : 'block'
+				'display' : 'none'
 			});
 		}
 	});
@@ -237,15 +234,15 @@ $(document).ready(function(){
 			});
 		}
 		else if ($('#question_type_5').val()=="single_choice") {
-			$('#type_answer_5').html("<input type='radio' name='single'/><input type='text' size='43' maxlength='40' placeholder='Choice'/>");
+			$('#type_answer_5').html("<input type='radio' name='single'/><input type='text' id='option_50' size='43' maxlength='40' placeholder='Choice'/><br/><br/><input type='radio' name='single'/><input type='text' id='option_51' size='43' maxlength='40' placeholder='Choice'/><br/><br/><input type='radio' name='single'/><input type='text' id='option_52' size='43' maxlength='40' placeholder='Choice (optional)'/><br/><br/><input type='radio' name='single'/><input type='text' id='option_53' size='43' maxlength='40' placeholder='Choice (optional)'/>");
 			$('#add_answer_5').css({
-				'display' : 'block'
+				'display' : 'none'
 			});
 		}
 		else if ($('#question_type_5').val()=="multiple_choice") {
 			$('#type_answer_5').html("<input type='checkbox'/><input type='text' size='43' maxlength='40' placeholder='Choice'/>");
 			$('#add_answer_5').css({
-				'display' : 'block'
+				'display' : 'none'
 			});
 		}
 	});
@@ -277,15 +274,15 @@ $(document).ready(function(){
 			});
 		}
 		else if ($('#question_type_6').val()=="single_choice") {
-			$('#type_answer_6').html("<input type='radio' name='single'/><input type='text' size='43' maxlength='40' placeholder='Choice'/>");
+			$('#type_answer_6').html("<input type='radio' name='single'/><input type='text' id='option_60' size='43' maxlength='40' placeholder='Choice'/><br/><br/><input type='radio' name='single'/><input type='text' id='option_61' size='43' maxlength='40' placeholder='Choice'/><br/><br/><input type='radio' name='single'/><input type='text' id='option_62' size='43' maxlength='40' placeholder='Choice (optional)'/><br/><br/><input type='radio' name='single'/><input type='text' id='option_63' size='43' maxlength='40' placeholder='Choice (optional)'/>");
 			$('#add_answer_6').css({
-				'display' : 'block'
+				'display' : 'none'
 			});
 		}
 		else if ($('#question_type_6').val()=="multiple_choice") {
 			$('#type_answer_6').html("<input type='checkbox'/><input type='text' size='43' maxlength='40' placeholder='Choice'/>");
 			$('#add_answer_6').css({
-				'display' : 'block'
+				'display' : 'none'
 			});
 		}
 	});
@@ -317,15 +314,15 @@ $(document).ready(function(){
 			});
 		}
 		else if ($('#question_type_7').val()=="single_choice") {
-			$('#type_answer_7').html("<input type='radio' name='single'/><input type='text' size='43' maxlength='40' placeholder='Choice'/>");
+			$('#type_answer_7').html("<input type='radio' name='single'/><input type='text' id='option_70' size='43' maxlength='40' placeholder='Choice'/><br/><br/><input type='radio' name='single'/><input type='text' id='option_71' size='43' maxlength='40' placeholder='Choice'/><br/><br/><input type='radio' name='single'/><input type='text' id='option_72' size='43' maxlength='40' placeholder='Choice (optional)'/><br/><br/><input type='radio' name='single'/><input type='text' id='option_73' size='43' maxlength='40' placeholder='Choice (optional)'/>");
 			$('#add_answer_7').css({
-				'display' : 'block'
+				'display' : 'none'
 			});
 		}
 		else if ($('#question_type_7').val()=="multiple_choice") {
 			$('#type_answer_7').html("<input type='checkbox'/><input type='text' size='43' maxlength='40' placeholder='Choice'/>");
 			$('#add_answer_7').css({
-				'display' : 'block'
+				'display' : 'none'
 			});
 		}
 	});
@@ -357,15 +354,15 @@ $(document).ready(function(){
 			});
 		}
 		else if ($('#question_type_8').val()=="single_choice") {
-			$('#type_answer_8').html("<input type='radio' name='single'/><input type='text' size='43' maxlength='40' placeholder='Choice'/>");
+			$('#type_answer_8').html("<input type='radio' name='single'/><input type='text' id='option_80' size='43' maxlength='40' placeholder='Choice'/><br/><br/><input type='radio' name='single'/><input type='text' id='option_81' size='43' maxlength='40' placeholder='Choice'/><br/><br/><input type='radio' name='single'/><input type='text' id='option_82' size='43' maxlength='40' placeholder='Choice (optional)'/><br/><br/><input type='radio' name='single'/><input type='text' id='option_83' size='43' maxlength='40' placeholder='Choice (optional)'/>");
 			$('#add_answer_8').css({
-				'display' : 'block'
+				'display' : 'none'
 			});
 		}
 		else if ($('#question_type_8').val()=="multiple_choice") {
 			$('#type_answer_8').html("<input type='checkbox'/><input type='text' size='43' maxlength='40' placeholder='Choice'/>");
 			$('#add_answer_8').css({
-				'display' : 'block'
+				'display' : 'none'
 			});
 		}
 	});
@@ -397,15 +394,15 @@ $(document).ready(function(){
 			});
 		}
 		else if ($('#question_type_9').val()=="single_choice") {
-			$('#type_answer_9').html("<input type='radio' name='single'/><input type='text' size='43' maxlength='40' placeholder='Choice'/>");
+			$('#type_answer_9').html("<input type='radio' name='single'/><input type='text' id='option_90' size='43' maxlength='40' placeholder='Choice'/><br/><br/><input type='radio' name='single'/><input type='text' id='option_91' size='43' maxlength='40' placeholder='Choice'/><br/><br/><input type='radio' name='single'/><input type='text' id='option_92' size='43' maxlength='40' placeholder='Choice (optional)'/><br/><br/><input type='radio' name='single'/><input type='text' id='option_93' size='43' maxlength='40' placeholder='Choice (optional)'/>");
 			$('#add_answer_9').css({
-				'display' : 'block'
+				'display' : 'none'
 			});
 		}
 		else if ($('#question_type_9').val()=="multiple_choice") {
 			$('#type_answer_9').html("<input type='checkbox'/><input type='text' size='43' maxlength='40' placeholder='Choice'/>");
 			$('#add_answer_9').css({
-				'display' : 'block'
+				'display' : 'none'
 			});
 		}
 	});
@@ -439,13 +436,13 @@ $(document).ready(function(){
 		else if ($('#question_type_10').val()=="single_choice") {
 			$('#type_answer_10').html("<input type='radio' name='single'/><input type='text' size='43' maxlength='40' placeholder='Choice'/>");
 			$('#add_answer_10').css({
-				'display' : 'block'
+				'display' : 'none'
 			});
 		}
 		else if ($('#question_type_10').val()=="multiple_choice") {
-			$('#type_answer_10').html("<input type='checkbox'/><input type='text' size='43' maxlength='40' placeholder='Choice'/>");
+			$('#type_answer_10').html("<input type='radio' name='single'/><input type='text' id='option_100' size='43' maxlength='40' placeholder='Choice'/><br/><br/><input type='radio' name='single'/><input type='text' id='option_101' size='43' maxlength='40' placeholder='Choice'/><br/><br/><input type='radio' name='single'/><input type='text' id='option_102' size='43' maxlength='40' placeholder='Choice (optional)'/><br/><br/><input type='radio' name='single'/><input type='text' id='option_103' size='43' maxlength='40' placeholder='Choice (optional)'/>");
 			$('#add_answer_10').css({
-				'display' : 'block'
+				'display' : 'none'
 			});
 		}
 	});
