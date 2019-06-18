@@ -104,9 +104,6 @@ public class PollCreate extends PollWebBaseController {
          
             ((PollWebDataLayer) request.getAttribute("datalayer")).getPollDAO().storePoll(tempPoll);
             
-            //TODO
-            String answer;//answer options ','
-
             int position = 1;
             while (!request.getParameter("question_name_" + position).equals("")) {
                 QuestionImpl question = new QuestionImpl();
@@ -118,9 +115,11 @@ public class PollCreate extends PollWebBaseController {
                 question.setType(request.getParameter("question_type_" + position));
                 Boolean mandatory = question_mandatory.equals("yes");
                 question.setMandatory(mandatory);
+                if(question.getType().equals("single_chioce") || question.getType().equals("multiple_choice")){
+                    //question.setAnswer();
+                }
                 ((PollWebDataLayer) request.getAttribute("datalayer")).getQuestionDAO().storeQuestion(question);
                 position++;
-                System.out.println(position);
             }
 
             if (reserved) {
