@@ -57,7 +57,7 @@
 
             <p class="text" id="closing_text">${poll.closeText}</p>
 
-            <input type="submit" id="poll_send" value="Send" />
+            <input type="submit" id="poll_send" value="Send" name="Send"/>
 
         </form>
         </section>

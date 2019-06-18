@@ -5,8 +5,11 @@
  */
 package pollweb.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
@@ -15,11 +18,13 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import pollweb.data.dao.PollWebDataLayer;
 import pollweb.data.impl.PollImpl;
 import pollweb.data.model.Poll;
 import pollweb.data.model.Question;
 import pollweb.data.util.DataException;
+import pollweb.security.SecurityLayer;
 
 /**
  *
@@ -67,35 +72,50 @@ public class ShowPoll extends PollWebBaseController {
         }
     }
     private void action_write_answers(HttpServletRequest request, HttpServletResponse response, int poll_id) throws IOException, ServletException{
+        //Answer tempAnswer = null;
+        String contextPath = getServletContext().getRealPath("/");
+        String csvFilePath=contextPath+"\\test";
+        File answerFile = new File(csvFilePath);
+        FileWriter fr = new FileWriter(answerFile);
+        
+       
+        StringBuffer header = new StringBuffer();
+        final String commaDelimeter = ",";        
+        
         try{
-                        
+            //TODO: set userID to database
+            HttpSession s = SecurityLayer.checkSession(request);
+            int userID = (int) s.getAttribute("userid");
+            
             Poll poll = ((PollWebDataLayer) request.getAttribute("datalayer")).getPollDAO().getPoll(poll_id);
             List<Question> questions = ((PollWebDataLayer) request.getAttribute("datalayer")).getQuestionDAO().getQuestionsByPoll(poll);
-            
-            FileWriter fileWriter = new FileWriter("user_answers.csv");
 
-            StringBuffer FILE_HEADER = new StringBuffer();
-           
             for(Question question:questions){
-                FILE_HEADER.append(question.getText());
+                header.append(question.getText());
             }
-            
-            FILE_HEADER.append(poll.getCloseText());
-
-            fileWriter.append(FILE_HEADER.toString());
-            fileWriter.append(System.lineSeparator());
+            fr.append(header.toString());
+            fr.append(System.lineSeparator());           
             
             for(Question question:questions){
                 String answer = request.getParameter(String.valueOf(question.getPosition()));
-            }
+                fr.append(answer);
+                fr.append(commaDelimeter);
+            }           
+            } catch (Exception ex) {
+                request.setAttribute("exception", ex);
+                action_error(request, response);           
             
-            if(questions.isEmpty()){
-                action_error(request, response);
-            }
-              
-            } catch (Exception e) {
-
-            }
+            }finally {
+                fr.flush();
+                fr.close();            
+        }
+        
+        answerFile = new File(csvFilePath);
+        FileInputStream file = new FileInputStream(answerFile);
+  
+//        tempAnswer = new Answer();
+//        tempAnswer.setUserID= userID;
+//        tempAnswer.setPollID = poll
     }
     
     @Override
@@ -108,6 +128,9 @@ public class ShowPoll extends PollWebBaseController {
         }
         try {
             action_default(request, response,poll_id);
+            if (request.getParameter("Send") != null) {
+                action_write_answers(request, response,poll_id);
+            }
         } catch (IOException ex) {
             request.setAttribute("exception", ex);
             action_error(request, response);
